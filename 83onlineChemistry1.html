@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>专题1 化学使生活更美好</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
     <style>
-        /* 全局样式 */
+        :root {
+            --base-font-size: 13px;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
         }
         body {
             background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
@@ -21,7 +26,6 @@
             color: #333;
             line-height: 1.8;
             min-height: 100vh;
-            padding-bottom: 60px;
         }
         /* 头部样式 */
         header {
@@ -38,16 +42,16 @@
             text-align: center;
         }
         h1 {
-            font-size: 1.8rem;
+            font-size: calc(1.8 * var(--base-font-size));
             margin-bottom: 0.5rem;
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .time-range {
-            font-size: 1rem;
+            font-size: calc(1 * var(--base-font-size));
             color: rgba(255, 255, 255, 0.9);
             font-weight: normal;
         }
-        /* 导航栏样式（简化文字，优化排版） */
+        /* 导航栏样式 */
         .nav-container {
             max-width: 800px;
             margin: 1.5rem auto;
@@ -64,23 +68,22 @@
         .unit-nav h2 {
             color: #5f52ff;
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: calc(1.2 * var(--base-font-size));
             border-left: 4px solid #5f52ff;
             padding-left: 0.8rem;
         }
-        .unit-list {
-            list-style: none;
+        .btn-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
+            padding: 0 2rem;
         }
-        .unit-list li {
-            flex: 0 0 calc((100% - 4 * 1rem) / 5);
-            max-width: calc((100% - 4 * 1rem) / 5);
-            text-align: center;
+        .btn-item {
+            flex: 0 0 calc((100% - 5 * 1.5rem) / 6);
+            max-width: calc((100% - 5 * 1.5rem) / 6);
         }
-        .unit-list li a {
+        .btn-item a {
             display: block;
             padding: 0.6rem 0.8rem;
             background: #5f52ff;
@@ -88,14 +91,15 @@
             text-decoration: none;
             border-radius: 6px;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: calc(0.95 * var(--base-font-size));
             white-space: nowrap;
+            text-align: center;
         }
-        .unit-list li a:hover {
+        .btn-item a:hover {
             background: #4a3ed8;
             transform: translateY(-2px);
         }
-        .unit-list li a.active {
+        .btn-item a.active {
             background: #3366cc;
             pointer-events: none;
         }
@@ -115,18 +119,18 @@
             color: #5f52ff;
             font-weight: bold;
             margin: 0 0 1.5rem;
-            font-size: 1.5rem;
+            font-size: calc(1.5 * var(--base-font-size));
             padding-bottom: 0.8rem;
             border-bottom: 2px solid rgba(95, 82, 255, 0.2);
         }
         .topic-title {
-            font-size: 1.3rem;
+            font-size: calc(1.3 * var(--base-font-size));
             color: #333;
             margin: 1.8rem 0 1rem;
         }
         .textbook-title {
             color: #3366cc;
-            font-size: 1.1rem;
+            font-size: calc(1.1 * var(--base-font-size));
             margin: 1.5rem 0 0.8rem;
             padding-left: 0.5rem;
             border-left: 3px solid #3366cc;
@@ -184,15 +188,15 @@
                 background-attachment: scroll;
             }
             h1 {
-                font-size: 1.5rem;
+                font-size: calc(1.5 * var(--base-font-size));
             }
-            .unit-list li {
-                flex: 0 0 calc((100% - 1 * 1rem) / 2);
-                max-width: calc((100% - 1 * 1rem) / 2);
+            .btn-item {
+                flex: 0 0 calc((100% - 2 * 1.5rem) / 3);
+                max-width: calc((100% - 2 * 1.5rem) / 3);
             }
-            .unit-list li a {
+            .btn-item a {
                 padding: 0.5rem 0.6rem;
-                font-size: 0.9rem;
+                font-size: calc(0.9 * var(--base-font-size));
             }
             .note-section {
                 padding: 1.5rem;
@@ -201,9 +205,152 @@
                 display: none;
             }
         }
+        .book-reference {
+            background-color: #f0f0f0;
+            font-style: italic;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+            line-height: 1.6;
+        }
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .chem-formula {
+            font-family: 'Times New Roman', serif;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/7/18 <span class="announcement-version">Ver7.0.18</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>提升了页面交互体验，优化了导航栏响应式布局</li>
+                    <li>统一了CSS样式，与专题4~6保持视觉一致性</li>
+                    <li>添加了KaTeX公式渲染，支持专业化学公式展示</li>
+                    <li>优化了化学式和单位字体，使用Times New Roman字体</li>
+                    <li>去掉了期末考试倒计时功能</li>
+                </ol>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+        }
+    </script>
     <!-- 头部 -->
     <header>
         <div class="header-container">
@@ -211,17 +358,18 @@
             <p class="time-range">学习周期：2025年9月1日 - 2025年12月14日</p>
         </div>
     </header>
-    <!-- 导航栏（仅简化专题文字，保留所有链接功能） -->
+    <!-- 导航栏 -->
     <div class="nav-container">
         <div class="unit-nav">
-            <h2>八上化学笔记单元导航</h2>
-            <ul class="unit-list">
-                <li><a href="unit1.html" class="active">专题一</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html">专题二</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html">专题三</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></li>
-            </ul>
+            <h2>八年级化学笔记单元导航</h2>
+            <div class="btn-container">
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry1.html" class="active">专题一</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html">专题二</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html">专题三</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry4.html">专题四</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></div>
+            </div>
         </div>
     </div>
     <!-- 主内容（完全保留原有笔记正文） -->
@@ -277,7 +425,7 @@
                 <ul>
                     <li><strong>1. 元素符号书写规则</strong>
                         <ul>
-                            <li>首字母大写，第二个字母小写（如：O、Fe、Cu）</li>
+                            <li>首字母大写，第二个字母小写（如：<span class="chem-formula">O</span>、<span class="chem-formula">Fe</span>、<span class="chem-formula">Cu</span>）</li>
                         </ul>
                     </li>
                     <li><strong>2. 元素名称的偏旁含义</strong>
@@ -295,7 +443,7 @@
     <!-- 页脚（完全保留原有） -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-12/14）</p>
+            <p>© 2026 上海市北郊学校八（3）班 八上化学笔记（9/1-12/14）</p>
             <p>记录人：胡锦乐</p>
             <div class="seewo-info">
                 <span>使用工具：</span>
@@ -307,5 +455,15 @@
     </footer>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -810,15 +810,13 @@ footer {
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/6/8 <span class="announcement-version">Ver4.1.14</span></div>
+            <div class="announcement-time">2026/7/18 <span class="announcement-version">Ver4.1.15</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>完善质量守恒定律验证实验内容   </li>
+                    <li>完结了八年级化学笔记</li>
+                    <li>去掉了期末考试倒计时功能</li>
                 </ol>
-            </div>
-            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
-                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
             </div>
             <div class="announcement-signature">83online运营团队</div>
             <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
@@ -1156,38 +1154,12 @@ footer {
             var query = searchInput.value.trim();
             performSearch(query);
         }
-        function updateCountdown() {
-            const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
-            const timeDiff = examDate - today;
-            
-            if (timeDiff <= 0) {
-                document.getElementById('countdown-container').style.display = 'none';
-                return;
-            }
-            
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            
-            const countdownElement = document.getElementById('countdown');
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
-            } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
-            }
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
     </script>
     <!-- 头部 -->
     <header>
         <div class="header-container">
             <h1>上海市北郊学校 八（3）班 化学笔记</h1>
-            <p class="time-range">学习周期：2025年9月1日 - 2025年12月19日</p>
+            <p class="time-range">学习周期：2025年9月1日 - 2026年6月9日</p>
         </div>
         <button class="settings-btn" onclick="openSettings()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -1518,7 +1490,7 @@ footer {
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-12/19）</p>
+            <p>© 2026 上海市北郊学校八（3）班 八年级化学笔记（2025/9/1-2026/6/9）</p>
             <p>记录人：胡锦乐</p>
             <div class="seewo-info">
                 <span>使用工具：</span>

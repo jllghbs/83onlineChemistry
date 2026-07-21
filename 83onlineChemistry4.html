@@ -812,17 +812,13 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/6/7 <span class="announcement-version">Ver6.1.12</span></div>
+            <div class="announcement-time">2026/7/18 <span class="announcement-version">Ver6.1.13</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>新增笔记内容搜索功能，支持关键词高亮、上一处/下一处导航</li>
-                    <li>新增设置面板中"显示搜索框"开关功能</li>
-                    <li>重新排版设置面板，优化分类结构</li>
+                    <li>完结了八年级化学笔记</li>
+                    <li>去掉了期末考试倒计时功能</li>
                 </ol>
-            </div>
-            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
-                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
             </div>
             <div class="announcement-signature">83online运营团队</div>
             <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
@@ -1166,32 +1162,6 @@
             var query = searchInput.value.trim();
             performSearch(query);
         }
-        function updateCountdown() {
-            const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
-            const timeDiff = examDate - today;
-            
-            if (timeDiff <= 0) {
-                document.getElementById('countdown-container').style.display = 'none';
-                return;
-            }
-            
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            
-            const countdownElement = document.getElementById('countdown');
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
-            } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
-            }
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
     </script>
     <!-- 头部 -->
     <header>
@@ -1378,7 +1348,7 @@
                         <ul>
                             <li>操作：点燃纯净氢气，火焰上方罩干冷烧杯</li>
                             <li>现象：淡蓝色火焰，烧杯内壁出现水雾</li>
-                            <li>化学表达式：<span class="formula">2H_2 + O_2 \xlongequal{\text{点燃}} 2H_2O</span></li>
+                            <li>化学方程式：<span class="formula">2H_2 + O_2 \xlongequal{\text{点燃}} 2H_2O</span></li>
                             <li>结论：水由氢、氧元素组成</li>
                         </ul>
                     </li>
@@ -1394,7 +1364,7 @@
                                     <li>负极：点燃淡蓝色火焰 → <span class="chem-formula">H₂</span></li>
                                 </ul>
                             </li>
-                            <li>化学表达式：<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span></li>
+                            <li>化学方程式：<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span></li>
                             <li>结论：
                                 <ul>
                                     <li>水由氢、氧元素组成</li>
@@ -1447,7 +1417,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八下化学笔记（3/2-5/8）</p>
+            <p>© 2026 上海市北郊学校八（3）班 八年级化学笔记（3/2-5/8）</p>
             <p>记录人：胡锦乐</p>
             <div class="seewo-info">
                 <span>使用工具：</span>

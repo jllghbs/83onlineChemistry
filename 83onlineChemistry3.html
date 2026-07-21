@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>专题3 空气、氧气、二氧化碳</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
     <style>
-        /* 全局样式 */
+        :root {
+            --base-font-size: 13px;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
         }
         body {
             background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
@@ -21,7 +26,6 @@
             color: #333;
             line-height: 1.8;
             min-height: 100vh;
-            padding-bottom: 60px;
         }
         /* 头部样式 */
         header {
@@ -38,16 +42,16 @@
             text-align: center;
         }
         h1 {
-            font-size: 1.8rem;
+            font-size: calc(1.8 * var(--base-font-size));
             margin-bottom: 0.5rem;
             text-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .time-range {
-            font-size: 1rem;
+            font-size: calc(1 * var(--base-font-size));
             color: rgba(255, 255, 255, 0.9);
             font-weight: normal;
         }
-        /* 导航栏样式（简化文字，优化排版） */
+        /* 导航栏样式 */
         .nav-container {
             max-width: 800px;
             margin: 1.5rem auto;
@@ -64,23 +68,22 @@
         .unit-nav h2 {
             color: #5f52ff;
             margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-size: calc(1.2 * var(--base-font-size));
             border-left: 4px solid #5f52ff;
             padding-left: 0.8rem;
         }
-        .unit-list {
-            list-style: none;
+        .btn-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
+            padding: 0 2rem;
         }
-        .unit-list li {
-            flex: 0 0 calc((100% - 4 * 1rem) / 5);
-            max-width: calc((100% - 4 * 1rem) / 5);
-            text-align: center;
+        .btn-item {
+            flex: 0 0 calc((100% - 5 * 1.5rem) / 6);
+            max-width: calc((100% - 5 * 1.5rem) / 6);
         }
-        .unit-list li a {
+        .btn-item a {
             display: block;
             padding: 0.6rem 0.8rem;
             background: #5f52ff;
@@ -88,14 +91,15 @@
             text-decoration: none;
             border-radius: 6px;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: calc(0.95 * var(--base-font-size));
             white-space: nowrap;
+            text-align: center;
         }
-        .unit-list li a:hover {
+        .btn-item a:hover {
             background: #4a3ed8;
             transform: translateY(-2px);
         }
-        .unit-list li a.active {
+        .btn-item a.active {
             background: #3366cc;
             pointer-events: none;
         }
@@ -115,18 +119,18 @@
             color: #5f52ff;
             font-weight: bold;
             margin: 0 0 1.5rem;
-            font-size: 1.5rem;
+            font-size: calc(1.5 * var(--base-font-size));
             padding-bottom: 0.8rem;
             border-bottom: 2px solid rgba(95, 82, 255, 0.2);
         }
         .topic-title {
-            font-size: 1.3rem;
+            font-size: calc(1.3 * var(--base-font-size));
             color: #333;
             margin: 1.8rem 0 1rem;
         }
         .textbook-title {
             color: #3366cc;
-            font-size: 1.1rem;
+            font-size: calc(1.1 * var(--base-font-size));
             margin: 1.5rem 0 0.8rem;
             padding-left: 0.5rem;
             border-left: 3px solid #3366cc;
@@ -184,15 +188,15 @@
                 background-attachment: scroll;
             }
             h1 {
-                font-size: 1.5rem;
+                font-size: calc(1.5 * var(--base-font-size));
             }
-            .unit-list li {
-                flex: 0 0 calc((100% - 1 * 1rem) / 2);
-                max-width: calc((100% - 1 * 1rem) / 2);
+            .btn-item {
+                flex: 0 0 calc((100% - 2 * 1.5rem) / 3);
+                max-width: calc((100% - 2 * 1.5rem) / 3);
             }
-            .unit-list li a {
+            .btn-item a {
                 padding: 0.5rem 0.6rem;
-                font-size: 0.9rem;
+                font-size: calc(0.9 * var(--base-font-size));
             }
             .note-section {
                 padding: 1.5rem;
@@ -201,40 +205,172 @@
                 display: none;
             }
         }
-        /* 容器样式 */
-        .table-container {
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(30, 136, 229, 0.1);
-            margin: 20px auto;
-        }
-        /* 表格样式 */
         table {
             width: 100%;
-            background-color: #fff;
-        /* 单元格 */
-        td {
-            padding: 18px 20px;
-            vertical-align: middle;
-            border: 1px solid #000306;
-            font-size: 16px;
-            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #3366cc;
+            color: #fff;
+        }
+        th, td {
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 15px;
             text-align: center;
         }
-        /* 化学方程式容器（核心：相对定位，让点燃在双横线正上方） */
+        th {
+            font-size: calc(1.3 * var(--base-font-size));
+            font-weight: bold;
+        }
+        td {
+            font-size: calc(1.1 * var(--base-font-size));
+        }
+        .book-reference {
+            background-color: #f0f0f0;
+            font-style: italic;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+            line-height: 1.6;
+        }
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .chem-formula {
+            font-family: 'Times New Roman', serif;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
         .formula {
-            color: #0d47a1;
-            font-size: 20px;
-            font-weight: 500;
-            position: relative; /* 父容器相对定位 */
-            display: inline-block; /* 适配双横线宽度 */
-            line-height: 1.5;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/7/18 <span class="announcement-version">Ver8.0.18</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>提升了页面交互体验，优化了导航栏响应式布局</li>
+                    <li>统一了CSS样式，与专题4~6保持视觉一致性</li>
+                    <li>添加了KaTeX公式渲染，支持专业化学公式展示</li>
+                    <li>优化了化学式和单位字体，使用Times New Roman字体</li>
+                    <li>去掉了期末考试倒计时功能</li>
+                </ol>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+        }
+    </script>
     <!-- 头部 -->
     <header>
         <div class="header-container">
@@ -242,17 +378,18 @@
             <p class="time-range">学习周期：2025年9月1日 - 2025年12月14日</p>
         </div>
     </header>
-    <!-- 导航栏（仅简化专题文字，保留所有链接功能） -->
+    <!-- 导航栏 -->
     <div class="nav-container">
         <div class="unit-nav">
-            <h2>八上化学笔记单元导航</h2>
-            <ul class="unit-list">
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry1.html">专题一</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html">专题二</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html"  class="active">专题三</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></li>
-                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></li>
-            </ul>
+            <h2>八年级化学笔记单元导航</h2>
+            <div class="btn-container">
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry1.html">专题一</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html">专题二</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html" class="active">专题三</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry4.html">专题四</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></div>
+                <div class="btn-item"><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></div>
+            </div>
         </div>
     </div> 
         <!-- 主内容 -->
@@ -265,21 +402,21 @@
                 <ul>
                     <li><strong>1. 红磷燃烧测定空气中氧气含量</strong>
                         <ul>
-                            <li>（1）实验步骤（参考书P58）：</li>
+                            <li>（1）<div class="book-reference">实验步骤（书P58）<br><br>
                             <ol>
-                                <li>在100mL的量筒内加入80mL水，用弹簧夹夹紧乳胶管；</li>
-                                <li>点燃燃烧匙内的红磷后，立即伸入容积为250mL的集气瓶中，并塞紧橡胶塞，观察并记录实验现象；
+                                <li>在<span class="chem-formula">100mL</span>的量筒内加入<span class="chem-formula">80mL</span>水，用弹簧夹夹紧乳胶管；</li>
+                                <li>点燃燃烧匙内的红磷后，立即伸入容积为<span class="chem-formula">250mL</span>的集气瓶中，并塞紧橡胶塞，观察并记录实验现象；
                                     <ul>
                                         <li>红磷燃烧，产生大量白烟，放出热量</li>
                                     </ul>
                                 </li>
                                 <li>待红磷熄灭并冷却至室温后，打开弹簧夹，观察并记录实验现象；
                                     <ul>
-                                        <li>冷却后打开弹簧夹，烧杯中的水倒流进入集气瓶，进入水的体积约占集气瓶内空气总体积的1/5</li>
+                                        <li>冷却后打开弹簧夹，烧杯中的水倒流进入集气瓶，进入水的体积约占集气瓶内空气总体积的<span class="chem-formula">1/5</span></li>
                                     </ul>
                                 </li>
-                            </ol>
-                            <li>（2）实验结论：空气中氧气的体积分数约为1/5，且空气是由多种物质组成的混合物。</li>
+                            </ol></div>
+                            <li>（2）实验结论：空气中氧气的体积分数约为<span class="chem-formula">1/5</span>，且空气是由多种物质组成的混合物。</li>
                             <li>（3）误差分析：
                                 <ul>
                                     <li style="margin: 8px 0;">&nbsp;&nbsp;测量结果偏小:</li>
@@ -302,21 +439,21 @@
                     </li>
                     <li><strong>2. 空气的主要成分</strong>
                         <ul>
-                            <li>（1）氮气：约占78%，是空气的主要成分，化学性质不活泼。</li>
-                            <li>（2）氧气：约占21%，支持燃烧和呼吸，是维持生命活动的重要物质。</li>
-                            <li>（3）稀有气体：约占0.94%，化学性质极不活泼，常用作保护气。</li>
-                            <li>（4）二氧化碳：约占0.03%。</li>
-                            <li>（5）其他气体和杂质：约占0.03%。</li>
+                            <li>（1）氮气：约占<span class="chem-formula">78%</span>，是空气的主要成分，化学性质不活泼。</li>
+                            <li>（2）氧气：约占<span class="chem-formula">21%</span>，支持燃烧和呼吸，是维持生命活动的重要物质。</li>
+                            <li>（3）稀有气体：约占<span class="chem-formula">0.94%</span>，化学性质极不活泼，常用作保护气。</li>
+                            <li>（4）二氧化碳：约占<span class="chem-formula">0.03%</span>。</li>
+                            <li>（5）其他气体和杂质：约占<span class="chem-formula">0.03%</span>。</li>
                         </ul>
                     </li>
                 </ul>
                 <div class="textbook-title">洁净的空气为何如此重要</div>
                 <p><strong>空气污染</strong></p>
                 <ul>
-                    <li><strong>SO<sub>2</sub></strong>(二氧化硫):酸雨</li>
-                    <li><strong>N<sub>2</sub></strong>(氮气)、<strong>NO<sub>2</sub></strong>(二氧化氮)、<strong>N<sub>2</sub>O<sub>4</sub></strong>(四氧化二氮):氮氧化合物</li>
-                    <li><strong>PM2.5</strong>、<strong>PM10</strong>:可吸入颗粒物</li>
-                    <li><strong>CO<sub>2</sub></strong>(二氧化碳):温室效应气体</li>
+                    <li><span class="chem-formula">SO<sub>2</sub></span>(二氧化硫):酸雨</li>
+                    <li><span class="chem-formula">N<sub>2</sub></span>(氮气)、<span class="chem-formula">NO<sub>2</sub></span>(二氧化氮)、<span class="chem-formula">N<sub>2</sub>O<sub>4</sub></span>(四氧化二氮):氮氧化合物</li>
+                    <li><span class="chem-formula">PM2.5</span>、<span class="chem-formula">PM10</span>:可吸入颗粒物</li>
+                    <li><span class="chem-formula">CO<sub>2</sub></span>(二氧化碳):温室效应气体</li>
                 </ul>
 
                 <!-- 总算更到这里了 -->
@@ -339,7 +476,6 @@
                             <li>由两种物质组成且其中一种是氧元素的化合物是<strong>氧化物</strong></li>
                         </ul>
                         <li><strong>4.氧气有关反应</strong>
-                            <div class="table-container">
                                 <table>
                                     <tr>
                                         <td>物质</td>
@@ -352,9 +488,7 @@
                                         <td>红热</td>
                                         <td>发白光，放热</td>
                                         <td>
-                                            <div class="formula">
-                                                C + O<sub>2</sub> ═══（条件：点燃） CO<sub>2</sub>
-                                            </div>
+                                            <span class="formula">C + O_2 \xlongequal{\text{点燃}} CO_2</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -362,33 +496,26 @@
                                         <td>不燃烧</td>
                                         <td>火星四射，剧烈燃烧，生成黑色固体，放出大量热</td>
                                         <td>
-                                            <div class="formula">
-                                                3Fe + 2O<sub>2</sub> ═══（条件：点燃） Fe<sub>3</sub>O<sub>4</sub>
-                                            </div>
+                                            <span class="formula">3Fe + 2O_2 \xlongequal{\text{点燃}} Fe_3O_4</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>磷</td>
-                                        <td></td>
+                                        <td>/</td>
                                         <td>大量白烟，放热</td>
                                         <td>
-                                            <div class="formula">
-                                                4P + 5O<sub>2</sub> ═══（条件：点燃） 2P<sub>2</sub>O<sub>5</sub>
-                                            </div>
+                                            <span class="formula">4P + 5O_2 \xlongequal{\text{点燃}} 2P_2O_5</span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>镁</td>
-                                        <td></td>
+                                        <td>/</td>
                                         <td>发出耀眼白光，放热，生成白色固体</td>
                                         <td>
-                                            <div class="formula">
-                                                2Mg + O<sub>2</sub> ═══（条件：点燃） 2MgO
-                                            </div>
+                                            <span class="formula">2Mg + O_2 \xlongequal{\text{点燃}} 2MgO</span>
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
 
                             <div>
                                 <strong>铁丝燃烧实验补充说明：</strong><br>
@@ -414,31 +541,29 @@
                         <li>能与澄清石灰水（氢氧化钙）发生反应</li>
                     </ul>
                     <li><strong>3. 二氧化碳有关反应</strong></li>
-                        <div class="table-container">
                             <table>
                                 <tr><td>反应物</td>
                                     <td>实验现象</td>
                                     <td>化学方程式</td>
                                     <td>补充说明</td>
                                 </tr>
-                                <tr><td>二氧化碳 + 水</td>
+                                <tr><td>二氧化碳、水</td>
                                     <td>无明显现象（滴加石蕊溶液后石蕊变红）</td>
-                                    <td><div class="formula">CO<sub>2</sub> + H<sub>2</sub>O ═══ H<sub>2</sub>CO<sub>3</sub></div></td>
+                                    <td><span class="formula">CO_2 + H_2O \xlongequal{\quad} H_2CO_3</span></td>
                                     <td>生成的碳酸不稳定，加热易分解</td>
                                 </tr>
                                 <tr><td>碳酸</td>
                                     <td>加热后，滴加石蕊的溶液由红变紫</td>
-                                    <td><div class="formula">H<sub>2</sub>CO<sub>3</sub> ═══ （ 条件：Δ） CO<sub>2</sub>↑ + H<sub>2</sub>O</div></td>
+                                    <td><span class="formula">H_2CO_3 \xlongequal{\Delta} CO_2 \uparrow + H_2O</span></td>
                                     <td>碳酸分解释放二氧化碳</td>
                                 </tr>
                                 <tr>
-                                    <td>二氧化碳 + 澄清石灰水</td>
+                                    <td>二氧化碳、澄清石灰水</td>
                                     <td>澄清石灰水变浑浊</td>
-                                    <td><div class="formula">Ca(OH)<sub>2</sub> + CO<sub>2</sub> ═══ CaCO<sub>3</sub>↓ + H<sub>2</sub>O</div></td>
+                                    <td><span class="formula">Ca(OH)_2 + CO_2 \xlongequal{\quad} CaCO_3 \downarrow + H_2O</span></td>
                                     <td>该反应常用于检验二氧化碳气体</td>
                                 </tr>
                             </table>
-                        </div>
                 </ul>
 
                 <!-- 为什么闭合不了 -->
@@ -449,17 +574,17 @@
                         <ul>
                             <li>原理：利用空气各成分沸点不同（物理变化）
                                 <ul>
-                                    <li>氮气沸点：-196℃；氧气沸点：-183℃</li>
+                                    <li>氮气沸点：<span class="chem-formula">-196℃</span>；氧气沸点：<span class="chem-formula">-183℃</span></li>
                                 </ul>
                             </li>
                             <li>步骤：净化空气 → 压缩冷却液化 → 升温分离（氮气先汽化） → 收集液氧</li>
                         </ul>
                     <li>二、实验室制取氧气</li>
                         <ul>
-                            <li>1. 加热高锰酸钾（KMnO<sub>4</sub>）
+                            <li>1. 加热高锰酸钾（<span class="chem-formula">KMnO<sub>4</sub></span>）
                                 <ul>
                                     <li>化学式：
-                                        <p>2KMnO₄ ═══ （条件：Δ） K₂MnO₄ + MnO₂ + O₂↑</p>
+                                        <span class="formula">2KMnO_4 \xlongequal{\Delta} K_2MnO_4 + MnO_2 + O_2 \uparrow</span>
                                     </li>
                                     <li>特点：需要加热，反应稳定</li>
                                     <li>实验操作步骤（豆沙包生成）
@@ -484,28 +609,28 @@
                                 </ul>
                             </li>
                     
-                            <li>2. 过氧化氢（H<sub>2</sub>O<sub>2</sub>）分解（二氧化锰催化）
+                            <li>2. 过氧化氢（<span class="chem-formula">H<sub>2</sub>O<sub>2</sub></span>）分解（二氧化锰催化）
                                 <ul>
                                     <li>化学式：
-                                        <p>2H₂O₂ ═══ （条件：MnO₂做催化剂） 2H₂O + O₂↑</p>
+                                        <span class="formula">2H_2O_2 \xlongequal{MnO_2} 2H_2O + O_2 \uparrow</span>
                                     </li>
                                     <li>特点：无需加热，操作简便</li>
                                 </ul>
                             </li>
                     
-                            <li>3. 电解水（H<sub>2</sub>O）
+                            <li>3. 电解水（<span class="chem-formula">H<sub>2</sub>O</span>）
                                 <ul>
                                     <li>化学式：
-                                        <p>2H₂O ═══ （条件：通电） 2H₂↑ + O₂↑</p>
+                                        <span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2 \uparrow + O_2 \uparrow</span>
                                     </li>
                                     <li>特点：能耗高，实验室少用（主要用于演示水的组成）</li>
                                 </ul>
                             </li>
                     
-                            <li>4. 加热氯酸钾（KClO<sub>3</sub>）（二氧化锰催化）
+                            <li>4. 加热氯酸钾（<span class="chem-formula">KClO<sub>3</sub></span>）（二氧化锰催化）
                                 <ul>
                                     <li>化学式：
-                                        <p>2KClO₃ ═══（条件：MnO₂做催化剂、Δ）2KCl + 3O₂↑</p>
+                                        <span class="formula">2KClO_3 \xlongequal[\Delta]{MnO_2} 2KCl + 3O_2 \uparrow</span>
                                     </li>
                                     <li>特点：需要加热，氧气产量高</li>
                                 </ul>
@@ -544,7 +669,7 @@
                                     </li>
                                     <li><strong>向上排空气法</strong>
                                         <ol>
-                                            <li>原理：氧气密度（1.429g/L）略大于空气（1.293g/L）；</li>
+                                            <li>原理：氧气密度（<span class="chem-formula">1.429g/L</span>）略大于空气（<span class="chem-formula">1.293g/L</span>）；</li>
                                             <li>优点：收集的氧气干燥；</li>
                                             <li>缺点：纯度较低，需验满。</li>
                                         </ol>
@@ -565,32 +690,32 @@
                 <!-- 对了！！！ -->
                 <div class="textbook-title">实验室中如何制取二氧化碳</div>
                 <ul>
-                    <li>实验室制取CO₂的原料选择对比
+                    <li>实验室制取<span class="chem-formula">CO₂</span>的原料选择对比
                         <ul>
                             <li>1. 稀盐酸 + 块状石灰石
                                 <ul>
-                                    <li>反应：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
-                                    <li>优点：反应速率适中，便于控制，持续产生CO₂</li>
-                                    <li>产物：CaCl₂易溶于水，不会覆盖石灰石表面，反应可顺利进行</li>
+                                    <li>反应：<span class="formula">CaCO_3 + 2HCl \xlongequal{\quad} CaCl_2 + CO_2 \uparrow + H_2O</span></li>
+                                    <li>优点：反应速率适中，便于控制，持续产生<span class="chem-formula">CO₂</span></li>
+                                    <li>产物：<span class="chem-formula">CaCl₂</span>易溶于水，不会覆盖石灰石表面，反应可顺利进行</li>
                                 </ul>
                             </li>
                             <li>2. 稀盐酸 + 粉末状石灰石
                                 <ul>
-                                    <li>反应：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
-                                    <li>缺点：粉末状石灰石与稀盐酸接触面积大，反应速率过快，不易控制，不利于收集CO₂</li>
+                                    <li>反应：<span class="formula">CaCO_3 + 2HCl \xlongequal{\quad} CaCl_2 + CO_2 \uparrow + H_2O</span></li>
+                                    <li>缺点：粉末状石灰石与稀盐酸接触面积大，反应速率过快，不易控制，不利于收集<span class="chem-formula">CO₂</span></li>
                                 </ul>
                             </li>
                             <li>3. 稀硫酸 + 块状石灰石
                                 <ul>
-                                    <li>反应：CaCO₃ + H₂SO₄ ═══ CaSO₄ + CO₂↑ + H₂O</li>
-                                    <li>缺点：生成的CaSO₄是微溶于水的物质，会覆盖在石灰石表面，阻止反应进行</li>
+                                    <li>反应：<span class="formula">CaCO_3 + H_2SO_4 \xlongequal{\quad} CaSO_4 + CO_2 \uparrow + H_2O</span></li>
+                                    <li>缺点：生成的<span class="chem-formula">CaSO₄</span>是微溶于水的物质，会覆盖在石灰石表面，阻止反应进行</li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li>实验室制取CO₂的原理
+                    <li>实验室制取<span class="chem-formula">CO₂</span>的原理
                         <ul>
-                            <li>化学方程式：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
+                            <li>化学方程式：<span class="formula">CaCO_3 + 2HCl \xlongequal{\quad} CaCl_2 + CO_2 \uparrow + H_2O</span></li>
                         </ul>
                     </li>
                     <li>发生装置选择依据
@@ -603,13 +728,13 @@
                     <li>收集装置选择依据
                         <ul>
                             <li>收集方法：向上排空气法</li>
-                            <li>选择理由：CO₂密度比空气大（CO₂密度1.977g/L＞空气1.293g/L），且能溶于水并与水反应，不能用排水集气法</li>
+                            <li>选择理由：<span class="chem-formula">CO₂</span>密度比空气大（<span class="chem-formula">CO₂</span>密度<span class="chem-formula">1.977g/L</span>＞空气<span class="chem-formula">1.293g/L</span>），且能溶于水并与水反应，不能用排水集气法</li>
                         </ul>
                     </li>
-                    <li>CO₂的验满方法
+                    <li><span class="chem-formula">CO₂</span>的验满方法
                         <ul>
                             <li>操作：将燃着的木条放在集气瓶口</li>
-                            <li>现象与结论：若木条熄灭，说明CO₂已收集满（利用CO₂不燃烧、不支持燃烧的性质）</li>
+                            <li>现象与结论：若木条熄灭，说明<span class="chem-formula">CO₂</span>已收集满（利用<span class="chem-formula">CO₂</span>不燃烧、不支持燃烧的性质）</li>
                         </ul>
                     </li>
                     <li>实验操作步骤（豆沙包生成）
@@ -644,18 +769,19 @@
                             <li>2）多功能瓶
                                 <ul>
                                     <li>收集气体<br>①空气<br>②排水</li>
-                                    <li>ρ大走长管，ρ小走短管</li>
+                                    <li><span class="chem-formula">ρ</span>大走长管，<span class="chem-formula">ρ</span>小走短管</li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
+        </div>
     </div>
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-12/14）</p>
+            <p>© 2026 上海市北郊学校八（3）班 八上化学笔记（9/1-12/14）</p>
             <p>记录人：胡锦乐</p>
             <div class="seewo-info">
                 <span>使用工具：</span>
@@ -667,5 +793,15 @@
     </footer>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
+            });
+        });
+    </script>
 </body>
 </html>
