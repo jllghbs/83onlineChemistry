@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题2 体验化学实验探究</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式（简化文字，优化排版） */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .unit-list li {
+            flex: 0 0 calc((100% - 4 * 1rem) / 5);
+            max-width: calc((100% - 4 * 1rem) / 5);
+            text-align: center;
+        }
+        .unit-list li a {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .unit-list li a:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .unit-list li a.active {
+            background: #3366cc;
+            pointer-events: none;
+        }
+        /* 主内容样式（完全保留） */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .topic-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        .textbook-title {
+            color: #3366cc;
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #3366cc;
+        }
+        .note-content {
+            margin-left: 0.8rem;
+        }
+        .note-content p {
+            margin-bottom: 1rem;
+        }
+        .note-content ul {
+            margin: 0.8rem 0 1.2rem 2rem;
+        }
+        .note-content li {
+            margin-bottom: 0.5rem;
+        }
+        /* 页脚样式（完全保留） */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-color: transparent;
+                background-attachment: scroll;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .unit-list li {
+                flex: 0 0 calc((100% - 1 * 1rem) / 2);
+                max-width: calc((100% - 1 * 1rem) / 2);
+            }
+            .unit-list li a {
+                padding: 0.5rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            .note-section {
+                padding: 1.5rem;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 化学笔记</h1>
+            <p class="time-range">学习周期：2025年9月1日 - 2025年12月19日</p>
+        </div>
+    </header>
+    <!-- 导航栏（仅简化专题文字，保留所有链接功能） -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>八上化学笔记单元导航</h2>
+            <ul class="unit-list">
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry1.html">专题一</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html" class="active">专题二</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html">专题三</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></li>
+            </ul>
+        </div>
+    </div> 
+        <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="unit-title">专题2 体验化学实验探究</div>
+            <div class="note-content">
+                <h3 class="topic-title">课题1 走进化学实验室</h3>
+                
+                <div class="textbook-title">怎么样存放和取用粗盐</div>
+                <ul>
+                    <li><strong>1. 药品的存放</strong>
+                        <ul>
+                            <li>（1）固体药品：放在广口瓶中，瓶口用橡皮塞塞紧</li>
+                            <li>（2）液体药品：放在细口瓶中，瓶口用橡皮塞塞紧</li>
+                            <li>（3）少量液体药品：放在滴瓶中，滴瓶口用橡胶塞塞紧</li>
+                            <li>（4）少见光易分解药品：存放在棕色瓶中，避光保存</li>
+                        </ul>
+                    </li>
+                    <li><strong>2. 药品的取用</strong>
+                        <ul>
+                            <li>液体药品
+                                <ul>
+                                    <li>（1）定量液体药品：用胶头滴管吸取</li>
+                                    <li>（2）少量液体药品：用量筒量取，用胶头滴管吸取</li>
+                                    <li>（3）大量液体药品：用倾倒法</li>
+                                </ul>
+                            </li>
+                            <li>固体药品
+                                <ul>
+                                    <li>（1）块状固体：用镊子夹取，放在纸上称量</li>
+                                    <li>（2）粉末状固体：用纸槽或药匙取用</li>
+                                </ul>
+                            </li>
+                                <ul>
+                                    <li>固体：粉末状铺满试管底部，块状取1块；</li>
+                                    <li>液体：取1~2mL。</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>3. 电子天平的使用</strong>
+                        <ul>
+                            <li><strong>水准泡</strong></li>
+                            <li>称量纸</li>
+                            <li>小烧杯（腐蚀性物品）</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="textbook-title">如何去除粗盐中的难溶性杂质</div>
+                <ul>
+                    <li>1. 实验原理：粗盐的可溶性
+                        <ul>
+                            <li>杂质在水中溶解</li>
+                            <li>难溶性杂质在水中不溶解</li>
+                        </ul>
+                    </li>
+                    <li>2. 实验步骤：溶解、过滤、蒸发</li>
+                        <ul>
+                            <li>溶解：
+                                <ul>
+                                    <li>取5g粗盐，加入15mL水</li>
+                                    <li>用玻璃棒搅拌
+                                        <ul>
+                                            <li>玻璃棒的操作：搅拌</li>
+                                            <li>玻璃棒的目的：<strong>加速溶解</strong></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>过滤：
+                                <ul>
+                                    <li>一贴：滤纸紧贴漏斗内壁</li>
+                                    <li>二低：滤纸低于漏斗边缘，漏斗低于烧杯边缘</li>
+                                    <li>三靠：玻璃棒紧靠三层滤纸，漏斗紧靠烧杯内壁，烧杯紧靠漏斗内壁</li>
+                                    <li>仪器搭建顺序：从下到上，从左到右</li>
+                                    <li>用玻璃棒引流
+                                        <ul>
+                                            <li>玻璃棒的操作：引流</li>
+                                            <li>玻璃棒的目的：<strong>引流</strong></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                </ul>
+
+                <div class="textbook-title">如何从滤液中得到食盐固体</div>
+                <ul>
+                    <li>蒸发：
+                        <ul>
+
+                            </li>
+                            <li>有大量液体析出时，停止加热，用余温蒸干</li>
+                            <li>用玻璃棒搅拌
+                                <ul>
+                                    <li>玻璃棒的操作：搅拌</li>
+                                    <li>玻璃棒的目的：<strong>防止液体受热不均</strong></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>酒精灯的使用：
+                        <ul>
+                            <li>点燃：用火柴/喷灯点燃</li>
+                            <li>熄灭：用灯帽盖灭</li>
+                            <li>加热：外焰加热</li>
+                                <ul>
+                                    <li>试管口略向下倾斜
+                                        <strong>防止冷凝水回流，使试管炸裂</strong>
+                                    </li>
+                                    <li>铁夹夹在试管口1/3处</li>
+                                    <li>加热时，先预热，后集中加热</li>
+                                        <strong>防止受热不均，使试管炸裂</strong>
+                                </ul>
+                        </ul>
+                    </li>
+                    <li>加热规范：
+                        <ul>
+                            <li>直接加热：蒸发皿、试管、燃烧匙</li>
+                            <li>不直接加热：烧杯、烧瓶、锥形瓶</li>
+                            <li>不能加热：量筒、集气瓶</li>
+                        </ul>
+                    </li>
+                    <li>分析与总结：
+                        <ul>
+                            <li><strong>一、产率误差分析</strong>
+                                <ul>
+                                    <li>产率公式：产率 = (m<sub>精盐</sub>/m<sub>粗盐</sub>↓) × 100%</li>
+                                    <li>（m<sub>精盐</sub>上升或m<sub>粗盐</sub>↓下降会使产率上升）</li>
+                                    <li><strong>产率偏大（精盐质量大）</strong>：
+                                        <ul>
+                                            <li>蒸发：精盐未蒸干；</li>
+                                            <li>过滤：滤纸破损、液面高于滤纸边缘；</li>
+                                            <li>称量：称量粗盐时未去皮。</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>产率偏小</strong>：
+                                        <ul>
+                                            <li>溶解：粗盐未完全溶解（溶解时间短、蒸馏水太少）；</li>
+                                            <li>蒸发：加热过程中液体溅出；</li>
+                                            <li>过滤：过滤后有液体残留；</li>
+                                            <li>称量：蒸发皿中有残留固体未转移。</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>二、蒸馏水用量</strong>
+                                <ul>
+                                    <li>太多：延长过滤、蒸发时间；</li>
+                                    <li>太少：无法完全溶解粗盐中的可溶物。</li>
+                                </ul>
+                            </li>
+                            <li><strong>三、食用盐定义</strong></li>
+                                <ul>
+                                    <li>食用盐的主要成分是氯化钠</li>
+                                    <li>还包括少量其他氯化物和其他矿物质</li>
+                                </ul>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 class="topic-title">课题2 学习开展化学实验探究</h3>
+                
+                <div class="textbook-title">化学实验探究一般有哪些思路与方法</div>
+                <ol>
+                    <li><strong>蜡烛的性质（实验验证结果）</strong>：
+                        <ul>
+                            <li>物理性质：白色固体√、难溶于水√、熔点低√、密度比水小√、质地软√、稳定性×、无味√、导电性差√、中性×；</li>
+                            <li>化学性质：具有可燃性√（燃烧生成二氧化碳和水，验证：二氧化碳使澄清石灰水浑浊，瓶壁出现小液滴）。</li>
+                        </ul>
+                    </li>
+                    <li><strong>探究的核心步骤</strong>：提出问题 → 提出假设 → 实施实验获取证据 → 分析解释数据 → 形成结论及建构模型 → 反思评价与表达交流<p><p>
+                        （以蜡烛性质探究为例：先提出“蜡烛具有哪些性质？”的问题，再假设其可能具有可燃性、难溶于水等性质，通过实验验证并记录现象，最终总结性质）</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-12/19）（补充食盐定义）</p>
+            <p>记录人：胡锦乐</p>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    </footer>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

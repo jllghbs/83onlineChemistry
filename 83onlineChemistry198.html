@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番外篇 化学99条大全</title>
+    <!-- 引入KaTeX CSS与JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <style>
+        /* 全局字号 */
+        :root {
+            --base-font-size: 13px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        body.theme-blue {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.theme-green {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.bg-image-hidden.theme-blue {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        @media (max-width: 768px) {
+            body.theme-green {
+                background-size: cover;
+                background-position: center center;
+                background-attachment: fixed;
+            }
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        body.theme-green header {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green footer {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .unit-nav h2 {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .unit-list li a {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .unit-list li a:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+        }
+        body.theme-green .unit-title {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .topic-title {
+            color: #1b5e20;
+        }
+        body.theme-green .back-to-top {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .back-to-top:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+        }
+        body.theme-green .download-btn {
+            background: rgba(46, 125, 50, 0.85);
+        }
+        body.theme-green .download-btn:hover {
+            background: rgba(27, 94, 32, 0.9);
+        }
+        body.theme-green .point-number {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .settings-content h3 {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .setting-slider::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-slider::-moz-range-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-value {
+            color: #2e7d32;
+        }
+        body.theme-green .theme-btn.active {
+            border-color: #2e7d32;
+            background: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .note-item {
+            border-bottom-color: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .note-item::before {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header h2 {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header {
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .setting-toggle.active {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式（优化宽度，手机端一行显示） */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: nowrap; /* 强制不换行 */
+            gap: 0.8rem; /* 按钮间距（优化美观度） */
+            justify-content: center;
+            overflow-x: auto; /* 极端情况横向滚动 */
+            padding: 0.3rem 0;
+        }
+        .unit-list li {
+            flex: 0 0 auto; /* 取消固定宽度，自适应内容 */
+            text-align: center;
+        }
+        .unit-list li a {
+            display: block;
+            padding: 0.6rem 1rem; /* 优化内边距，适配3字内容 */
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        /* 导出PDF按钮样式 */
+        .export-pdf {
+            display: block;
+            width: 160px;
+            margin: 1rem auto;
+            padding: 0.7rem 0;
+            background: #3366cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(51, 102, 204, 0.2);
+            transition: background 0.3s ease;
+        }
+        .export-pdf:hover {
+            background: #2855aa;
+        }
+        /* 导出提示样式 */
+        .export-tip {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        /* 主内容样式 */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .topic-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        /* 专题锚点样式（仅作为跳转标记，无视觉显示） */
+        .topic-anchor {
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        /* 99条样式（无专题间隔，连续排列） */
+        .note-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .note-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(95, 82, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap; /* 允许子元素换行 */
+        }
+        .note-item::before {
+            content: attr(data-index); /* 使用data-index属性显示序号 */
+            display: inline-block;
+            width: 2rem;
+            font-weight: bold;
+            color: #5f52ff;
+            margin-right: 0.8rem;
+        }
+        /* 图片条目的序号垂直居中 */
+        .note-item.item-with-image::before {
+            vertical-align: middle;
+            line-height: 4em;
+        }
+        /* 第五条和第六条随机显示（序号都是5） */
+        .note-item.random-hidden {
+            display: none !important;
+        }
+        /* 嵌套ul样式：强制换行+缩进 */
+        .note-item > ul {
+            width: 100%;
+            margin: 0.5rem 0 0 2.8rem; /* 左缩进=序号宽度+间距 */
+            list-style: disc;
+        }
+        .note-item > ul > li {
+            margin: 0.3rem 0;
+        }
+        /* 二级嵌套ul样式（一贴二低三靠内部） */
+        .note-item > ul > li > ul {
+            margin: 0.3rem 0 0 2rem;
+            list-style: circle;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 化学方程式/化学式样式 */
+        .chem-formula {
+            font-family: 'Times New Roman', serif;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        /* KateX公式样式 */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        .formula + br {
+            display: block;
+            content: "";
+            margin: 0;
+            padding: 0;
+        }
+        /* 返回顶部按钮样式 - 圆形、右下角固定 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: #4a3ed8;
+        }
+        /*打印*/
+        .download-btn {
+            padding: 14px 32px;
+            background: rgba(95, 82, 255, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(95, 82, 255, 1);
+            box-shadow: 0 8px 25px rgba(95, 82, 255, 0.5);
+        }
+        .download-btn:active {
+            transform: translateY(-1px);
+            background: rgba(95, 82, 255, 0.7);
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-icon .icon {
+            font-size: 1.2rem;
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 二维码容器 */
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: contain;
+                background-color: #f5f7fa;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            h1 {
+                font-size: calc(1.5rem - 2px);
+            }
+            /* 手机端导航栏优化：确保一行显示 */
+            .unit-list {
+                gap: 0.5rem; /* 移动端间距适配 */
+                padding: 0.3rem 0.5rem;
+            }
+            .unit-list li a {
+                padding: 0.5rem 0.8rem;
+                font-size: calc(0.9rem - 2px);
+            }
+            .note-section {
+                padding: 1.5rem;
+                padding-bottom: 50px;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+            .note-item::before {
+                width: 1.8rem;
+                margin-right: 0.5rem;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            .note-item > ul {
+                margin-left: 2.3rem;
+            }
+            .note-item > ul > li > ul {
+                margin-left: 1.5rem;
+            }
+            /* 移动端返回顶部按钮调整 */
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: calc(1.1rem - 2px);
+            }
+            /* 移动端导出按钮适配 */
+            .export-pdf {
+                width: 140px;
+                padding: 0.6rem 0;
+                font-size: calc(0.95rem - 2px);
+            }
+            /* 更新公告移动端字号小4号 */
+            .announcement-time,
+            .announcement-version {
+                font-size: 10px;
+            }
+            .announcement-title {
+                font-size: 14px;
+            }
+            .announcement-content ol {
+                font-size: 10px;
+            }
+            .announcement-signature {
+                font-size: 8px;
+            }
+            .announcement-close-mobile {
+                font-size: 20px;
+            }
+        }
+        /* 更新公告 */
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .announcement-close-mobile:hover {
+            color: #5f52ff;
+        }
+        @media (max-width: 768px) {
+            .announcement-close {
+                display: none;
+            }
+            .announcement-close-mobile {
+                display: block;
+            }
+            .contact-info {
+                display: none;
+            }
+        }
+        /* 设置按钮样式 */
+        header {
+            position: relative;
+        }
+        .settings-btn {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        /* 设置界面样式 */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        body.theme-green .settings-overlay {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+        }
+        .settings-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .settings-content {
+            background: white;
+            border-radius: 12px;
+            width: 70%;
+            max-width: 600px;
+            min-height: 400px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        .settings-overlay.show .settings-content {
+            transform: translateY(0);
+        }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .settings-header h2 {
+            margin: 0;
+            color: #5f52ff;
+        }
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+        .settings-close:hover {
+            color: #5f52ff;
+        }
+        /* 移动端设置按钮适配 */
+        @media (max-width: 768px) {
+            .settings-btn {
+                right: 1rem;
+            }
+            .settings-content {
+                width: 85%;
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+        }
+        /* 设置控件样式 */
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        .settings-section h3 {
+            font-size: 1rem;
+            color: #5f52ff;
+            margin: 0 0 0.8rem 0;
+            font-weight: 500;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .setting-label {
+            min-width: 70px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .setting-slider {
+            flex: 1;
+            min-width: 120px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+        .setting-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #5f52ff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .setting-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #5f52ff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .setting-value {
+            min-width: 45px;
+            text-align: right;
+            color: #5f52ff;
+            font-weight: 500;
+        }
+        .setting-toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #ddd;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .setting-toggle.active {
+            background: #5f52ff;
+        }
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .setting-toggle.active::after {
+            transform: translateX(24px);
+        }
+        body.theme-green .setting-toggle.active {
+            background: #2e7d32;
+        }
+        
+        /* 主题色样式 */
+        body.theme-blue { --primary-color: #5f52ff; --secondary-color: #4285f4; }
+        body.theme-green { --primary-color: #2e7d32; --secondary-color: #4caf50; --accent-color: #81c784; }
+        
+        body.bg-image-hidden.theme-blue .settings-overlay {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green .settings-overlay {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        /* 主题按钮样式 */
+        .theme-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-btn:hover {
+            border-color: var(--primary-color);
+        }
+        .theme-btn.active {
+            border-color: var(--primary-color);
+            background: rgba(95, 82, 255, 0.1);
+        }
+        .theme-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .theme-name {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* 搜索框样式 */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: transparent;
+        }
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #5f52ff;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .search-box:focus-within {
+            border-color: #5f52ff;
+            box-shadow: 0 0 15px rgba(95, 82, 255, 0.3);
+        }
+        .search-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            color: #5f52ff;
+            transition: color 0.3s ease;
+        }
+        .search-box:focus-within .search-icon {
+            color: #5f52ff;
+        }
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            padding: 0.3rem 0;
+        }
+        .search-input::placeholder {
+            color: #5f52ff;
+            transition: color 0.3s ease;
+        }
+        .search-input:focus::placeholder {
+            color: #5f52ff;
+        }
+        .search-clear {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: #5f52ff;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .search-clear:hover {
+            background: #4a3ed8;
+            color: white;
+        }
+        .search-clear.show {
+            display: flex;
+        }
+        body.theme-green .search-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: #2e7d32;
+        }
+        body.theme-green .search-box:focus-within {
+            border-color: #2e7d32;
+            box-shadow: 0 0 15px rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .search-icon {
+            color: #2e7d32;
+        }
+        body.theme-green .search-box:focus-within .search-icon {
+            color: #2e7d32;
+        }
+        body.theme-green .search-input::placeholder {
+            color: #2e7d32;
+        }
+        body.theme-green .search-input:focus::placeholder {
+            color: #2e7d32;
+        }
+        body.theme-green .search-clear {
+            background: #2e7d32;
+            color: white;
+        }
+        body.theme-green .search-clear:hover {
+            background: #1b5e20;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .search-box {
+                padding: 0.5rem 1rem;
+            }
+            .search-input {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/6/10 <span class="announcement-version">Ver2.5.16</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>新增三条课堂与考试纪律要求</li>
+                </ol>
+            </div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function openSettings() {
+            document.getElementById('settings-overlay').classList.add('show');
+        }
+        function closeSettings() {
+            document.getElementById('settings-overlay').classList.remove('show');
+        }
+        function updateFontSize(value) {
+            document.getElementById('fontSizeValue').textContent = value + '%';
+            document.body.style.fontSize = value + '%';
+        }
+        function updateLineHeight(value) {
+            document.getElementById('lineHeightValue').textContent = value;
+            document.body.style.lineHeight = value;
+        }
+        function updateLetterSpacing(value) {
+            document.getElementById('letterSpacingValue').textContent = value + 'em';
+            document.body.style.letterSpacing = value + 'em';
+        }
+        function updateCardOpacity(value) {
+            document.getElementById('cardOpacityValue').textContent = value + '%';
+            var alpha = 1 - value / 100;
+            var noteSection = document.querySelector('.note-section');
+            noteSection.style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            document.querySelector('.settings-content').style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            document.querySelector('.unit-nav').style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            if (alpha < 0.4 && document.body.classList.contains('theme-green')) {
+                noteSection.style.color = 'white';
+                document.querySelectorAll('.note-item::before').forEach(function(el) {
+                    el.style.color = '#90EE90';
+                });
+            } else {
+                noteSection.style.color = '#333';
+                document.querySelectorAll('.note-item::before').forEach(function(el) {
+                    el.style.color = '';
+                });
+            }
+        }
+        function toggleBackgroundImage() {
+            var toggle = document.getElementById('bgImageToggle');
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                document.body.classList.remove('bg-image-hidden');
+            } else {
+                document.body.classList.add('bg-image-hidden');
+            }
+        }
+        function toggleSearchBox() {
+            var toggle = document.getElementById('searchBoxToggle');
+            toggle.classList.toggle('active');
+            var searchContainer = document.querySelector('.search-container');
+            if (toggle.classList.contains('active')) {
+                searchContainer.style.display = '';
+            } else {
+                searchContainer.style.display = 'none';
+            }
+        }
+        function updateTheme(theme) {
+            var classes = document.body.className.split(' ').filter(c => !c.startsWith('theme-'));
+            document.body.className = classes.join(' ') + ' theme-' + theme;
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            var cardOpacityValue = document.getElementById('cardOpacitySlider').value;
+            updateCardOpacity(cardOpacityValue);
+        }
+        function initNoteIndex() {
+            var noteItems = document.querySelectorAll('.note-item');
+            var visibleCount = 0;
+            var lastRandomGroup = null;
+            noteItems.forEach(function(item, index) {
+                // 检查元素是否被隐藏
+                if (item.classList.contains('random-hidden')) {
+                    return;
+                }
+                // 检查是否有随机组
+                var randomGroup = item.getAttribute('data-random-group');
+                if (randomGroup) {
+                    // 如果是同一随机组，保持序号相同
+                    if (lastRandomGroup !== randomGroup) {
+                        visibleCount++;
+                        lastRandomGroup = randomGroup;
+                    }
+                    item.setAttribute('data-index', visibleCount);
+                } else {
+                    visibleCount++;
+                    item.setAttribute('data-index', visibleCount);
+                }
+            });
+        }
+        function validateSearchInput(input) {
+            var value = input.value;
+            var hasChinese = /[\u4e00-\u9fa5]/.test(value);
+            var hasEnglish = /[a-zA-Z]/.test(value);
+            
+            if (hasChinese && hasEnglish) {
+                var lastChar = value[value.length - 1];
+                var isChinese = /[\u4e00-\u9fa5]/.test(lastChar);
+                var isEnglish = /[a-zA-Z]/.test(lastChar);
+                
+                if (isEnglish) {
+                    input.value = value.slice(0, -1);
+                } else if (isChinese) {
+                    input.value = value.slice(0, -1);
+                }
+            }
+        }
+        function handleSearch(query) {
+            var clearBtn = document.getElementById('searchClear');
+            if (query.length > 0) {
+                clearBtn.classList.add('show');
+            } else {
+                clearBtn.classList.remove('show');
+            }
+            var noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(function(item) {
+                if (query.length === 0) {
+                    item.style.display = '';
+                    return;
+                }
+                var displayText = getDisplayText(item);
+                var lowerText = displayText.toLowerCase();
+                var lowerQuery = query.toLowerCase();
+                if (lowerText.indexOf(lowerQuery) !== -1) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        function getDisplayText(element) {
+            var text = '';
+            var nodes = element.childNodes;
+            for (var i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
+                if (node.nodeType === Node.TEXT_NODE) {
+                    text += node.nodeValue;
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    var tagName = node.tagName.toLowerCase();
+                    if (tagName === 'script' || tagName === 'style') {
+                        continue;
+                    }
+                    if (node.classList && node.classList.contains('katex') && node.querySelector('.katex-mathml')) {
+                        var mathmlText = node.querySelector('.katex-html')?.textContent || '';
+                        text += mathmlText;
+                    } else if (tagName === 'img' && node.dataset.searchText) {
+                        text += node.dataset.searchText;
+                    } else {
+                        text += getDisplayText(node);
+                    }
+                }
+            }
+            return text;
+        }
+        function clearSearch() {
+            var searchInput = document.getElementById('searchInput');
+            var clearBtn = document.getElementById('searchClear');
+            searchInput.value = '';
+            clearBtn.classList.remove('show');
+            var noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(function(item) {
+                item.style.display = '';
+            });
+            searchInput.focus();
+        }
+        window.addEventListener('DOMContentLoaded', initNoteIndex);
+    </script>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 化学99条</h1>
+            <p class="time-range">学习周期：2026年3月2日 - ？</p>
+        </div>
+        <button class="settings-btn" onclick="openSettings()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94c0-0.31-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94l-0.36-2.54c-0.05-0.24-0.26-0.41-0.5-0.41h-3.84c-0.24,0-0.45,0.17-0.5,0.41l-0.36,2.54c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.08-0.47,0-0.59,0.22l-1.92,3.32c-0.12,0.2-0.07,0.47,0.12,0.61l2.03,1.58C4.84,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54c0.05,0.24,0.26,0.41,0.5,0.41h3.84c0.24,0,0.45-0.17,0.5-0.41l0.36-2.54c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.2,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+        </button>
+    </header>
+    <!-- 设置界面 -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>设置</h2>
+                <button class="settings-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-section">
+                <h3>文字排版</h3>
+                <div class="setting-item">
+                    <span class="setting-label">字号缩放</span>
+                    <input type="range" class="setting-slider" id="fontSizeSlider" min="80" max="120" value="100" oninput="updateFontSize(this.value)">
+                    <span class="setting-value" id="fontSizeValue">100%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">行间距</span>
+                    <input type="range" class="setting-slider" id="lineHeightSlider" min="1" max="3" step="0.1" value="1.5" oninput="updateLineHeight(this.value)">
+                    <span class="setting-value" id="lineHeightValue">1.5</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">字间距</span>
+                    <input type="range" class="setting-slider" id="letterSpacingSlider" min="0" max="0.5" step="0.05" value="0" oninput="updateLetterSpacing(this.value)">
+                    <span class="setting-value" id="letterSpacingValue">0em</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">搜索框</span>
+                    <div class="setting-toggle active" id="searchBoxToggle" onclick="toggleSearchBox()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>界面外观</h3>
+                <div class="setting-item">
+                    <span class="setting-label">卡片透明度</span>
+                    <input type="range" class="setting-slider" id="cardOpacitySlider" min="0" max="100" value="80" oninput="updateCardOpacity(this.value)">
+                    <span class="setting-value" id="cardOpacityValue">80%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">背景图</span>
+                    <div class="setting-toggle active" id="bgImageToggle" onclick="toggleBackgroundImage()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>主题色彩</h3>
+                <div class="setting-item">
+                    <div class="theme-buttons">
+                        <button class="theme-btn theme-blue active" onclick="updateTheme('blue')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #4285f4, #5f52ff);"></span>
+                            <span class="theme-name">蓝色</span>
+                        </button>
+                        <button class="theme-btn theme-green" onclick="updateTheme('green')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #1b5e20, #4caf50, #81c784);"></span>
+                            <span class="theme-name">绿色</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航栏（优化宽度，手机端一行显示） -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>八下化学笔记单元导航</h2>
+            <ul class="unit-list">
+                <li><a href="#topic4">专题四</a></li>
+                <li><a href="#topic5">专题五</a></li>
+                <li><a href="#topic6">专题六</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 搜索框 -->
+    <div class="search-container">
+        <div class="search-box">
+            <div class="search-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索笔记内容..." oninput="validateSearchInput(this); handleSearch(this.value)">
+            <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
+        </div>
+    </div>
+    <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="unit-title">番外篇 化学99条大全</div>
+            <div class="note-content">
+                <h3 class="topic-title">本学期核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
+                
+                <ul class="note-list">
+                    <li class="note-item">不能在化学课上挑衅、激怒化学老师</li>
+                    <li class="note-item">上课禁止写作业（刘育君除外）</li>
+                    <li class="note-item">上课不能阅读《嫌疑人x的献身》并向高老师泄露情节</li>
+                    <li class="note-item">考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
+                    <li class="note-item" data-random-group="5">禁止使用AI化学老师工具问奇奇怪怪的问题或进行恶搞</li>
+                    <li class="note-item item-with-image" data-random-group="5"><img src="https://img.zxxk.com/aed/ai/upload/20260610/fbc7f5daae38495dbb96a74470a9391f.png" style="height: 4em; vertical-align: middle;" data-search-text="马励行与王星砚反应产生糖分"></li>
+                    <!-- 专题四锚点 -->
+                    <span id="topic4" class="topic-anchor"></span>
+                    <li class="note-item">水是由大量水分子构成的</li>
+                    <li class="note-item">水的三态为固态冰、液态水、气态水蒸气</li>
+                    <li class="note-item">水的三态变化属于物理变化，水分子本身不发生改变</li>
+                    <li class="note-item">水的三态变化只改变分子间的间隔和排列方式</li>
+                    <li class="note-item">温度越高，分子的运动速率越快</li>
+                    <li class="note-item">一般情况下，温度升高，分子之间的间隔会变大</li>
+                    <li class="note-item">水的三态变化过程中会伴随能量的吸收或释放</li>
+                    <li class="note-item">由分子构成的物质多是非金属化合物和气态非金属单质，例如<span class="chem-formula">H₂O</span>、<span class="chem-formula">O₂</span></li>
+                    <li class="note-item">由原子直接构成的物质多是金属、稀有气体和部分固态非金属，例如<span class="chem-formula">Fe</span>、<span class="chem-formula">He</span></li>
+                    <li class="note-item">由分子构成的物质，分子是保持其化学性质的最小粒子</li>
+                    <li class="note-item">分子的基本性质：质量和体积都很小；分子之间有间隔；分子在不断运动</li>
+                    <li class="note-item">常温常压下，水是无色、无味的透明液体</li>
+                    <li class="note-item">标准大气压下，水的凝固点为<span class="chem-formula">0℃</span>，沸点为<span class="chem-formula">100℃</span></li>
+                    <li class="note-item">水在<span class="chem-formula">4℃</span>时密度最大，数值为<span class="chem-formula">1g/cm³</span></li>
+                    <li class="note-item">冰的密度比水小，所以冰能浮在水面上</li>
+                    <li class="note-item">水具有反常膨胀的特点：<span class="chem-formula">0~4℃</span>时温度升高体积减小，高于<span class="chem-formula">4℃</span>时温度升高体积增大，导致相同质量的冰体积比水大，密度比水小</li>
+                    <li class="note-item">水的比热容较大，吸热和放热能力强，常被用作冷却剂或调节温度的介质</li>
+                    <li class="note-item">水是常见的优良溶剂，能溶解食盐、蔗糖等多种物质形成溶液</li>
+                    <li class="note-item">水具有毛细现象，可以沿着细小孔隙向上移动</li>
+                    <li class="note-item">水具有表面张力，能支撑较轻的物体停留在水面</li>
+                    <li class="note-item">水和二氧化碳的反应：
+                        <ul>
+                            <li>水与二氧化碳反应生成碳酸</li>
+                            <li>反应表达式：<span class="formula">H_2O + CO_2 \xlongequal{\quad} H_2CO_3</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">水与氧化钙的反应：
+                        <ul>
+                            <li>氧化钙与水反应生成氢氧化钙，同时放出大量热</li>
+                            <li>反应表达式：<span class="formula">CaO + H_2O \xlongequal{\quad} Ca(OH)_2</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">氢氧化钙：俗称熟石灰，微溶于水，溶液呈碱性，能使无色酚酞试液变红；生石灰的主要成分是氧化钙</li>
+                    <li class="note-item">自然界中的水含有杂质，矿泉水、河水、井水等天然水都属于混合物</li>
+                    <li class="note-item">氯气常用来对自来水进行杀菌消毒</li>
+                    <li class="note-item">硬水是含有较多可溶性钙、镁化合物的水</li>
+                    <li class="note-item">软水是不含或含较少可溶性钙、镁化合物的水</li>
+                    <li class="note-item">地球表面约<span class="chem-formula">71%</span>被水覆盖，地球上的水中，咸水约占<span class="chem-formula">97%</span>，淡水约占<span class="chem-formula">3%</span>，但可直接利用的淡水资源很少，不足总水量的<span class="chem-formula">1%</span></li>
+                    <li class="note-item">氢气燃烧的操作是点燃纯净氢气，火焰上方罩干冷烧杯；现象是产生淡蓝色火焰，烧杯内壁出现水雾</li>
+                    <li class="note-item">氢气燃烧化学表达式：<span class="formula">2H_2 + O_2 \xlongequal{\text{点燃}} 2H_2O</span>；结论：证明水由氢、氧元素组成</li>
+                    <li class="note-item">电解水装置与现象：装置为水电解器、直流电源、水；水位控制通过上下调整漏斗（连通器原理）使玻璃管充满水；通电后两极均产生气泡，负极产生气泡更快，正、负极气体体积比为1:2</li>
+                    <li class="note-item">电解水正负极气体：正极产生氧气（能使燃着木条燃烧更旺），负极产生氢气（点燃后产生淡蓝色火焰）</li>
+                    <li class="note-item">电解水化学表达式为<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span>；结论：证明水由氢、氧元素组成；氢、氧气体积比2:1说明水分子中氢、氧原子个数比2:1</li>
+                    <li class="note-item">水分解微观过程：水分子分裂为氢原子和氧原子，氢原子重新结合形成氢分子，氧原子重新结合形成氧分子；说明化学变化中分子可分，原子不可分</li>
+                    <li class="note-item">化合反应：两种或多种物质生成一种物质，特点是多变一，表达式为<span class="formula">A+B+\dots\rightarrow C</span></li>
+                    <li class="note-item">化合反应举例：<span class="formula">2H_2 + O_2 \xlongequal{\text{点燃}} 2H_2O</span></li>
+                    <li class="note-item">分解反应：一种物质生成两种或多种物质，特点是一变多，表达式为<span class="formula">A\rightarrow B+C+\dots</span></li>
+                    <li class="note-item">分解反应举例：<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span></li>
+                    <li class="note-item">置换反应："单换单"，由一种单质与一种化合物反应，生成另一种单质和另一种化合物，特点是单换单，表达式为<span class="formula">A+BC\rightarrow AC+B</span></li>
+                    <li class="note-item">置换反应举例：<span class="formula">Fe + CuSO_4 \xlongequal{} FeSO_4 + Cu</span></li>
+                    <li class="note-item">复分解反应："双交换"，由两种化合物互相交换成分，生成另外两种化合物，特点是双交换，表达式为<span class="formula">AB+CD\xlongequal{} AD+BC</span></li>
+                    <li class="note-item">复分解反应举例：<span class="formula">NaOH + HCl \xlongequal{} NaCl + H_2O</span></li>
+                    
+                    <!-- 专题五 锚点-->
+                    <span id="topic5" class="topic-anchor"></span>
+                    <li class="note-item">物质的宏观<strong>组成</strong>：指物质由元素组成，仅说种类、不说个数</li>
+                    <li class="note-item">物质的微观<strong>构成</strong>：指物质由离子、分子、原子构成，既说种类、也说个数</li>
+                    <li class="note-item">离子的定义与对应物质：带电荷的微观粒子；对应物质为金属化合物（如<span class="chem-formula">NaCl</span>）</li>
+                    <li class="note-item">分子的定义与对应物质：由原子构成的微观粒子；对应物质为非金属单质（如<span class="chem-formula">O₂</span>、<span class="chem-formula">N₂</span>）、非金属化合物（如<span class="chem-formula">CO₂</span>、<span class="chem-formula">H₂O</span>）</li>
+                    <li class="note-item">原子的定义与对应物质：化学变化中的最小微观粒子；对应物质为金属单质（如<span class="chem-formula">Fe</span>、<span class="chem-formula">Cu</span>）、非金属固体单质（如<span class="chem-formula">C</span>、<span class="chem-formula">P</span>）、稀有气体（如<span class="chem-formula">He</span>、<span class="chem-formula">Ne</span>）</li>
+                    <li class="note-item">元素的定义：质子数相同的同一类原子的总称（宏观层面，是原子的集合）</li>
+                    <li class="note-item">微观粒子的基本性质：①体积小、质量小；②不断运动；③粒子间有间隔；④同种粒子性质相同，不同粒子性质不同</li>
+                    <li class="note-item"><span class="chem-formula">H₂O</span>的宏微观含义：
+                        <ul>
+                            <li>宏观：①代表物质（水）；②由氢元素和氧元素<strong>组成</strong></li>
+                            <li>微观：①代表1个水分子；②1个水分子由2个氢原子和1个氧原子<strong>构成</strong></li>
+                        </ul>
+                    </li>
+                    <li class="note-item"><span class="chem-formula">3SO₂</span>的宏微观含义：
+                        <ul>
+                            <li>化学式前加数字后，只能表示微观意义，无宏观意义</li>
+                            <li>微观：①代表3个二氧化硫分子；②1个二氧化硫分子由1个硫原子和2个氧原子<strong>构成</strong></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">原子结构：由原子核（含质子带正电、中子不带电，氢原子无中子）和核外电子（带负电）构成；核外电子排布规律：电子层最多容<span class="chem-formula">2n²</span>个电子，最外层不超8个（第一层不超2个），先排内层再排外层</li>
+                    <li class="note-item">元素周期表的基本排布：按原子序数排，周期数=电子层数，主族数=最外层电子数（0族除外）</li>
+                    <li class="note-item">化合价：定义为形成化合物时一个原子和其他原子相结合的数目；规则是化合物中正负化合价代数和为0，单质中元素化合价为0</li>
+                    <li class="note-item">常见元素的化合价：
+                        <ul>
+                            <li>+1价：<span class="chem-formula"></span>K</span>、<span class="chem-formula">Na</span>、<span class="chem-formula">Ag</span>、<span class="chem-formula">H</span></li>
+                            <li>+2价：<span class="chem-formula">Ca</span>、<span class="chem-formula">Mg</span>、<span class="chem-formula">Ba</span>、<span class="chem-formula">Zn</span>、<span class="chem-formula">Cu</span>、<span class="chem-formula">Fe</span>（亚铁）</li>
+                            <li>+3价：<span class="chem-formula">Al</span>、<span class="chem-formula">Fe</span>（铁）</li>
+                            <li>-1价：<span class="chem-formula">F</span>、<span class="chem-formula">Cl</span></li>
+                            <li>-2价：<span class="chem-formula">O</span>、<span class="chem-formula">S</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">常见原子团的化合价：
+                        <ul>
+                            <li>+1价：<span class="chem-formula">NH₄⁺</span>（铵根）</li>
+                            <li>-1价：<span class="chem-formula">OH⁻</span>（氢氧根）、<span class="chem-formula">NO₃⁻</span>（硝酸根）</li>
+                            <li>-2价：<span class="chem-formula">CO₃²⁻</span>（碳酸根）、<span class="chem-formula">SO₄²⁻</span>（硫酸根）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">金属化合物的读写规则：
+                        <ul>
+                            <li>读法：从右向左读“某化某”</li>
+                            <li>写法：正价在前，负价在后</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">非金属化合物的读写规则：
+                        <ul>
+                            <li>读法：读“几某化几某”</li>
+                            <li>写法：正价在前，负价在后</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">原子结构模型（实心球模型）：道尔顿1803年提出，认为原子是不可再分的实心球体</li>
+                    <li class="note-item">原子结构模型（葡萄干面包模型）：汤姆孙1903年提出，认为原子像蛋糕、电子像葡萄干嵌在其中（无核结构）</li>
+                    <li class="note-item">原子结构模型（核式结构模型）：卢瑟福1911年提出，认为原子中心有带电原子核，核外电子绕核运动</li>
+                    <li class="note-item">碳单质的多样性原因：同种碳元素组成不同单质，本质是碳原子的排列方式不同</li>
+                    <li class="note-item">石墨的性质与用途：质柔、黑色、有导电性和滑腻感，层状结构，可作铅笔芯、电极、润滑剂</li>
+                    <li class="note-item">金刚石的性质与用途：天然最硬物质、折射率高，正四面体结构，可作钻头、装饰品、切割工具</li>
+                    <li class="note-item">金刚石与石墨的转化：二者之间的转化属于化学变化（碳原子排列方式改变，生成新物质）</li>
+                    <li class="note-item"><span class="chem-formula">C₆₀</span>的结构与应用：足球状分子结构，无特殊标注性质，可用于装饰材料、新型材料研究</li>
+                    <li class="note-item">“碳”与“炭”的区别：“碳”指碳元素/纯净碳单质，“炭”指无定形碳（混合物）</li>
+                    <li class="note-item">无定形碳的组成：木炭、活性炭、焦炭、炭黑统称无定形碳，由微小石墨晶体和少量杂质组成</li>
+                    <li class="note-item">木炭的吸附性：因疏松多孔的结构具有吸附能力，可吸附色素异味</li>
+                    <li class="note-item">活性炭的特性：经活化处理的无定形碳，吸附作用比普通木炭更强</li>
+                    <li class="note-item">活性炭吸附实验：红墨水溶液中加活性炭，红色逐渐变浅最终无色（证明吸附性）</li>
+                    
+                    <!-- 专题六 锚点-->
+                    <span id="topic6" class="topic-anchor"></span>
+                    <li class="note-item">质量守恒定律：参加化学反应的各物质的质量总和，等于反应后生成的各物质的质量总和</li>
+                    <li class="note-item">质量守恒定律的微观解释：
+                        <ul>
+                            <li>化学变化中，参加反应的反应物质量之和等于生成物质量之和</li>
+                            <li>化学变化中，原子的种类与个数不变</li>
+                            <li>化学变化中，元素的种类与质量不变</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">硫酸铜溶液与氢氧化钠溶液反应：
+                        <ul>
+                            <li>反应前总质量：<span class="chem-formula">85.9g</span>，反应后总质量：<span class="chem-formula">85.9g</span></li>
+                            <li>反应方程式：<span class="formula">CuSO_4 + 2NaOH \xlongequal{\quad} Cu(OH)_2\downarrow + Na_2SO_4</span></li>
+                            <li>实验现象：生成蓝色氢氧化铜沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">稀盐酸与大理石反应：
+                        <ul>
+                            <li>反应前总质量：<span class="chem-formula">78.4g</span>，反应后总质量：<span class="chem-formula">78.4g</span>（高老师失败了）</li>
+                            <li>反应方程式：<span class="formula">CaCO_3 + 2HCl \xlongequal{\quad} CaCl_2 + H_2O + CO_2\uparrow</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">稀盐酸与大理石反应需在密闭容器中进行，否则产生的二氧化碳气体会扩散到空气中，导致二氧化碳没有被测量，反应后总质量无法准确测量</li>
+                    <li class="note-item">金属铜加热反应：
+                        <ul>
+                            <li>实验现象：铜丝由红色变为黑色</li>
+                            <li>反应方程式：<span class="formula">2Cu + O_2 \xlongequal{\triangle} 2CuO</span></li>
+                            <li>实验结论：反应前后质量不变（提到，没有做）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">书写化学方程式的原则：以客观事实为基础；遵守质量守恒定律</li>
+                    <li class="note-item">书写化学方程式的步骤：写（写出反应物和生成物化学式）→ 配（配平方程式）→ 注（注明反应条件）→ 等（短线改等号）→ 标（标注生成物状态）</li>
+                    <li class="note-item">化学方程式中的状态符号：↑表示气体（反应物无气体时标注），↓表示沉淀（反应物无固体时标注）</li>
+                    <li class="note-item">化学方程式的含义：表示反应物、生成物和反应条件</li>
+                    <li class="note-item">化学方程式的微观意义：表示各物质的粒子个数比</li>
+                    <li class="note-item">化学方程式的质量意义：表示各物质的质量比（等于相对分子质量乘以化学计量数之比）</li>
+                    <li class="note-item">根据化学方程式计算的步骤：设未知数→写方程式→算相对质量→列比例式→求解→作答</li>
+                    <li class="note-item">示例1：<span class="formula">C + O_2 \xlongequal{\text{点燃}} CO_2</span>
+                        <ul>
+                            <li><strong>物质</strong>：碳与氧气在点燃条件下反应，生成二氧化碳</li>
+                            <li><strong>微观</strong>：
+                                <ul style="list-style-type: none;">
+                                    <li><strong>每</strong>1个碳原子和1个氧分子在点燃条件下反应，生成1个二氧化碳分子</li>
+                                    <li><strong>每</strong>12克碳与32克氧气反应，生成44克二氧化碳</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="note-item">示例2：<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span>
+                        <ul>
+                            <li><strong>物质</strong>：水在通电条件下生成氢气和氧气</li>
+                            <li><strong>微观</strong>：
+                                <ul style="list-style-type: none;">
+                                    <li>在通电条件下，<strong>每</strong>2个水分子反应生成2个氢分子和1个氧分子</li>
+                                    <li>在通电条件下，<strong>每</strong>36克水分解，生成4克氢气和32克氧气</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="note-item">化合反应：两种或多种物质生成一种物质，特点多变一，表达式：<span class="formula">A+B+\dots\rightarrow C</span>，特点是多变一</li>
+                    <li class="note-item">化合反应举例：<span class="formula">2H_2 + O_2 \xlongequal{\text{点燃}} 2H_2O</span></li>
+                    <li class="note-item">分解反应：一种物质生成两种或多种物质，特点一变多，表达式：<span class="formula">A\rightarrow B+C+\dots</span>，特点是一变多</li>
+                    <li class="note-item">分解反应举例：<span class="formula">2H_2O \xlongequal{\text{通电}} 2H_2\uparrow + O_2\uparrow</span></li>
+                    <li class="note-item">置换反应："单换单"，由一种单质与一种化合物反应，生成另一种单质和另一种化合物，表达式：A+BC→AC+B，特点是单换单</li>
+                    <li class="note-item">置换反应举例：<span class="formula">Fe + CuSO_4 \xlongequal{} FeSO_4 + Cu</span></li>
+                    <li class="note-item">复分解反应："双交换"，由两种化合物互相交换成分，生成另外两种化合物，表达式：<span class="formula">AB+CD\rightarrow AD+BC</span>，特点是双交换</li>
+                    <li class="note-item">复分解反应举例：<span class="formula">NaOH + HCl \xlongequal{} NaCl + H_2O</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 八下化学笔记（3/2-？）</p>
+            <p>记录人：胡锦乐</p>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.doc</button>
+    <script>
+        function downloadChemWord() {
+            // 化学99条大全的完整内容（Word可识别的HTML格式，带样式）
+            const wordContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+                    <head>
+                        <meta charset="utf-8">
+                        <style>
+                            body { font-family: 'SimSun', '宋体', serif; margin: 2cm; }
+                            h1 { 
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                                color: #5f52ff; 
+                                text-align: center; 
+                                font-size: 18pt; 
+                                border-bottom: 2px solid rgba(95, 82, 255, 0.7); 
+                                padding-bottom: 10px;
+                                margin-bottom: 20px;
+                            }
+                            h2 { 
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                                color: #5f52ff; 
+                                font-size: 14pt; 
+                                margin-top: 20px;
+                                margin-bottom: 10px;
+                            }
+                            ol { 
+                                list-style-type: none;
+                                counter-reset: item;
+                                padding-left: 0;
+                            }
+                            li { 
+                                font-size: 11pt; 
+                                line-height: 1.8; 
+                                margin-bottom: 8px;
+                                color: #333;
+                                counter-increment: item;
+                                position: relative;
+                                padding-left: 35px;
+                            }
+                            li::before {
+                                content: counter(item) ".";
+                                position: absolute;
+                                left: 0;
+                                color: #5f52ff;
+                                font-weight: bold;
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                            }
+                            ul { 
+                                list-style-type: disc; 
+                                padding-left: 30px;
+                            }
+                            .highlight { 
+                                color: #5f52ff; 
+                                font-weight: bold;
+                            }
+                            .chem-formula {
+                                font-family: 'Times New Roman', serif;
+                            }
+                            .note-section {
+                                margin-left: 20px;
+                            }
+                            .topic-divider {
+                                border-top: 1px dashed rgba(95, 82, 255, 0.5);
+                                margin: 15px 0;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>化学99条大全-本学期核心知识点</h1>
+                        <ol>
+                            <li>不能在化学课上挑衅、激怒化学老师</li>
+                            <li>上课禁止写作业（刘育君除外）</li>
+                            <li>上课不能阅读《嫌疑人x的献身》并向高老师泄露情节</li>
+                            <li>考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
+                            <li>马励行与王星砚反应产生糖分</li>
+                            <li>水是由大量水分子构成的</li>
+                            <li>水的三态为固态冰、液态水、气态水蒸气</li>
+                            <li>水的三态变化属于物理变化，水分子本身不发生改变</li>
+                            <li>水的三态变化只改变分子间的间隔和排列方式</li>
+                            <li>温度越高，分子的运动速率越快</li>
+                            <li>一般情况下，温度升高，分子之间的间隔会变大</li>
+                            <li>水的三态变化过程中会伴随能量的吸收或释放</li>
+                            <li>由分子构成的物质多是非金属化合物和气态非金属单质，例如水、氧气</li>
+                            <li>由原子直接构成的物质多是金属、稀有气体和部分固态非金属，例如铁、氦气</li>
+                            <li>由分子构成的物质，分子是保持其化学性质的最小粒子</li>
+                            <li>分子的基本性质：质量和体积都很小；分子之间有间隔；分子在不断运动</li>
+                            <li>常温常压下，水是无色、无味的透明液体</li>
+                            <li>标准大气压下，水的凝固点为0℃，沸点为100℃</li>
+                            <li>水在4℃时密度最大，数值为1g/cm³</li>
+                            <li>冰的密度比水小，所以冰能浮在水面上</li>
+                            <li>水具有反常膨胀的特点：0~4℃时温度升高体积减小，高于4℃时温度升高体积增大，导致相同质量的冰体积比水大，密度比水小</li>
+                            <li>水的比热容较大，吸热和放热能力强，常被用作冷却剂或调节温度的介质</li>
+                            <li>水是常见的优良溶剂，能溶解食盐、蔗糖等多种物质形成溶液</li>
+                            <li>水具有毛细现象，可以沿着细小孔隙向上移动</li>
+                            <li>水具有表面张力，能支撑较轻的物体停留在水面</li>
+                            <li>水和二氧化碳的反应：
+                                <ul>
+                                    <li>水与二氧化碳反应生成碳酸</li>
+                                    <li>反应表达式：H₂O + CO₂ ═══ H₂CO₃</li>
+                                </ul>
+                            </li>
+                            <li>水与氧化钙的反应：
+                                <ul>
+                                    <li>氧化钙与水反应生成氢氧化钙，同时放出大量热</li>
+                                    <li>反应表达式：CaO + H₂O ═══ Ca(OH)₂</li>
+                                </ul>
+                            </li>
+                            <li>氢氧化钙：俗称熟石灰，微溶于水，溶液呈碱性，能使无色酚酞试液变红；生石灰的主要成分是氧化钙</li>
+                            <li>自然界中的水含有杂质，矿泉水、河水、井水等天然水都属于混合物</li>
+                            <li>氯气常用来对自来水进行杀菌消毒</li>
+                            <li>硬水是含有较多可溶性钙、镁化合物的水</li>
+                            <li>软水是不含或含较少可溶性钙、镁化合物的水</li>
+                            <li>地球表面约71%被水覆盖，地球上的水中，咸水约占97%，淡水约占3%，但可直接利用的淡水资源很少，不足总水量的1%</li>
+                            <li>氢气燃烧：操作是点燃纯净氢气，火焰上方罩干冷烧杯；现象是产生淡蓝色火焰，烧杯内壁出现水雾；化学表达式：H₂ + O₂ ═══（条件：点燃）H₂O；证明水由氢、氧元素组成</li>
+                            <li>电解水装置与现象：装置为水电解器、直流电源、水；水位控制通过上下调整漏斗（连通器原理）使玻璃管充满水；通电后两极均产生气泡，负极产生气泡更快，正、负极气体体积比为1:2</li>
+                            <li>电解水正负极气体：正极产生氧气（能使燃着木条燃烧更旺），负极产生氢气（点燃后产生淡蓝色火焰）</li>
+                            <li>电解水结论：化学表达式为H₂O ═══（条件：通电）H₂ + O₂；证明水由氢、氧元素组成；氢、氧气体积比2:1说明水分子中氢、氧原子个数比2:1</li>
+                            <li>水分解微观过程：水分子分裂为氢原子和氧原子，氢原子重新结合形成氢分子，氧原子重新结合形成氧分子；说明化学变化中分子可分，原子不可分</li>
+                            <li>化合反应：两种或多种物质生成一种物质，特点是多变一，表达式为A+B+…→C</li>
+                            <li>化合反应举例：2H₂ + O₂ ═══（条件：点燃）2H₂O</li>
+                            <li>分解反应：一种物质生成两种或多种物质，特点是一变多，表达式为A→B+C+…</li>
+                            <li>分解反应举例：2H₂O ═══（条件：通电）2H₂↑ + O₂↑</li>
+                            <li>置换反应："单换单"，由一种单质与一种化合物反应，生成另一种单质和另一种化合物，特点是单换单，表达式为A+BC→AC+B</li>
+                            <li>置换反应举例：Fe + CuSO₄ ═══ FeSO₄ + Cu</li>
+                            <li>复分解反应："双交换"，由两种化合物互相交换成分，生成另外两种化合物，特点是双交换，表达式为AB+CD ═══ AD+BC</li>
+                            <li>复分解反应举例：NaOH + HCl ═══ NaCl + H₂O</li>
+                            <li><strong>物质的构成与组成1：</strong>宏观（组成）指物质由元素组成，仅说种类、不说个数</li>
+                            <li><strong>物质的构成与组成2：</strong>微观（构成）指物质由离子、分子、原子构成，既说种类、也说个数</li>
+                            <li>离子的定义与对应物质：带电荷的微观粒子；对应物质为金属化合物（如NaCl）</li>
+                            <li>分子的定义与对应物质：由原子构成的微观粒子；对应物质为非金属单质（如O₂、N₂）、非金属化合物（如CO₂、H₂O）</li>
+                            <li>原子的定义与对应物质：化学变化中的最小微观粒子；对应物质为金属单质（如Fe、Cu）、非金属固体单质（如C、P）、稀有气体（如He、Ne）</li>
+                            <li>元素的定义：质子数相同的同一类原子的总称（宏观层面，是原子的集合）</li>
+                            <li>微观粒子的基本性质：①体积小、质量小；②不断运动；③粒子间有间隔；④同种粒子性质相同，不同粒子性质不同</li>
+                            <li>H₂O的宏微观含义：
+                                <ul>
+                                    <li>宏观：①代表物质（水）；②由氢元素和氧元素组成</li>
+                                    <li>微观：①代表1个水分子；②1个水分子由2个氢原子和1个氧原子构成</li>
+                                </ul>
+                            </li>
+                            <li>3SO₂的宏微观含义：
+                                <ul>
+                                    <li>化学式前加数字后，只能表示微观意义，无宏观意义</li>
+                                    <li>微观：①代表3个二氧化硫分子；②1个二氧化硫分子由1个硫原子和2个氧原子构成</li>
+                                </ul>
+                            </li>
+                            <li>原子结构：由原子核（含质子带正电、中子不带电，氢原子无中子）和核外电子（带负电）构成；核外电子排布规律：电子层最多容2n²个电子，最外层不超8个（第一层不超2个），先排内层再排外层</li>
+                            <li>元素周期表的基本排布：按原子序数排，周期数=电子层数，主族数=最外层电子数（0族除外）</li>
+                            <li>化合价：定义为形成化合物时一个原子和其他原子相结合的数目；规则是化合物中正负化合价代数和为0，单质中元素化合价为0</li>
+                            <li>常见元素的化合价：
+                                <ul>
+                                    <li>+1价：K、Na、Ag、H</li>
+                                    <li>+2价：Ca、Mg、Ba、Zn、Cu、Fe（亚铁）</li>
+                                    <li>+3价：Al、Fe（铁）</li>
+                                    <li>-1价：F、Cl</li>
+                                    <li>-2价：O、S</li>
+                                </ul>
+                            </li>
+                            <li>常见原子团的化合价：
+                                <ul>
+                                    <li>+1价：NH₄⁺（铵根）</li>
+                                    <li>-1价：OH⁻（氢氧根）、NO₃⁻（硝酸根）</li>
+                                    <li>-2价：CO₃²⁻（碳酸根）、SO₄²⁻（硫酸根）</li>
+                                </ul>
+                            </li>
+                            <li>金属化合物的读写规则：
+                                <ul>
+                                    <li>读法：从右向左读"某化某"</li>
+                                    <li>写法：正价在前，负价在后</li>
+                                </ul>
+                            </li>
+                            <li>非金属化合物的读写规则：
+                                <ul>
+                                    <li>读法：读"几某化几某"</li>
+                                    <li>写法：正价在前，负价在后</li>
+                                </ul>
+                            </li>
+                            <li>原子结构模型（实心球模型）：道尔顿1803年提出，认为原子是不可再分的实心球体</li>
+                            <li>原子结构模型（葡萄干面包模型）：汤姆孙1903年提出，认为原子像蛋糕、电子像葡萄干嵌在其中（无核结构）</li>
+                            <li>原子结构模型（核式结构模型）：卢瑟福1911年提出，认为原子中心有带电原子核，核外电子绕核运动</li>
+                            <li>碳单质的多样性原因：同种碳元素组成不同单质，本质是碳原子的排列方式不同</li>
+                            <li>石墨的性质与用途：质柔、黑色、有导电性和滑腻感，层状结构，可作铅笔芯、电极、润滑剂</li>
+                            <li>金刚石的性质与用途：天然最硬物质、折射率高，正四面体结构，可作钻头、装饰品、切割工具</li>
+                            <li>金刚石与石墨的转化：二者之间的转化属于化学变化（碳原子排列方式改变，生成新物质）</li>
+                            <li>C₆₀的结构与应用：足球状分子结构，无特殊标注性质，可用于装饰材料、新型材料研究</li>
+                            <li>"碳"与"炭"的区别："碳"指碳元素/纯净碳单质，"炭"指无定形碳（混合物）</li>
+                            <li>无定形碳的组成：木炭、活性炭、焦炭、炭黑统称无定形碳，由微小石墨晶体和少量杂质组成</li>
+                            <li>木炭的吸附性：因疏松多孔的结构具有吸附能力，可吸附色素异味</li>
+                            <li>活性炭的特性：经活化处理的无定形碳，吸附作用比普通木炭更强</li>
+                            <li>活性炭吸附实验：红墨水溶液中加活性炭，红色逐渐变浅最终无色（证明吸附性）</li>
+                            <li>质量守恒定律：参加化学反应的各物质的质量总和，等于反应后生成的各物质的质量总和</li>
+                            <li>质量守恒定律的微观解释：
+                                <ul>
+                                    <li>化学变化中，参加反应的反应物质量之和等于生成物质量之和</li>
+                                    <li>化学变化中，原子的种类与个数不变</li>
+                                    <li>化学变化中，元素的种类与质量不变</li>
+                                </ul>
+                            </li>
+                            <li>硫酸铜溶液与氢氧化钠溶液反应：
+                                <ul>
+                                    <li>反应前总质量：85.9g，反应后总质量：85.9g</li>
+                                    <li>反应方程式：CuSO₄ + 2NaOH ═══ Cu(OH)₂↓ + Na₂SO₄</li>
+                                    <li>实验现象：生成蓝色氢氧化铜沉淀</li>
+                                </ul>
+                            </li>
+                            <li>稀盐酸与大理石反应：
+                                <ul>
+                                    <li>反应前总质量：78.4g，反应后总质量：78.4g（高老师失败了）</li>
+                                    <li>反应方程式：CaCO₃ + 2HCl ═══ CaCl₂ + H₂O + CO₂↑</li>
+                                </ul>
+                            </li>
+                            <li>稀盐酸与大理石反应需在密闭容器中进行，否则产生的二氧化碳气体会扩散到空气中，导致二氧化碳没有被测量，反应后总质量无法准确测量</li>
+                            <li>金属铜加热反应：
+                                <ul>
+                                    <li>实验现象：铜丝由红色变为黑色</li>
+                                    <li>反应方程式：2Cu + O₂ ═══（条件：△）2CuO</li>
+                                    <li>实验结论：反应前后质量不变（提到，没有做）</li>
+                                </ul>
+                            </li>
+                            <li>书写化学方程式的原则：以客观事实为基础；遵守质量守恒定律</li>
+                            <li>书写化学方程式的步骤：写（写出反应物和生成物化学式）→ 配（配平方程式）→ 注（注明反应条件）→ 等（短线改等号）→ 标（标注生成物状态）</li>
+                            <li>化学方程式中的状态符号：↑表示气体（反应物无气体时标注），↓表示沉淀（反应物无固体时标注），△表示加热</li>
+                            <li>化学方程式的含义：表示反应物、生成物和反应条件</li>
+                            <li>化学方程式的微观意义：表示各物质的粒子个数比</li>
+                            <li>化学方程式的质量意义：表示各物质的质量比（等于相对分子质量乘以化学计量数之比）</li>
+                            <li>根据化学方程式计算的步骤：设未知数→写方程式→算相对质量→列比例式→求解→作答</li>
+                            <li>示例1：
+                                <ul>
+                                    <li><strong>物质</strong>：碳与氧气在点燃条件下反应，生成二氧化碳</li>
+                                    <li><strong>微观</strong>：
+                                        <ul style="list-style-type: none;">
+                                            <li><strong>每</strong>1个碳原子和1个氧分子在点燃条件下反应，生成1个二氧化碳分子</li>
+                                            <li><strong>每</strong>12克碳与32克氧气反应，生成44克二氧化碳</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>示例2：
+                                <ul>
+                                    <li><strong>物质</strong>：水在通电条件下生成氢气和氧气</li>
+                                    <li><strong>微观</strong>：
+                                        <ul style="list-style-type: none;">
+                                            <li>在通电条件下，<strong>每</strong>2个水分子反应生成2个氢分子和1个氧分子</li>
+                                            <li>在通电条件下，<strong>每</strong>36克水分解，生成4克氢气和32克氧气</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>化合反应：两种或多种物质生成一种物质，特点多变一，表达式：A+B+…→C，特点是多变一</li>
+                            <li>分解反应：一种物质生成两种或多种物质，特点一变多，表达式：A→B+C+…，特点是一变多</li>
+                            <li>置换反应："单换单"，由一种单质与一种化合物反应，生成另一种单质和另一种化合物，表达式：A+BC→AC+B，特点是单换单</li>
+                            <li>复分解反应："双交换"，由两种化合物互相交换成分，生成另外两种化合物，表达式：AB+CD→AD+BC，特点是双交换</li>
+                            <li>化合反应举例：H₂ + O₂ ═══（条件：点燃）H₂O</li>
+                            <li>分解反应举例：2H₂O ═══（条件：通电）2H₂↑ + O₂↑</li>
+                            <li>置换反应举例：Fe + CuSO₄ ═══ FeSO₄ + Cu</li>
+                            <li>复分解反应举例：NaOH + HCl ═══ NaCl + H₂O</li>
+                        </ol>
+                    </body>
+                </html>
+            `;
+            // 编码内容，防止特殊字符出错
+            const encodedContent = encodeURIComponent(wordContent);
+            // 创建下载链接
+            const link = document.createElement('a');
+            link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
+            link.download = "化学99条大全-本学期核心知识点.doc";
+            // 触发下载
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    </footer>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
+            });
+            // 第五条和第六条随机轮流显示（序号都是5）
+            var randomItems = document.querySelectorAll('.note-item[data-random-group="5"]');
+            if (randomItems.length > 0) {
+                var randomIndex = Math.floor(Math.random() * randomItems.length);
+                randomItems.forEach(function(item, index) {
+                    if (index !== randomIndex) {
+                        item.classList.add('random-hidden');
+                    }
+                });
+            }
+            // 随机显示后重新计算序号
+            initNoteIndex();
+        });
+    </script>
+</body>
+</html>

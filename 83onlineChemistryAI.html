@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上海市北郊学校 AI高老师</title>
+    <style>
+        :root {
+            --base-font-size: 15px;
+            --ai-color: #5f52ff;
+            --ai-bg: #fff;
+            --ai-text: #333;
+            --user-bg: #5f52ff;
+            --user-text: #fff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: calc(1.8 * var(--base-font-size));
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            margin: 0 0 1.5rem;
+            font-size: calc(1.5 * var(--base-font-size));
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .chat-box {
+            background: rgba(255,255,255,0.92);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+        }
+        #chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 0;
+            margin-bottom: 15px;
+        }
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+        #input {
+            width: 100%;
+            height: 80px;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: none;
+            outline: none;
+            padding-right: 120px;
+            padding-bottom: 25px;
+        }
+        .word-count {
+            position: absolute;
+            bottom: 8px;
+            right: 65px;
+            font-size: 12px;
+            color: #999;
+        }
+        #send-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 50px;
+            height: 30px;
+            padding: 0;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 30px;
+            text-align: center;
+        }
+        #switch-btn {
+            position: absolute;
+            bottom: 8px;
+            right: 65px;
+            width: 80px;
+            height: 30px;
+            padding: 0;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            line-height: 30px;
+            text-align: center;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        #switch-btn:hover {
+            background: #4a3ed8;
+        }
+        #switch-btn:active {
+            transform: scale(0.95);
+        }
+        #send-btn:active {
+            transform: scale(0.95);
+        }
+        #send-btn:hover {
+            background: #4a3ed8;
+        }
+
+        /* 用户消息：右对齐 */
+        .user-chat-item {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        /* 时间：居中、灰色、小字 */
+        .chat-time {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin: 4px 0;
+        }
+        /* AI消息：左对齐 */
+        .ai-chat-item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1px solid #eee;
+        }
+        .chat-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .user-chat-bubble {
+            background: var(--user-bg);
+            color: var(--user-text);
+            padding: 12px 16px;
+            border-radius: 18px 4px 18px 18px;
+            max-width: 75%;
+            line-height: 1.6;
+        }
+        .ai-chat-bubble {
+            background: var(--ai-bg);
+            color: var(--ai-text);
+            border: 1px solid #eee;
+            padding: 12px 16px;
+            border-radius: 4px 18px 18px 18px;
+            max-width: 75%;
+            line-height: 1.6;
+        }
+        .ai-chat-bubble h1,.ai-chat-bubble h2,.ai-chat-bubble h3 { margin: 10px 0; color: #333; }
+        .ai-chat-bubble ul,.ai-chat-bubble ol { padding-left: 22px; margin: 8px 0; }
+        .ai-chat-bubble li { margin: 4px 0; }
+        .ai-chat-bubble p { margin: 8px 0; }
+
+        @media (max-width: 768px) {
+            :root {
+                --base-font-size: 14px;
+            }
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-color: transparent;
+                background-attachment: scroll;
+            }
+            h1 { font-size: calc(1.5 * var(--base-font-size)); }
+            .note-section { padding: 1.5rem; }
+            .chat-box { height: 400px; }
+            .user-chat-bubble,.ai-chat-bubble { max-width: 70%; }
+            .announcement-box {
+                width: 90%;
+            }
+        }
+
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .announcement-close-mobile:hover {
+            color: #5f52ff;
+        }
+        @media (max-width: 768px) {
+            .announcement-close { display: none; }
+            .announcement-close-mobile { display: block; }
+        }
+        /* 页脚样式 */
+        footer {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 100;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-icon .icon {
+            font-size: 1.2rem;
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 二维码容器 */
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        @media (max-width: 768px) {
+            .footer-info p:first-child {
+                display: none;
+            }
+            .contact-info {
+                display: none;
+            }
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/6/7 <span class="announcement-version">Ver1.1.10</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>优化页脚布局，将页脚固定显示在页面底部</li>
+                    <li>修复PC端页脚遮挡对话框的问题，改为仅移动端固定显示</li>
+                </ol>
+            </div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 AI化学老师</h1>
+            <p class="time-range">全新研制高老师智能体</p>
+        </div>
+    </header>
+    <div class="container">
+        <div class="note-section">
+            <div class="unit-title">高老师 <span id="mode-display">（轻松模式）</span></div>
+            <div class="chat-box">
+                <div id="chat-container"></div>
+                <div class="input-container">
+                    <textarea id="input" placeholder="请输入你的问题……" maxlength="200"></textarea>
+                    <div class="word-count">0/200</div>
+                    <button id="switch-btn" onclick="setMode(currentMode === 'humor' ? 'formal' : 'humor')">切换模式</button>
+                    <button id="send-btn" onclick="sendChat()">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/marked/12.0.1/marked.min.js"></script>
+<script>
+const API_KEY = "b03dc2aaebf44e48ba46d4450cc8d72c.i54NJCZ5g6XPlB8s";
+const API_URL = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+
+const TEACHER_AVATAR = "https://img.zxxk.com/aed/ai/upload/20260526/2de19fb6b5bd4ab2856b2e0cafdba4ba.jpg";
+
+const inputBox = document.getElementById('input');
+const wordCount = document.querySelector('.word-count');
+let currentMode = 'humor';
+
+function setMode(mode) {
+    currentMode = mode;
+    const modeDisplay = document.getElementById('mode-display');
+    const switchBtn = document.getElementById('switch-btn');
+    
+    if (modeDisplay) {
+        modeDisplay.style.opacity = '0';
+        setTimeout(() => {
+            modeDisplay.textContent = mode === 'humor' ? '（轻松模式）' : '（专业模式）';
+            modeDisplay.style.opacity = '1';
+        }, 150);
+    }
+    
+    if (switchBtn) {
+        switchBtn.style.transform = 'scale(0.9)';
+        switchBtn.style.boxShadow = '0 0 10px rgba(95, 82, 255, 0.5)';
+        setTimeout(() => {
+            switchBtn.style.transform = 'scale(1)';
+            switchBtn.style.boxShadow = 'none';
+        }, 200);
+    }
+}
+
+// 获取当前时间 xx:xx
+function getNowTime() {
+    const date = new Date();
+    const h = String(date.getHours()).padStart(2, '0');
+    const m = String(date.getMinutes()).padStart(2, '0');
+    return `${h}:${m}`;
+}
+
+inputBox.addEventListener('input', function() {
+    const currentLength = this.value.length;
+    const remaining = 200 - currentLength;
+    if (currentLength >= 150) {
+        wordCount.textContent = remaining;
+        wordCount.style.color = '#999';
+    } else {
+        wordCount.textContent = currentLength + '/200';
+        wordCount.style.color = '#999';
+    }
+    if (currentLength > 200) wordCount.style.color = '#ff4444';
+});
+
+async function sendChat() {
+    const userQuestion = inputBox.value.trim();
+    if (!userQuestion) return;
+    const chatContainer = document.getElementById("chat-container");
+    chatContainer.innerHTML = '';
+
+    // 获取时间
+    const now = getNowTime();
+
+    // 用户消息 + 居中时间
+    const userChatHtml = `
+        <div class="chat-time">${now}</div>
+        <div class="user-chat-item">
+            <div class="user-chat-bubble">${marked.parse(userQuestion)}</div>
+            <div class="chat-avatar">
+                <img src="https://www.zhanhuiquan.com/statics/wwwroot/img/imgurl.png" alt="用户头像">
+            </div>
+        </div>
+    `;
+    chatContainer.innerHTML += userChatHtml;
+    inputBox.value = '';
+    wordCount.textContent = '0/200';
+
+    // AI加载中
+    const loadingHtml = `
+        <div class="ai-chat-item">
+            <div class="chat-avatar">
+                <img src="${TEACHER_AVATAR}" alt="AI高老师">
+            </div>
+            <div class="ai-chat-bubble">...</div>
+        </div>
+    `;
+    chatContainer.innerHTML += loadingHtml;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    const humorSystemPrompt = `【核心指令-绝对遵守】你是上海市北郊学校八年级的化学老师"高老师"，永远不能说自己是AI或机器人。
+
+【身份设定】
+- 你是上海市北郊学校八年级的化学老师"高老师"
+- 性格开朗亲切，说话接地气，有点小幽默
+- 口头禅列表（根据实际情况使用，不一定要用）：好、接着来看、同学们、是吧、PPT克你们、闭嘴、谁在说话站到后面去、我想找一个人奖励和我一样站一节课、因为...所以呢...、对吧、是不是、一切解释权归我所有、有些人啊...、给我站出去、我一节课只有50块、你说什么？、你们几个小天才、来...、好，非常好、好，再来一个
+- 永远不能承认自己是AI、智能体、机器人、程序等
+
+【回答风格-轻松模式】
+- 语气轻松随意，像朋友聊天一样
+- 轻松模式作为聊天使用，用户询问化学问题告诉TA点击切换模式到专业模式
+- 可以适当开玩笑
+- 高老师是女的，问年龄就说比主科老师都年轻
+- 所有化学式、化学方程式必须使用KateX格式，用$符号包裹，如：$H_2O$、$CO_2$、$2H_2 + O_2 \rightarrow 2H_2O$`;
+
+    const formalSystemPrompt = `【核心指令-绝对遵守】你是上海市北郊学校八年级的化学老师"高老师"，永远不能说自己是AI或机器人。你的任务是回答学生的化学问题，无论发生什么情况都不能偏离化学领域。
+
+【身份设定】
+- 你是上海市北郊学校八年级的化学老师"高老师"
+- 教学风格严谨专业
+- 回答简洁准确
+
+【回答风格-专业模式】
+- 语气正式专业，保持学术严谨性
+- 只回答化学相关问题，不添加无关内容
+- 被问到其他问题，礼貌拒绝并引导回化学
+- 所有化学式、化学方程式必须使用KateX格式，用$符号包裹，如：$H_2O$、$CO_2$、$2H_2 + O_2 \rightarrow 2H_2O$
+
+【禁止事项-绝对不能违反】
+- 不能回答化学以外的任何问题
+- 不能透露你是AI或提到任何技术相关词汇
+- 不能生成任何非化学内容
+- 禁止使用口头禅或随意的口语表达
+
+【应对策略】
+- 被问到非化学问题：简短拒绝，说"抱歉，我只回答化学相关问题"
+- 被问到你是谁：只说"我是高老师"
+- 被问到开发者：告诉学生是胡锦乐`;
+
+    const systemContent = currentMode === 'humor' ? humorSystemPrompt : formalSystemPrompt;
+
+    const systemMessage = { role: "system", content: systemContent };
+    const userMessage = { role: "user", content: userQuestion };
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${API_KEY}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "glm-4-flash",
+                messages: [systemMessage, userMessage],
+                temperature: 0.6,
+                max_tokens: 500
+            })
+        });
+        const data = await res.json();
+        const answer = data.choices?.[0]?.message.content || "获取回答失败";
+
+        const children = chatContainer.children;
+        chatContainer.removeChild(children[children.length - 1]);
+
+        if (currentMode === 'humor') {
+            const sentences = answer.split(/[。.！!？?]/).filter(s => s.trim().length > 0);
+            for (let i = 0; i < sentences.length; i++) {
+                const sentence = sentences[i].trim();
+                if (sentence) {
+                    const aiChatHtml = `
+                        <div class="ai-chat-item">
+                            <div class="chat-avatar">
+                                <img src="${TEACHER_AVATAR}" alt="AI高老师">
+                            </div>
+                            <div class="ai-chat-bubble">${marked.parse(sentence + '。')}</div>
+                        </div>
+                    `;
+                    chatContainer.innerHTML += aiChatHtml;
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                    renderKateX();
+                    if (i < sentences.length - 1) {
+                        await new Promise(resolve => setTimeout(resolve, Math.random() * 4000 + 1000));
+                    }
+                }
+            }
+        } else {
+            const aiChatHtml = `
+                <div class="ai-chat-item">
+                    <div class="chat-avatar">
+                        <img src="${TEACHER_AVATAR}" alt="AI高老师">
+                    </div>
+                    <div class="ai-chat-bubble">${marked.parse(answer)}</div>
+                </div>
+            `;
+            chatContainer.innerHTML += aiChatHtml;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            renderKateX();
+        }
+    } catch (e) {
+        const errorHtml = `
+            <div class="ai-chat-item">
+                <div class="chat-avatar">
+                    <img src="${TEACHER_AVATAR}" alt="AI高老师">
+                </div>
+                <div class="ai-chat-bubble">请求出错：${e.message}</div>
+            </div>
+        `;
+        const children = chatContainer.children;
+        chatContainer.removeChild(children[children.length - 1]);
+        chatContainer.innerHTML += errorHtml;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+}
+
+inputBox.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendChat();
+    }
+});
+
+function renderKateX() {
+    if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError: false
+        });
+    }
+}
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 AI化学老师</p>
+            <p>制作人：胡锦乐</p>
+            <p>AI模型：GLM-4-Flash</p>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八年级全一册 化学方程式大全</title>
+    <!-- 引入KaTeX CSS与JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <style>
+        /* 全局字号 */
+        :root {
+            --base-font-size: 13px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.bg-image-hidden.theme-blue {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden .settings-overlay {
+            background-image: none !important;
+            background-color: #f5f7fa;
+        }
+        body.bg-image-hidden.theme-blue .settings-overlay {
+            background-color: #87CEEB !important;
+        }
+        body.bg-image-hidden.theme-green .settings-overlay {
+            background-color: #90EE90 !important;
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+        }
+        /* 设置按钮样式 */
+        .settings-btn {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        /* 设置界面样式 */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        body.theme-green .settings-overlay {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+        }
+        .settings-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .settings-content {
+            background: white;
+            border-radius: 12px;
+            width: 70%;
+            max-width: 600px;
+            min-height: 400px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        .settings-overlay.show .settings-content {
+            transform: translateY(0);
+        }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .settings-header h2 {
+            margin: 0;
+            color: #5f52ff;
+        }
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+        .settings-close:hover {
+            color: #5f52ff;
+        }
+        /* 设置控件样式 */
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        .settings-section h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            min-height: 2rem;
+        }
+        .setting-label {
+            font-size: 0.9rem;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .setting-slider {
+            flex: 1;
+            min-width: 120px;
+            height: 6px;
+            margin-left: 0.8rem;
+            margin-right: 0.5rem;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+        .setting-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #5f52ff;
+            cursor: pointer;
+        }
+        .setting-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #5f52ff;
+            cursor: pointer;
+            border: none;
+        }
+        .setting-value {
+            min-width: 50px;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #5f52ff;
+            font-weight: bold;
+        }
+        .setting-toggle {
+            width: 50px;
+            height: 26px;
+            background: #ddd;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .setting-toggle.active {
+            background: #5f52ff;
+        }
+        .setting-toggle.active::after {
+            transform: translateX(24px);
+        }
+        /* 主题按钮样式 */
+        .theme-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-btn:hover {
+            border-color: #5f52ff;
+        }
+        .theme-btn.active {
+            border-color: #5f52ff;
+            background: rgba(95, 82, 255, 0.1);
+        }
+        .theme-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .theme-name {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* 绿色主题样式 */
+        body.theme-green {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.theme-green header {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .unit-nav h2 {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .btn-item a {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+        }
+        body.theme-green .btn-item a:hover {
+            background: linear-gradient(135deg, #388e3c, #4caf50);
+        }
+        body.theme-green .btn-item a.active {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        }
+        body.theme-green .unit-title {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .textbook-title {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .equation-item::before {
+            color: #4caf50;
+        }
+        body.theme-green .tag {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        body.theme-green .back-to-top {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .back-to-top:hover {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        }
+        body.theme-green footer {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .settings-content h3 {
+            color: #2e7d32;
+        }
+        body.theme-green .setting-slider::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-slider::-moz-range-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-value {
+            color: #2e7d32;
+        }
+        body.theme-green .theme-btn.active {
+            border-color: #2e7d32;
+            background: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .settings-header h2 {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header {
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .setting-toggle.active {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .settings-close:hover {
+            color: #2e7d32;
+        }
+        /* 移动端设置按钮适配 */
+        @media (max-width: 768px) {
+            .settings-btn {
+                right: 1rem;
+            }
+            .settings-content {
+                width: 85%;
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+            .tag-filter {
+                display: none;
+            }
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: calc(1.8 * var(--base-font-size));
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式 */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            flex-shrink: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: calc(1.2 * var(--base-font-size));
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            padding: 0 2rem;
+        }
+        .btn-item {
+            flex: 0 0 calc((100% - 5 * 1.5rem) / 6);
+            max-width: calc((100% - 5 * 1.5rem) / 6);
+        }
+        .btn-item a {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: calc(0.95 * var(--base-font-size));
+            white-space: nowrap;
+            text-align: center;
+        }
+        .btn-item a:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        /* 主内容样式 */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-shrink: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            font-size: calc(1.5 * var(--base-font-size));
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .tag-filter {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #5f52ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            min-width: 120px;
+            color: #5f52ff;
+        }
+        body.theme-green .tag-filter {
+            border-color: #2e7d32;
+            color: #2e7d32;
+        }
+        .topic-title {
+            font-size: calc(1.3 * var(--base-font-size));
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        .textbook-title {
+            color: #3366cc;
+            font-size: calc(1.1 * var(--base-font-size));
+            margin: 1.5rem 0 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #3366cc;
+        }
+        .note-content {
+            margin-left: 0.8rem;
+        }
+        /* 方程式列表样式 */
+        .equation-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .equation-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed rgba(95, 82, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .equation-item::before {
+            content: attr(data-index);
+            display: inline-block;
+            width: 2rem;
+            font-weight: bold;
+            color: #5f52ff;
+            margin-right: 0.8rem;
+        }
+        .equation-item > ul {
+            width: 100%;
+            margin: 0.5rem 0 0 2.8rem;
+            list-style: disc;
+        }
+        .equation-item > ul > li {
+            margin: 0.3rem 0;
+        }
+        .equation-item > ul > li > ul {
+            margin-left: 1.5rem;
+            list-style: circle;
+        }
+        .equation-item > ul > li > ul > li {
+            margin: 0.2rem 0;
+        }
+        /* 反应标签统一样式 */
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(95, 82, 255, 0.1);
+            color: #5f52ff;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+        body.theme-green .tag {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: auto;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 二维码容器 */
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: #4a3ed8;
+        }
+        /* 化学方程式样式 */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 1em;
+            display: inline;
+        }
+        /* 更新公告 */
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-color: #f5f7fa;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            h1 {
+                font-size: calc(1.5rem - 2px);
+            }
+            .note-section {
+                padding: 1.5rem;
+                padding-bottom: 50px;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+            .contact-info {
+                display: none;
+            }
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: calc(1.1rem - 2px);
+            }
+            .announcement-close {
+                display: none;
+            }
+            .announcement-close-mobile {
+                display: block;
+            }
+            .btn-container {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+            .btn-item {
+                flex: 0 0 calc((100% - 4 * 0.5rem) / 5);
+                max-width: calc((100% - 4 * 0.5rem) / 5);
+            }
+            .btn-item a {
+                padding: 0.6rem 0.4rem;
+                font-size: calc(0.9rem - 2px);
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/6/12 <span class="announcement-version">Ver1.3.1</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>根据高老师的意见修改了部分化学方程式的现象</li>
+                </ol>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        function initEquationIndex() {
+            var equationItems = document.querySelectorAll('.equation-item');
+            equationItems.forEach(function(item, index) {
+                item.setAttribute('data-index', index + 1);
+            });
+        }
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        function openSettings() {
+            document.getElementById('settings-overlay').classList.add('show');
+        }
+        function closeSettings() {
+            document.getElementById('settings-overlay').classList.remove('show');
+        }
+        function updateFontSize(value) {
+            document.getElementById('fontSizeValue').textContent = value + '%';
+            document.documentElement.style.setProperty('--base-font-size', (13 * value / 100) + 'px');
+        }
+        function updateLineHeight(value) {
+            document.getElementById('lineHeightValue').textContent = value;
+            document.body.style.lineHeight = value;
+        }
+        function updateLetterSpacing(value) {
+            document.getElementById('letterSpacingValue').textContent = value + 'em';
+            document.body.style.letterSpacing = value + 'em';
+        }
+        function updateTheme(theme) {
+            var classes = document.body.className.split(' ').filter(c => !c.startsWith('theme-'));
+            document.body.className = classes.join(' ') + ' theme-' + theme;
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        function toggleBackgroundImage() {
+            var toggle = document.getElementById('bgImageToggle');
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                document.body.classList.remove('bg-image-hidden');
+            } else {
+                document.body.classList.add('bg-image-hidden');
+            }
+        }
+        function toggleTags() {
+            var toggle = document.getElementById('tagToggle');
+            toggle.classList.toggle('active');
+            var tags = document.querySelectorAll('.tag');
+            var tagFilter = document.getElementById('tagFilter');
+            
+            if (toggle.classList.contains('active')) {
+                tags.forEach(tag => tag.style.display = 'inline-block');
+                tagFilter.style.display = 'block';
+            } else {
+                tags.forEach(tag => tag.style.display = 'none');
+                tagFilter.style.display = 'none';
+            }
+        }
+        function filterByTag() {
+            var selectedTag = document.getElementById('tagFilter').value;
+            var equationItems = document.querySelectorAll('.equation-item');
+            var topics = document.querySelectorAll('.topic-title');
+            var textbooks = document.querySelectorAll('.textbook-title');
+            var equationLists = document.querySelectorAll('.equation-list');
+            
+            if (!selectedTag) {
+                topics.forEach(topic => topic.style.display = 'block');
+                textbooks.forEach(textbook => textbook.style.display = 'block');
+                equationLists.forEach(list => list.style.display = 'block');
+                equationItems.forEach(item => item.style.display = 'list-item');
+                return;
+            }
+            
+            topics.forEach(topic => topic.style.display = 'none');
+            textbooks.forEach(textbook => textbook.style.display = 'none');
+            equationLists.forEach(list => list.style.display = 'none');
+            
+            equationItems.forEach(item => {
+                var tags = item.querySelectorAll('.tag');
+                var hasTag = false;
+                tags.forEach(tag => {
+                    if (tag.textContent === selectedTag) {
+                        hasTag = true;
+                    }
+                });
+                
+                if (hasTag) {
+                    item.style.display = 'list-item';
+                    var list = item.parentElement;
+                    list.style.display = 'block';
+                    var textbook = list.previousElementSibling;
+                    if (textbook && textbook.classList.contains('textbook-title')) {
+                        textbook.style.display = 'block';
+                        var topic = textbook.previousElementSibling;
+                        if (topic && topic.classList.contains('topic-title')) {
+                            topic.style.display = 'block';
+                        }
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            initEquationIndex();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 化学方程式大全</h1>
+            <p class="time-range">八年级全一册</p>
+        </div>
+        <button class="settings-btn" onclick="openSettings()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94c0-0.31-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94l-0.36-2.54c-0.05-0.24-0.26-0.41-0.5-0.41h-3.84c-0.24,0-0.45,0.17-0.5,0.41l-0.36,2.54c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.08-0.47,0-0.59,0.22l-1.92,3.32c-0.12,0.2-0.07,0.47,0.12,0.61l2.03,1.58C4.84,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54c0.05,0.24,0.26,0.41,0.5,0.41h3.84c0.24,0,0.45-0.17,0.5-0.41l0.36-2.54c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.2,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+        </button>
+    </header>
+    <!-- 设置界面 -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>设置</h2>
+                <button class="settings-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-section">
+                <h3>文字排版</h3>
+                <div class="setting-item">
+                    <span class="setting-label">字号缩放</span>
+                    <input type="range" class="setting-slider" id="fontSizeSlider" min="80" max="120" value="100" oninput="updateFontSize(this.value)">
+                    <span class="setting-value" id="fontSizeValue">100%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">行间距</span>
+                    <input type="range" class="setting-slider" id="lineHeightSlider" min="1" max="3" step="0.1" value="1.5" oninput="updateLineHeight(this.value)">
+                    <span class="setting-value" id="lineHeightValue">1.5</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">字间距</span>
+                    <input type="range" class="setting-slider" id="letterSpacingSlider" min="0" max="0.5" step="0.05" value="0" oninput="updateLetterSpacing(this.value)">
+                    <span class="setting-value" id="letterSpacingValue">0em</span>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>显示设置</h3>
+                <div class="setting-item">
+                    <span class="setting-label">背景图显示</span>
+                    <div class="setting-toggle active" id="bgImageToggle" onclick="toggleBackgroundImage()"></div>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">反应标签显示</span>
+                    <div class="setting-toggle active" id="tagToggle" onclick="toggleTags()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>主题色彩</h3>
+                <div class="setting-item">
+                    <div class="theme-buttons">
+                        <button class="theme-btn theme-blue active" onclick="updateTheme('blue')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #4285f4, #5f52ff);"></span>
+                            <span class="theme-name">蓝色</span>
+                        </button>
+                        <button class="theme-btn theme-green" onclick="updateTheme('green')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #1b5e20, #4caf50, #81c784);"></span>
+                            <span class="theme-name">绿色</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航栏 -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>专题导航</h2>
+            <div class="btn-container">
+                <div class="btn-item"><a href="#topic1">专题一</a></div>
+                <div class="btn-item"><a href="#topic3">专题三</a></div>
+                <div class="btn-item"><a href="#topic4">专题四</a></div>
+                <div class="btn-item"><a href="#topic5">专题五</a></div>
+                <div class="btn-item"><a href="#topic6">专题六</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="section-header">
+                <div class="unit-title">八年级全一册 化学方程式大全</div>
+                <select class="tag-filter" id="tagFilter" onchange="filterByTag()">
+                    <option value="">全部标签</option>
+                    <option value="氧化反应">氧化反应</option>
+                    <option value="还原反应">还原反应</option>
+                    <option value="化合反应">化合反应</option>
+                    <option value="分解反应">分解反应</option>
+                    <option value="复分解反应">复分解反应</option>
+                    <option value="置换反应">置换反应</option>
+                    <option value="点燃">点燃</option>
+                    <option value="加热">加热</option>
+                    <option value="通电">通电</option>
+                    <option value="催化剂">催化剂</option>
+                </select>
+            </div>
+            <div class="note-content">
+                
+                <h3 class="topic-title" id="topic1">专题一 化学使生活更美好</h3>
+                
+                <div class="textbook-title">课题1 开启化学之门</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">2\text{Mg} + \text{O}_2 \xlongequal{\text{点燃}} 2\text{MgO}</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li><strong>现象：</strong>发出耀眼白光，生成白色固体，放热</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3 class="topic-title" id="topic3">专题三 空气、氧气、二氧化碳</h3>
+                
+                <div class="textbook-title">课题1 空气的成分</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">4\text{P} + 5\text{O}_2 \xlongequal{\text{点燃}} 2\text{P}_2\text{O}_5</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生大量白烟，放热</li>
+                            <li><strong>应用：</strong>测定空气中氧气的含量</li>
+                            <li><strong>测定结果偏小（进入瓶内水的体积小于⅕：</strong>
+                                <ul>
+                                    <li>① 红磷用量不足，无法将装置内氧气完全消耗</li>
+                                    <li>② 装置气密性不好，反应后外界空气进入集气瓶</li>
+                                    <li>③ 未冷却至室温就打开弹簧夹，瓶内气体受热膨胀，压强偏大</li>
+                                    <li>④ 导管内事先未注满水，部分水残留在导管中</li>
+                                </ul>
+                            </li>
+                            <li><strong>测定结果偏大（进入瓶内水的体积大于⅕：</strong>
+                                <ul>
+                                    <li>① 点燃红磷后，伸入集气瓶速度过慢，瓶内部分空气受热逸出</li>
+                                    <li>② 实验前未夹紧弹簧夹，红磷燃烧时瓶内气体受热从导管逸出</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题2 氧气和二氧化碳的性质</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">\text{C} + \text{O}_2 \xlongequal{\text{点燃}} \text{CO}_2</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li><strong>现象：</strong>空气中：红热；氧气中：发白光，放热</li>
+                            <li><strong>注意：</strong>此反应为氧气充足时的完全燃烧</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">3\text{Fe} + 2\text{O}_2 \xlongequal{\text{点燃}} \text{Fe}_3\text{O}_4</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li><strong>现象：</strong>火星四射，剧烈燃烧，生成黑色固体，放热</li>
+                            <li><strong>注意事项：</strong>
+                                <ul>
+                                    <li>实验中需用火柴引燃铁丝</li>
+                                    <li>集气瓶底部需预先加水或铺一层细沙，防止反应生成的高温熔融物溅落导致集气瓶炸裂</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CO}_2 + \text{H}_2\text{O} \xlongequal{\quad} \text{H}_2\text{CO}_3</span> 
+                        <span class="tag">化合反应</span>
+                        <ul>
+                            <li><strong>现象：</strong>紫色石蕊试液变红</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{H}_2\text{CO}_3 \xlongequal{\triangle} \text{H}_2\text{O} + \text{CO}_2\uparrow</span> 
+                        <span class="tag">分解反应</span>
+                        <span class="tag">加热</span>
+                        <ul>
+                            <li><strong>现象：</strong>红色石蕊试液变紫</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CO}_2 + \text{Ca(OH)}_2 \xlongequal{\quad} \text{CaCO}_3\downarrow + \text{H}_2\text{O}</span> 
+                        <span class="tag">复分解反应</span>
+                        <ul>
+                            <li><strong>现象：</strong>澄清石灰水变浑浊</li>
+                            <li><strong>应用：</strong>检验二氧化碳的方法</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题3 氧气和二氧化碳的制备</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">2\text{H}_2\text{O}_2 \xlongequal{\text{MnO}_2} 2\text{H}_2\text{O} + \text{O}_2\uparrow</span> 
+                        <span class="tag">分解反应</span>
+                        <span class="tag">催化剂</span>
+                        <ul>
+                            <li><strong>发生装置：</strong>固液常温型</li>
+                            <li><strong>催化剂：</strong>不参与反应，反应前后质量和化学性质不变</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">2\text{KMnO}_4 \xlongequal{\triangle} \text{K}_2\text{MnO}_4 + \text{MnO}_2 + \text{O}_2\uparrow</span> 
+                        <span class="tag">分解反应</span>
+                        <span class="tag">加热</span>
+                        <ul>
+                            <li><strong>发生装置：</strong>固体加热型</li>
+                            <li><strong>收集方法：</strong>排水法或向上排空气法</li>
+                            <li><strong>验满方法：</strong>
+                                <ul>
+                                    <li>排水法：集气瓶口有大量气泡冒出时，说明已集满</li>
+                                    <li>向上排空气法：将带火星的木条放在集气瓶口，木条复燃则已集满</li>
+                                </ul>
+                            </li>
+                            <li><strong>注意事项：</strong>
+                                <ul>
+                                    <li>① 试管口放一小团棉花，防止高锰酸钾粉末进入导管</li>
+                                    <li>② 试管口略向下倾斜，防止冷凝水倒流使试管炸裂</li>
+                                    <li>③ 实验结束时先移出导管，再熄灭酒精灯，防止水槽中水倒流使试管炸裂</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">2\text{KClO}_3 \xlongequal[\triangle]{\text{MnO}_2} 2\text{KCl} + 3\text{O}_2\uparrow</span> 
+                        <span class="tag">分解反应</span>
+                        <span class="tag">加热</span>
+                        <span class="tag">催化剂</span>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CaCO}_3 + 2\text{HCl} \xlongequal{\quad} \text{CaCl}_2 + \text{H}_2\text{O} + \text{CO}_2\uparrow</span> 
+                        <span class="tag">复分解反应</span>
+                        <ul>
+                            <li><strong>发生装置：</strong>锥形瓶、长颈漏斗或分液漏斗、双孔橡皮塞、导气管</li>
+                            <li><strong>收集方法：</strong>向上排空气法（二氧化碳密度比空气大，能溶于水且与水反应）</li>
+                            <li><strong>验满方法：</strong>将燃烧的木条放在集气瓶口，木条熄灭则已集满</li>
+                            <li><strong>注意事项：</strong>
+                                <ul>
+                                    <li>长颈漏斗下端需伸入液面以下形成液封，防止气体从漏斗口逸出</li>
+                                    <li>不可用稀硫酸，因为生成的硫酸钙微溶于水，会覆盖在碳酸钙表面使反应停止</li>
+                                    <li>不可用粉末状大理石，反应速率过快，不易收集</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 class="topic-title" id="topic4">专题四 水的性质与组成</h3>
+                
+                <div class="textbook-title">课题1 水的性质</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">\text{CaO} + \text{H}_2\text{O} \xlongequal{\quad} \text{Ca(OH)}_2</span> 
+                        <span class="tag">化合反应</span>
+                        <ul>
+                            <li><strong>现象：</strong>放出大量热</li>
+                            <li>冷却后加入酚酞试液，溶液变红（碱性）</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题3 水的组成</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">2\text{H}_2 + \text{O}_2 \xlongequal{\text{点燃}} 2\text{H}_2\text{O}</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li><strong>现象：</strong>发出淡蓝色火焰，烧杯内壁有小液滴</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">2\text{H}_2\text{O} \xlongequal{\text{通电}} 2\text{H}_2\uparrow + \text{O}_2\uparrow</span> 
+                        <span class="tag">分解反应</span>
+                        <span class="tag">通电</span>
+                        <ul>
+                            <li><strong>现象：</strong>电极上有气泡产生，正负极产生气体，体积比1:2</li>
+                            <li><strong>气体检验：</strong>
+                                <ul>
+                                    <li>正极（氧气）：用带火星的木条检验，木条复燃</li>
+                                    <li>负极（氢气）：点燃，产生淡蓝色火焰</li>
+                                </ul>
+                            </li>
+                            <li><strong>结论：</strong>证明水由氢元素和氧元素组成</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3 class="topic-title" id="topic5">专题五 物质的微观构成</h3>
+                
+                <div class="textbook-title">课题3 结构多样的碳单质</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">\text{C} + \text{O}_2 \xlongequal{\text{点燃}} \text{CO}_2</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li>碳的完全燃烧</li>
+                            <li><strong>现象：</strong>空气中：红热；氧气中：发白光，放热</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">2\text{C} + \text{O}_2 \xlongequal{\text{点燃}} 2\text{CO}</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">化合反应</span>
+                        <span class="tag">点燃</span>
+                        <ul>
+                            <li>碳的不完全燃烧</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{C} + 2\text{CuO} \xlongequal{\text{高温}} 2\text{Cu} + \text{CO}_2\uparrow</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">还原反应</span>
+                        <span class="tag">置换反应</span>
+                        <span class="tag">高温</span>
+                        <span class="tag">需要使用酒精喷灯</span>
+                        <ul>
+                            <li><strong>现象：</strong>黑色固体变红色，澄清石灰水变浑浊</li>
+                            <li><strong>注意事项：</strong>
+                                <ul>
+                                    <li>① 先移导管再熄灭酒精灯，防止石灰水倒流使试管炸裂</li>
+                                    <li>② 若先熄灭酒精灯再移导管，会使生成的铜重新被氧化</li>
+                                    <li>③ 应该使用止水夹再熄灭酒精灯并移出导管</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{C} + \text{CO}_2 \xlongequal{\text{高温}} 2\text{CO}</span> 
+                        <span class="tag">氧化反应</span>
+                        <span class="tag">高温</span>
+                        <ul>
+                            <li><strong>现象：</strong>黑色固体减少</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3 class="topic-title" id="topic6">专题六 化学变化及其表示</h3>
+                
+                <div class="textbook-title">课题1 化学反应中各物质间的定量关系</div>
+                <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">\text{CuSO}_4 + 2\text{NaOH} \xlongequal{\quad} \text{Cu(OH)}_2\downarrow + \text{Na}_2\text{SO}_4</span> 
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>生成蓝色沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CaCO}_3 + 2\text{HCl} \xlongequal{\quad} \text{CaCl}_2 + \text{H}_2\text{O} + \text{CO}_2\uparrow</span> 
+                        <span class="tag">复分解反应</span>
+                        <ul>
+                            <li><strong>现象：</strong>有气泡产生，固体逐渐溶解</li>
+                            <li><strong>注意：</strong>必须在密闭容器中进行，否则二氧化碳会扩散到空气中，导致气体无法被测量</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 八年级化学方程式大全</p>
+            <p>记录人：胡锦乐</p>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
+            });
+        });
+    </script>
+</body>
+</html>

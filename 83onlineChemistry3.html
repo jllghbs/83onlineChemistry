@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专题3 空气、氧气、二氧化碳</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式（简化文字，优化排版） */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .unit-list li {
+            flex: 0 0 calc((100% - 4 * 1rem) / 5);
+            max-width: calc((100% - 4 * 1rem) / 5);
+            text-align: center;
+        }
+        .unit-list li a {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        .unit-list li a:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .unit-list li a.active {
+            background: #3366cc;
+            pointer-events: none;
+        }
+        /* 主内容样式（完全保留） */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .topic-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        .textbook-title {
+            color: #3366cc;
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #3366cc;
+        }
+        .note-content {
+            margin-left: 0.8rem;
+        }
+        .note-content p {
+            margin-bottom: 1rem;
+        }
+        .note-content ul {
+            margin: 0.8rem 0 1.2rem 2rem;
+        }
+        .note-content li {
+            margin-bottom: 0.5rem;
+        }
+        /* 页脚样式（完全保留） */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-color: transparent;
+                background-attachment: scroll;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .unit-list li {
+                flex: 0 0 calc((100% - 1 * 1rem) / 2);
+                max-width: calc((100% - 1 * 1rem) / 2);
+            }
+            .unit-list li a {
+                padding: 0.5rem 0.6rem;
+                font-size: 0.9rem;
+            }
+            .note-section {
+                padding: 1.5rem;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+        }
+        /* 容器样式 */
+        .table-container {
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(30, 136, 229, 0.1);
+            margin: 20px auto;
+        }
+        /* 表格样式 */
+        table {
+            width: 100%;
+            background-color: #fff;
+        /* 单元格 */
+        td {
+            padding: 18px 20px;
+            vertical-align: middle;
+            border: 1px solid #000306;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+        /* 化学方程式容器（核心：相对定位，让点燃在双横线正上方） */
+        .formula {
+            color: #0d47a1;
+            font-size: 20px;
+            font-weight: 500;
+            position: relative; /* 父容器相对定位 */
+            display: inline-block; /* 适配双横线宽度 */
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 化学笔记</h1>
+            <p class="time-range">学习周期：2025年9月1日 - 2025年12月14日</p>
+        </div>
+    </header>
+    <!-- 导航栏（仅简化专题文字，保留所有链接功能） -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>八上化学笔记单元导航</h2>
+            <ul class="unit-list">
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry1.html">专题一</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry2.html">专题二</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry3.html"  class="active">专题三</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry5.html">专题五</a></li>
+                <li><a href="https://dkfile.net/jllghbs/83onlineChemistry6.html">专题六</a></li>
+            </ul>
+        </div>
+    </div> 
+        <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="unit-title">专题3 空气、氧气、二氧化碳</div>
+            <div class="note-content">
+                <h3 class="topic-title">课题1 空气的成分</h3>
+                <div class="textbook-title">空气中含有哪些物质</div>
+                <ul>
+                    <li><strong>1. 红磷燃烧测定空气中氧气含量</strong>
+                        <ul>
+                            <li>（1）实验步骤（参考书P58）：</li>
+                            <ol>
+                                <li>在100mL的量筒内加入80mL水，用弹簧夹夹紧乳胶管；</li>
+                                <li>点燃燃烧匙内的红磷后，立即伸入容积为250mL的集气瓶中，并塞紧橡胶塞，观察并记录实验现象；
+                                    <ul>
+                                        <li>红磷燃烧，产生大量白烟，放出热量</li>
+                                    </ul>
+                                </li>
+                                <li>待红磷熄灭并冷却至室温后，打开弹簧夹，观察并记录实验现象；
+                                    <ul>
+                                        <li>冷却后打开弹簧夹，烧杯中的水倒流进入集气瓶，进入水的体积约占集气瓶内空气总体积的1/5</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            <li>（2）实验结论：空气中氧气的体积分数约为1/5，且空气是由多种物质组成的混合物。</li>
+                            <li>（3）误差分析：
+                                <ul>
+                                    <li style="margin: 8px 0;">&nbsp;&nbsp;测量结果偏小:</li>
+                                      <ul style="margin: 0; padding-left: 0; list-style: none;">
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;红磷量不足，未能完全消耗瓶内氧气;</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;装置气密性不佳，冷却过程中有空气进入;</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;未冷却至室温就打开弹簧夹，瓶内气体受热膨胀导致进入的水偏少。</li>
+                                      </ul>
+                                    </li>
+                                    
+                                    <li style="margin: 8px 0;">&nbsp;&nbsp;测量结果偏大:</li>
+                                      <ul style="margin: 0; padding-left: 0; list-style: none;">
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;点燃红磷后未及时塞紧橡胶塞，导致瓶内部分空气受热逸出;</li>
+                                        <li>&nbsp;&nbsp;&nbsp;&nbsp;弹簧夹未夹紧，实验过程中有空气从胶皮管逸出。</li>
+                                      </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>2. 空气的主要成分</strong>
+                        <ul>
+                            <li>（1）氮气：约占78%，是空气的主要成分，化学性质不活泼。</li>
+                            <li>（2）氧气：约占21%，支持燃烧和呼吸，是维持生命活动的重要物质。</li>
+                            <li>（3）稀有气体：约占0.94%，化学性质极不活泼，常用作保护气。</li>
+                            <li>（4）二氧化碳：约占0.03%。</li>
+                            <li>（5）其他气体和杂质：约占0.03%。</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="textbook-title">洁净的空气为何如此重要</div>
+                <p><strong>空气污染</strong></p>
+                <ul>
+                    <li><strong>SO<sub>2</sub></strong>(二氧化硫):酸雨</li>
+                    <li><strong>N<sub>2</sub></strong>(氮气)、<strong>NO<sub>2</sub></strong>(二氧化氮)、<strong>N<sub>2</sub>O<sub>4</sub></strong>(四氧化二氮):氮氧化合物</li>
+                    <li><strong>PM2.5</strong>、<strong>PM10</strong>:可吸入颗粒物</li>
+                    <li><strong>CO<sub>2</sub></strong>(二氧化碳):温室效应气体</li>
+                </ul>
+
+                <!-- 总算更到这里了 -->
+                <h3 class="topic-title">课题2 氧气二氧化碳的性质</h3>
+                <div class="textbook-title">氧气有哪些性质</div>
+                <ul>
+                    <li><strong>1. 物理性质</strong></li>
+                        <ul>
+                            <li>无色无味</li>
+                            <li>难溶于水</li>
+                            <li>密度比空气大</li>
+                        </ul>
+                    <li><strong>2. 化学性质</strong></li>
+                        <ul>
+                            <li>助燃性</li>
+                        </ul>
+                        <li><strong>3. 氧化</strong></li>
+                        <ul>
+                            <li>与氧气发生的反应是<strong>氧化反应</strong><br>（高中定义：凡是物质所含元素的化合价升高或失去电子的反应，就是氧化反应。）</li>
+                            <li>由两种物质组成且其中一种是氧元素的化合物是<strong>氧化物</strong></li>
+                        </ul>
+                        <li><strong>4.氧气有关反应</strong>
+                            <div class="table-container">
+                                <table>
+                                    <tr>
+                                        <td>物质</td>
+                                        <td>空气中</td>
+                                        <td>氧气中</td>
+                                        <td>化学方程式</td>
+                                    </tr>
+                                    <tr>
+                                        <td>木炭</td>
+                                        <td>红热</td>
+                                        <td>发白光，放热</td>
+                                        <td>
+                                            <div class="formula">
+                                                C + O<sub>2</sub> ═══（条件：点燃） CO<sub>2</sub>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>铁丝</td>
+                                        <td>不燃烧</td>
+                                        <td>火星四射，剧烈燃烧，生成黑色固体，放出大量热</td>
+                                        <td>
+                                            <div class="formula">
+                                                3Fe + 2O<sub>2</sub> ═══（条件：点燃） Fe<sub>3</sub>O<sub>4</sub>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>磷</td>
+                                        <td></td>
+                                        <td>大量白烟，放热</td>
+                                        <td>
+                                            <div class="formula">
+                                                4P + 5O<sub>2</sub> ═══（条件：点燃） 2P<sub>2</sub>O<sub>5</sub>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>镁</td>
+                                        <td></td>
+                                        <td>发出耀眼白光，放热，生成白色固体</td>
+                                        <td>
+                                            <div class="formula">
+                                                2Mg + O<sub>2</sub> ═══（条件：点燃） 2MgO
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div>
+                                <strong>铁丝燃烧实验补充说明：</strong><br>
+                                1. 反应物浓度越大，铁丝燃烧现象越剧烈；<br>
+                                2. 实验中需用火柴引燃铁丝，若无引燃物铁丝无法自行燃烧；<br>
+                                3. 集气瓶底部需预先加水或铺一层细沙，防止反应生成的高温熔融物溅落导致集气瓶炸裂。
+                            </div>
+                        </li>
+                </ul>
+                <div class="textbook-title">二氧化碳有哪些性质</div>
+                <ul>
+                    <li><strong>1. 物理性质</strong></li>
+                    <ul>
+                        <li>无色无味气体</li>
+                        <li>能溶于水</li>
+                        <li>密度比空气大</li>
+                        <li>固态二氧化碳（干冰）易升华</li>
+                    </ul>
+                    <li><strong>2. 化学性质</strong></li>
+                    <ul>
+                        <li>不可燃、不助燃</li>
+                        <li>能与水发生反应生成碳酸</li>
+                        <li>能与澄清石灰水（氢氧化钙）发生反应</li>
+                    </ul>
+                    <li><strong>3. 二氧化碳有关反应</strong></li>
+                        <div class="table-container">
+                            <table>
+                                <tr><td>反应物</td>
+                                    <td>实验现象</td>
+                                    <td>化学方程式</td>
+                                    <td>补充说明</td>
+                                </tr>
+                                <tr><td>二氧化碳 + 水</td>
+                                    <td>无明显现象（滴加石蕊溶液后石蕊变红）</td>
+                                    <td><div class="formula">CO<sub>2</sub> + H<sub>2</sub>O ═══ H<sub>2</sub>CO<sub>3</sub></div></td>
+                                    <td>生成的碳酸不稳定，加热易分解</td>
+                                </tr>
+                                <tr><td>碳酸</td>
+                                    <td>加热后，滴加石蕊的溶液由红变紫</td>
+                                    <td><div class="formula">H<sub>2</sub>CO<sub>3</sub> ═══ （ 条件：Δ） CO<sub>2</sub>↑ + H<sub>2</sub>O</div></td>
+                                    <td>碳酸分解释放二氧化碳</td>
+                                </tr>
+                                <tr>
+                                    <td>二氧化碳 + 澄清石灰水</td>
+                                    <td>澄清石灰水变浑浊</td>
+                                    <td><div class="formula">Ca(OH)<sub>2</sub> + CO<sub>2</sub> ═══ CaCO<sub>3</sub>↓ + H<sub>2</sub>O</div></td>
+                                    <td>该反应常用于检验二氧化碳气体</td>
+                                </tr>
+                            </table>
+                        </div>
+                </ul>
+
+                <!-- 为什么闭合不了 -->
+                <h3 class="topic-title">课题3 氧气和二氧化碳的制备</h3>
+                <div class="textbook-title">怎样获得氧气</div>
+                <ul>
+                    <li>一、工业制取氧气</li>
+                        <ul>
+                            <li>原理：利用空气各成分沸点不同（物理变化）
+                                <ul>
+                                    <li>氮气沸点：-196℃；氧气沸点：-183℃</li>
+                                </ul>
+                            </li>
+                            <li>步骤：净化空气 → 压缩冷却液化 → 升温分离（氮气先汽化） → 收集液氧</li>
+                        </ul>
+                    <li>二、实验室制取氧气</li>
+                        <ul>
+                            <li>1. 加热高锰酸钾（KMnO<sub>4</sub>）
+                                <ul>
+                                    <li>化学式：
+                                        <p>2KMnO₄ ═══ （条件：Δ） K₂MnO₄ + MnO₂ + O₂↑</p>
+                                    </li>
+                                    <li>特点：需要加热，反应稳定</li>
+                                    <li>实验操作步骤（豆沙包生成）
+                                        <ul>
+                                            <li><strong>查</strong>：检查装置气密性（如上）；</li>
+                                            <li><strong>装</strong>：将高锰酸钾粉末平铺在试管底部，试管口放一团棉花（防止粉末进入导管）；</li>
+                                            <li><strong>定</strong>：固定试管（试管口略向下倾斜，防止冷凝水倒流炸裂试管）；</li>
+                                            <li><strong>点</strong>：点燃酒精灯，先预热试管，再集中加热药品部位；</li>
+                                            <li><strong>收</strong>：待导管口有连续均匀气泡冒出时，开始收集氧气；</li>
+                                            <li><strong>离</strong>：收集完毕后，先将导管移出水面；</li>
+                                            <li><strong>熄</strong>：最后熄灭酒精灯（防止水倒流裂试管）。</li>
+                                        </ul>
+                                    </li>
+                                    <li>注意事项
+                                        <ol>
+                                            <li><strong>试管口必须略向下倾斜</strong>：防止加热时试管口的冷凝水倒流，炸裂试管；</li>
+                                            <li><strong>试管口放棉花</strong>：防止高锰酸钾粉末随气流进入导管，堵塞导管；</li>
+                                            <li><strong>“先离后熄”</strong>：停止加热前先移出导管，再熄灭酒精灯，避免水倒吸；</li>
+                                            <li><strong>加热要预热</strong>：防止试管局部温度过高，受热不均而炸裂；</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                    
+                            <li>2. 过氧化氢（H<sub>2</sub>O<sub>2</sub>）分解（二氧化锰催化）
+                                <ul>
+                                    <li>化学式：
+                                        <p>2H₂O₂ ═══ （条件：MnO₂做催化剂） 2H₂O + O₂↑</p>
+                                    </li>
+                                    <li>特点：无需加热，操作简便</li>
+                                </ul>
+                            </li>
+                    
+                            <li>3. 电解水（H<sub>2</sub>O）
+                                <ul>
+                                    <li>化学式：
+                                        <p>2H₂O ═══ （条件：通电） 2H₂↑ + O₂↑</p>
+                                    </li>
+                                    <li>特点：能耗高，实验室少用（主要用于演示水的组成）</li>
+                                </ul>
+                            </li>
+                    
+                            <li>4. 加热氯酸钾（KClO<sub>3</sub>）（二氧化锰催化）
+                                <ul>
+                                    <li>化学式：
+                                        <p>2KClO₃ ═══（条件：MnO₂做催化剂、Δ）2KCl + 3O₂↑</p>
+                                    </li>
+                                    <li>特点：需要加热，氧气产量高</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <li>三、重点
+                        <ul>
+                            <li>1）装置气密性检查方法
+                                <ol>
+                                    <li>将导管一端浸入水中，用手紧握试管外壁（或用酒精灯微热试管）；</li>
+                                    <li>若导管口有<strong>连续气泡冒出</strong>，松开手后导管内形成一段稳定的水柱，说明气密性良好；</li>
+                                    <li>若无气泡/水柱，需检查装置连接处（如橡胶塞、导管接口）是否松动，重新组装后再次检查。</li>
+                                </ol>
+                            </li>
+                            <li>2）催化剂
+                                <ul>
+                                    <li>定义：<strong>催化剂是能改变化学反应速率，而本身的质量和化学性质在反应前后都没有发生改变的物质</strong></li>
+                                    <li>核心特征：
+                                        <ol>
+                                            <li>改变化学反应速率（可加快，也可减慢，实验室制氧中多为加快）；</li>
+                                            <li>反应前后质量、化学性质不变（物理性质可能改变）；</li>
+                                            <li>不改变反应的最终生成物种类和产量；</li>
+                                            <li>具有选择性（一种催化剂通常只对某一反应或某类反应起作用）。</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>3）三种集气方法</strong>
+                                <ul>
+                                    <li><strong>排水集气法</strong>
+                                        <ol>
+                                            <li>原理：氧气不易溶于水，且不与水反应；</li>
+                                            <li>优点：收集的氧气纯度高；</li>
+                                            <li>缺点：收集的氧气含有水蒸气，需干燥。</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>向上排空气法</strong>
+                                        <ol>
+                                            <li>原理：氧气密度（1.429g/L）略大于空气（1.293g/L）；</li>
+                                            <li>优点：收集的氧气干燥；</li>
+                                            <li>缺点：纯度较低，需验满。</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>向下排空气法</strong>
+                                        <ol>
+                                            <li>适用条件：密度比空气小，且不与空气成分反应的气体；</li>
+                                            <li>优点：操作简便、气体干燥；</li>
+                                            <li>缺点：纯度较低，需验满。</li>
+                                        </ol>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>  
+                </ul>
+
+                <!-- 对了！！！ -->
+                <div class="textbook-title">实验室中如何制取二氧化碳</div>
+                <ul>
+                    <li>实验室制取CO₂的原料选择对比
+                        <ul>
+                            <li>1. 稀盐酸 + 块状石灰石
+                                <ul>
+                                    <li>反应：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
+                                    <li>优点：反应速率适中，便于控制，持续产生CO₂</li>
+                                    <li>产物：CaCl₂易溶于水，不会覆盖石灰石表面，反应可顺利进行</li>
+                                </ul>
+                            </li>
+                            <li>2. 稀盐酸 + 粉末状石灰石
+                                <ul>
+                                    <li>反应：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
+                                    <li>缺点：粉末状石灰石与稀盐酸接触面积大，反应速率过快，不易控制，不利于收集CO₂</li>
+                                </ul>
+                            </li>
+                            <li>3. 稀硫酸 + 块状石灰石
+                                <ul>
+                                    <li>反应：CaCO₃ + H₂SO₄ ═══ CaSO₄ + CO₂↑ + H₂O</li>
+                                    <li>缺点：生成的CaSO₄是微溶于水的物质，会覆盖在石灰石表面，阻止反应进行</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>实验室制取CO₂的原理
+                        <ul>
+                            <li>化学方程式：CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O</li>
+                        </ul>
+                    </li>
+                    <li>发生装置选择依据
+                        <ul>
+                            <li>反应物状态：固体（块状大理石） + 液体（稀盐酸）</li>
+                            <li>反应条件：常温（不需要加热）</li>
+                            <li>装置类型：固液常温型发生装置</li>
+                        </ul>
+                    </li>
+                    <li>收集装置选择依据
+                        <ul>
+                            <li>收集方法：向上排空气法</li>
+                            <li>选择理由：CO₂密度比空气大（CO₂密度1.977g/L＞空气1.293g/L），且能溶于水并与水反应，不能用排水集气法</li>
+                        </ul>
+                    </li>
+                    <li>CO₂的验满方法
+                        <ul>
+                            <li>操作：将燃着的木条放在集气瓶口</li>
+                            <li>现象与结论：若木条熄灭，说明CO₂已收集满（利用CO₂不燃烧、不支持燃烧的性质）</li>
+                        </ul>
+                    </li>
+                    <li>实验操作步骤（豆沙包生成）
+                        <ul>
+                            <li>检查装置气密性：将导管一端浸入水中，用手紧握锥形瓶外壁，导管口有气泡冒出则气密性良好</li>
+                            <li>装入药品：先加块状大理石，再加入稀盐酸（长颈漏斗末端需液封）</li>
+                            <li>收集气体：将导管伸入集气瓶底部，用向上排空气法收集</li>
+                            <li>验满：将燃着的木条放在集气瓶口，木条熄灭则验满</li>
+                            <li>整理装置：实验结束后，先移除导管，再清理药品</li>
+                        </ul>
+                    </li>
+                    <li>重点
+                        <ul>
+                            <li>1）启普发生器
+                                <ul>
+                                    <li>适用条件
+                                        <ul>
+                                            <li>反应物为块状固体与液体</li>
+                                            <li>反应不需要加热</li>
+                                            <li>生成的气体难溶于反应液体</li>
+                                            <li>操作原理
+                                                <ul>
+                                                    <li>打开活塞：装置内压强减小，液体与块状固体接触，反应开始</li>
+                                                    <li>关闭活塞：装置内压强增大，液体被压回球形漏斗，与固体分离</li>
+                                                </ul>
+                                            </li>
+                                            <li>优点：随开随用、随关随停，可反复使用，操作简便</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>2）多功能瓶
+                                <ul>
+                                    <li>收集气体<br>①空气<br>②排水</li>
+                                    <li>ρ大走长管，ρ小走短管</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+    </div>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-12/14）</p>
+            <p>记录人：胡锦乐</p>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    </footer>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

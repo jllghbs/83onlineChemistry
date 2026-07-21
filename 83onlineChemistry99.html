@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番外篇 化学99条大全</title>
+    <!-- 引入KaTeX CSS与JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <style>
+        /* 全局字号 */
+        :root {
+            --base-font-size: 13px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        body.theme-blue {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.theme-green {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.bg-image-hidden.theme-blue {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        @media (max-width: 768px) {
+            body.theme-green {
+                background-size: cover;
+                background-position: center center;
+                background-attachment: fixed;
+            }
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        body.theme-green header {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green footer {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .unit-nav h2 {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .unit-list li a {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .unit-list li a:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+        }
+        body.theme-green .unit-title {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .topic-title {
+            color: #1b5e20;
+        }
+        body.theme-green .unit-nav h2 {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .unit-list li a {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .unit-list li a:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+        }
+        body.theme-green .back-to-top {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .back-to-top:hover {
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
+        }
+        body.theme-green .download-btn {
+            background: rgba(46, 125, 50, 0.85);
+        }
+        body.theme-green .download-btn:hover {
+            background: rgba(27, 94, 32, 0.9);
+        }
+        body.theme-green .point-number {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .settings-content h3 {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .setting-slider::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-slider::-moz-range-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-value {
+            color: #2e7d32;
+        }
+        body.theme-green .theme-btn.active {
+            border-color: #2e7d32;
+            background: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .note-item {
+            border-bottom-color: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .note-item::before {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header h2 {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header {
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .setting-toggle.active {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式（优化宽度，手机端一行显示） */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: nowrap; /* 强制不换行 */
+            gap: 0.8rem; /* 按钮间距（优化美观度） */
+            justify-content: center;
+            overflow-x: auto; /* 极端情况横向滚动 */
+            padding: 0.3rem 0;
+        }
+        .unit-list li {
+            flex: 0 0 auto; /* 取消固定宽度，自适应内容 */
+            text-align: center;
+        }
+        .unit-list li a {
+            display: block;
+            padding: 0.6rem 1rem; /* 优化内边距，适配3字内容 */
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        /* 导出PDF按钮样式 */
+        .export-pdf {
+            display: block;
+            width: 160px;
+            margin: 1rem auto;
+            padding: 0.7rem 0;
+            background: #3366cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(51, 102, 204, 0.2);
+            transition: background 0.3s ease;
+        }
+        .export-pdf:hover {
+            background: #2855aa;
+        }
+        /* 导出提示样式 */
+        .export-tip {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        /* 主内容样式 */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .topic-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        /* 专题锚点样式（仅作为跳转标记，无视觉显示） */
+        .topic-anchor {
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        /* 99条样式（无专题间隔，连续排列） */
+        .note-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .note-item {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(95, 82, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap; /* 允许子元素换行 */
+        }
+        .note-item::before {
+            content: attr(data-index); /* 使用data-index属性显示序号 */
+            display: inline-block;
+            width: 2rem;
+            font-weight: bold;
+            color: #5f52ff;
+            margin-right: 0.8rem;
+        }
+        /* 嵌套ul样式：强制换行+缩进 */
+        .note-item > ul {
+            width: 100%;
+            margin: 0.5rem 0 0 2.8rem; /* 左缩进=序号宽度+间距 */
+            list-style: disc;
+        }
+        .note-item > ul > li {
+            margin: 0.3rem 0;
+        }
+        /* 二级嵌套ul样式（一贴二低三靠内部） */
+        .note-item > ul > li > ul {
+            margin: 0.3rem 0 0 2rem;
+            list-style: circle;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-icon .icon {
+            font-size: 1.2rem;
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 二维码容器 */
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        /* 返回顶部按钮样式 - 圆形、右下角固定 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: #4a3ed8;
+        }
+        /*打印*/
+        .download-btn {
+            padding: 14px 32px;
+            background: rgba(95, 82, 255, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(95, 82, 255, 1);
+            box-shadow: 0 8px 25px rgba(95, 82, 255, 0.5);
+        }
+        .download-btn:active {
+            transform: translateY(-1px);
+            background: rgba(95, 82, 255, 0.7);
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: contain;
+                background-color: #f5f7fa;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            h1 {
+                font-size: calc(1.5rem - 2px);
+            }
+            /* 手机端导航栏优化：确保一行显示 */
+            .unit-list {
+                gap: 0.5rem; /* 移动端间距适配 */
+                padding: 0.3rem 0.5rem;
+            }
+            .unit-list li a {
+                padding: 0.5rem 0.8rem;
+                font-size: calc(0.9rem - 2px);
+            }
+            .note-section {
+                padding: 1.5rem;
+                padding-bottom: 50px;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+            .note-item::before {
+                width: 1.8rem;
+                margin-right: 0.5rem;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            .note-item > ul {
+                margin-left: 2.3rem;
+            }
+            .note-item > ul > li > ul {
+                margin-left: 1.5rem;
+            }
+            /* 移动端返回顶部按钮调整 */
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: calc(1.1rem - 2px);
+            }
+            /* 移动端导出按钮适配 */
+            .export-pdf {
+                width: 140px;
+                padding: 0.6rem 0;
+                font-size: calc(0.95rem - 2px);
+            }
+            /* 更新公告移动端字号小4号 */
+            .announcement-time,
+            .announcement-version {
+                font-size: 10px;
+            }
+            .announcement-title {
+                font-size: 14px;
+            }
+            .announcement-content ol {
+                font-size: 10px;
+            }
+            .announcement-signature {
+                font-size: 8px;
+            }
+            .announcement-close-mobile {
+                font-size: 20px;
+            }
+        }
+        /* 化学方程式/化学式样式 */
+        .chem-formula {
+            font-family: 'Times New Roman', serif;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        /* KateX公式样式 */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        .formula + br {
+            display: block;
+            content: "";
+            margin: 0;
+            padding: 0;
+        }
+        /* 更新公告 */
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .announcement-close-mobile:hover {
+            color: #5f52ff;
+        }
+        @media (max-width: 768px) {
+            .announcement-close {
+                display: none;
+            }
+            .announcement-close-mobile {
+                display: block;
+            }
+            .contact-info {
+                display: none;
+            }
+        }
+        /* 设置按钮样式 */
+        header {
+            position: relative;
+        }
+        .settings-btn {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        /* 设置界面样式 */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        body.theme-green .settings-overlay {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+        }
+        .settings-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .settings-content {
+            background: white;
+            border-radius: 12px;
+            width: 70%;
+            max-width: 600px;
+            min-height: 400px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        .settings-overlay.show .settings-content {
+            transform: translateY(0);
+        }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .settings-header h2 {
+            margin: 0;
+            color: #5f52ff;
+        }
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+        .settings-close:hover {
+            color: #5f52ff;
+        }
+        /* 移动端设置按钮适配 */
+        @media (max-width: 768px) {
+            .settings-btn {
+                right: 1rem;
+            }
+            .settings-content {
+                width: 85%;
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+        }
+        /* 设置控件样式 */
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        .settings-section h3 {
+            font-size: 1rem;
+            color: #5f52ff;
+            margin: 0 0 0.8rem 0;
+            font-weight: 500;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .setting-label {
+            min-width: 70px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .setting-slider {
+            flex: 1;
+            min-width: 120px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+        .setting-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #5f52ff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .setting-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #5f52ff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .setting-value {
+            min-width: 45px;
+            text-align: right;
+            color: #5f52ff;
+            font-weight: 500;
+        }
+        .setting-toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: #ddd;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .setting-toggle.active {
+            background: #5f52ff;
+        }
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        .setting-toggle.active::after {
+            transform: translateX(24px);
+        }
+        body.theme-green .setting-toggle.active {
+            background: #2e7d32;
+        }
+        
+        /* 主题色样式 */
+        body.theme-blue { --primary-color: #5f52ff; --secondary-color: #4285f4; }
+        body.theme-green { --primary-color: #2e7d32; --secondary-color: #4caf50; --accent-color: #81c784; }
+        
+        body.bg-image-hidden.theme-blue .settings-overlay {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green .settings-overlay {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        /* 主题按钮样式 */
+        .theme-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-btn:hover {
+            border-color: var(--primary-color);
+        }
+        .theme-btn.active {
+            border-color: var(--primary-color);
+            background: rgba(95, 82, 255, 0.1);
+        }
+        .theme-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .theme-name {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* 搜索框样式 */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: transparent;
+        }
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid #5f52ff;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .search-box:focus-within {
+            border-color: #5f52ff;
+            box-shadow: 0 0 15px rgba(95, 82, 255, 0.3);
+        }
+        .search-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            color: #5f52ff;
+            transition: color 0.3s ease;
+        }
+        .search-box:focus-within .search-icon {
+            color: #5f52ff;
+        }
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            padding: 0.3rem 0;
+        }
+        .search-input::placeholder {
+            color: #5f52ff;
+            transition: color 0.3s ease;
+        }
+        .search-input:focus::placeholder {
+            color: #5f52ff;
+        }
+        .search-clear {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: #5f52ff;
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .search-clear:hover {
+            background: #4a3ed8;
+            color: white;
+        }
+        .search-clear.show {
+            display: flex;
+        }
+        body.theme-green .search-box {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: #2e7d32;
+        }
+        body.theme-green .search-box:focus-within {
+            border-color: #2e7d32;
+            box-shadow: 0 0 15px rgba(46, 125, 50, 0.3);
+        }
+        body.theme-green .search-icon {
+            color: #2e7d32;
+        }
+        body.theme-green .search-box:focus-within .search-icon {
+            color: #2e7d32;
+        }
+        body.theme-green .search-input::placeholder {
+            color: #2e7d32;
+        }
+        body.theme-green .search-input:focus::placeholder {
+            color: #2e7d32;
+        }
+        body.theme-green .search-clear {
+            background: #2e7d32;
+            color: white;
+        }
+        body.theme-green .search-clear:hover {
+            background: #1b5e20;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .search-box {
+                padding: 0.5rem 1rem;
+            }
+            .search-input {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/6/8 <span class="announcement-version">Ver3.5.11</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>优化搜索框交互体验，实现页面滚动时搜索框始终固定在顶部，方便随时进行内容检索</li>
+                </ol>
+            </div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function openSettings() {
+            document.getElementById('settings-overlay').classList.add('show');
+        }
+        function closeSettings() {
+            document.getElementById('settings-overlay').classList.remove('show');
+        }
+        function updateFontSize(value) {
+            document.getElementById('fontSizeValue').textContent = value + '%';
+            document.body.style.fontSize = value + '%';
+        }
+        function updateLineHeight(value) {
+            document.getElementById('lineHeightValue').textContent = value;
+            document.body.style.lineHeight = value;
+        }
+        function updateLetterSpacing(value) {
+            document.getElementById('letterSpacingValue').textContent = value + 'em';
+            document.body.style.letterSpacing = value + 'em';
+        }
+        function updateCardOpacity(value) {
+            document.getElementById('cardOpacityValue').textContent = value + '%';
+            var alpha = 1 - value / 100;
+            var noteSection = document.querySelector('.note-section');
+            noteSection.style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            document.querySelector('.settings-content').style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            document.querySelector('.unit-nav').style.background = 'rgba(255, 255, 255, ' + alpha + ')';
+            if (alpha < 0.4 && document.body.classList.contains('theme-green')) {
+                noteSection.style.color = 'white';
+                document.querySelectorAll('.note-item::before').forEach(function(el) {
+                    el.style.color = '#90EE90';
+                });
+            } else {
+                noteSection.style.color = '#333';
+                document.querySelectorAll('.note-item::before').forEach(function(el) {
+                    el.style.color = '';
+                });
+            }
+        }
+        function toggleBackgroundImage() {
+            var toggle = document.getElementById('bgImageToggle');
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                document.body.classList.remove('bg-image-hidden');
+            } else {
+                document.body.classList.add('bg-image-hidden');
+            }
+        }
+        function toggleSearchBox() {
+            var toggle = document.getElementById('searchBoxToggle');
+            toggle.classList.toggle('active');
+            var searchContainer = document.querySelector('.search-container');
+            if (toggle.classList.contains('active')) {
+                searchContainer.style.display = '';
+            } else {
+                searchContainer.style.display = 'none';
+            }
+        }
+        function updateTheme(theme) {
+            var classes = document.body.className.split(' ').filter(c => !c.startsWith('theme-'));
+            document.body.className = classes.join(' ') + ' theme-' + theme;
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            var cardOpacityValue = document.getElementById('cardOpacitySlider').value;
+            updateCardOpacity(cardOpacityValue);
+        }
+        function initNoteIndex() {
+            var noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(function(item, index) {
+                item.setAttribute('data-index', index + 1);
+            });
+        }
+        function validateSearchInput(input) {
+            var value = input.value;
+            var hasChinese = /[\u4e00-\u9fa5]/.test(value);
+            var hasEnglish = /[a-zA-Z]/.test(value);
+            
+            if (hasChinese && hasEnglish) {
+                var lastChar = value[value.length - 1];
+                var isChinese = /[\u4e00-\u9fa5]/.test(lastChar);
+                var isEnglish = /[a-zA-Z]/.test(lastChar);
+                
+                if (isEnglish) {
+                    input.value = value.slice(0, -1);
+                } else if (isChinese) {
+                    input.value = value.slice(0, -1);
+                }
+            }
+        }
+        function handleSearch(query) {
+            var clearBtn = document.getElementById('searchClear');
+            if (query.length > 0) {
+                clearBtn.classList.add('show');
+            } else {
+                clearBtn.classList.remove('show');
+            }
+            var noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(function(item) {
+                if (query.length === 0) {
+                    item.style.display = '';
+                    return;
+                }
+                var displayText = getDisplayText(item);
+                var lowerText = displayText.toLowerCase();
+                var lowerQuery = query.toLowerCase();
+                if (lowerText.indexOf(lowerQuery) !== -1) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        function getDisplayText(element) {
+            var text = '';
+            var nodes = element.childNodes;
+            for (var i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
+                if (node.nodeType === Node.TEXT_NODE) {
+                    text += node.nodeValue;
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    var tagName = node.tagName.toLowerCase();
+                    if (tagName === 'script' || tagName === 'style') {
+                        continue;
+                    }
+                    if (node.classList && node.classList.contains('katex') && node.querySelector('.katex-mathml')) {
+                        var mathmlText = node.querySelector('.katex-html')?.textContent || '';
+                        text += mathmlText;
+                    } else {
+                        text += getDisplayText(node);
+                    }
+                }
+            }
+            return text;
+        }
+        function clearSearch() {
+            var searchInput = document.getElementById('searchInput');
+            var clearBtn = document.getElementById('searchClear');
+            searchInput.value = '';
+            clearBtn.classList.remove('show');
+            var noteItems = document.querySelectorAll('.note-item');
+            noteItems.forEach(function(item) {
+                item.style.display = '';
+            });
+            searchInput.focus();
+        }
+        window.addEventListener('DOMContentLoaded', initNoteIndex);
+    </script>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 八（3）班 化学99条</h1>
+            <p class="time-range">学习周期：2025年9月1日 - 2026年1月19日</p>
+        </div>
+        <button class="settings-btn" onclick="openSettings()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94c0-0.31-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94l-0.36-2.54c-0.05-0.24-0.26-0.41-0.5-0.41h-3.84c-0.24,0-0.45,0.17-0.5,0.41l-0.36,2.54c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.08-0.47,0-0.59,0.22l-1.92,3.32c-0.12,0.2-0.07,0.47,0.12,0.61l2.03,1.58C4.84,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54c0.05,0.24,0.26,0.41,0.5,0.41h3.84c0.24,0,0.45-0.17,0.5-0.41l0.36-2.54c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.2,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+        </button>
+    </header>
+    <!-- 设置界面 -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>设置</h2>
+                <button class="settings-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-section">
+                <h3>文字排版</h3>
+                <div class="setting-item">
+                    <span class="setting-label">字号缩放</span>
+                    <input type="range" class="setting-slider" id="fontSizeSlider" min="80" max="120" value="100" oninput="updateFontSize(this.value)">
+                    <span class="setting-value" id="fontSizeValue">100%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">行间距</span>
+                    <input type="range" class="setting-slider" id="lineHeightSlider" min="1" max="3" step="0.1" value="1.5" oninput="updateLineHeight(this.value)">
+                    <span class="setting-value" id="lineHeightValue">1.5</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">字间距</span>
+                    <input type="range" class="setting-slider" id="letterSpacingSlider" min="0" max="0.5" step="0.05" value="0" oninput="updateLetterSpacing(this.value)">
+                    <span class="setting-value" id="letterSpacingValue">0em</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">搜索框</span>
+                    <div class="setting-toggle active" id="searchBoxToggle" onclick="toggleSearchBox()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>界面外观</h3>
+                <div class="setting-item">
+                    <span class="setting-label">卡片透明度</span>
+                    <input type="range" class="setting-slider" id="cardOpacitySlider" min="0" max="100" value="80" oninput="updateCardOpacity(this.value)">
+                    <span class="setting-value" id="cardOpacityValue">80%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">背景图</span>
+                    <div class="setting-toggle active" id="bgImageToggle" onclick="toggleBackgroundImage()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>主题色彩</h3>
+                <div class="setting-item">
+                    <div class="theme-buttons">
+                        <button class="theme-btn theme-blue active" onclick="updateTheme('blue')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #4285f4, #5f52ff);"></span>
+                            <span class="theme-name">蓝色</span>
+                        </button>
+                        <button class="theme-btn theme-green" onclick="updateTheme('green')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #1b5e20, #4caf50, #81c784);"></span>
+                            <span class="theme-name">绿色</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航栏（优化宽度，手机端一行显示） -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>八上化学笔记单元导航</h2>
+            <ul class="unit-list">
+                <li><a href="#topic1">专题一</a></li>
+                <li><a href="#topic2">专题二</a></li>
+                <li><a href="#topic3">专题三</a></li>
+                <li><a href="#topic5">专题五</a></li>
+                <li><a href="#topic6">专题六</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 搜索框 -->
+    <div class="search-container">
+        <div class="search-box">
+            <div class="search-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索笔记内容..." oninput="validateSearchInput(this); handleSearch(this.value)">
+            <button class="search-clear" id="searchClear" onclick="clearSearch()">×</button>
+        </div>
+    </div>
+    <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="unit-title">番外篇 化学99条大全</div>
+            <div class="note-content">
+                <h3 class="topic-title">本学期核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
+                
+                <ul class="note-list">
+                    <li class="note-item">不能在化学课上挑衅、激怒化学老师</li>
+                    <!-- 专题一 锚点（第2~6条） -->
+                    <span id="topic1" class="topic-anchor"></span>
+                    <li class="note-item">物理变化：无新物质生成的变化（如玻璃破碎）</li>
+                    <li class="note-item">化学变化：有新物质生成的变化（如蜡烛燃烧）</li>
+                    <li class="note-item">物理性质：无需化学变化就能体现的性质（如颜色、状态）</li>
+                    <li class="note-item">化学性质：需通过化学变化才能体现的性质（如可燃性、酸碱性）</li>
+                    <li class="note-item">元素符号书写规则：首字母大写，后续字母小写（如<span class="chem-formula"></span>Fe</span>）</li>
+                    
+                    <!-- 专题二 锚点（第7~39条） -->
+                    <span id="topic2" class="topic-anchor"></span>
+                    <li class="note-item">固体药品取用工具：
+                        <ul>
+                            <li>块状：镊子</li>
+                            <li>粉末状：药匙或纸槽</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">液体药品取用工具：
+                        <ul>
+                            <li>少量：胶头滴管</li>
+                            <li>大量：倾倒法（标签向手心、瓶口紧挨容器口）</li>
+                            <li>定量：量筒（搭配胶头滴管）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">量筒读数方法：视线与液体凹液面最低处保持水平</li>
+                    <li class="note-item">粗盐成分：<strong>主要成分</strong>为氯化钠（<span class="chem-formula">NaCl</span>），含氯化镁、泥沙等杂质</li>
+                    <li class="note-item">粗盐溶解本质：<strong>完全</strong>溶解粗盐中的可溶性物质</li>
+                    <li class="note-item">粗盐提纯核心流程：溶解→过滤→蒸发</li>
+                    <li class="note-item">量筒的选择：选择量程内最小的</li>
+                    <li class="note-item">电子天平的使用：
+                        <ul>
+                            <li>将电子天平放在水平桌面上，使水准泡在圈中央</li>
+                            <li>按<strong>“去皮”</strong>键进行去皮，不是归零、调零</li>
+                            <li>添加粗盐至示数接近<span class="chem-formula">5.0g</span>（不能超过<span class="chem-formula">5.0g</span>）时，用另一只手轻敲持药匙的手腕或用食指轻敲药匙柄</li>
+                            <li>用手指轻轻弹击称量纸，确保称量纸上没有粗盐附着</li>
+                            <li>称量纸上放无腐蚀性固体药品，烧杯里比本身小的任何东西都能放</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">粗盐溶解操作要点及玻璃棒作用：加水，用玻璃棒搅拌，<strong>加速溶解</strong></li>
+                    <li class="note-item">溶解时所用的仪器：烧杯、玻璃棒</li>
+                    <li class="note-item">实验仪器搭建顺序：从下往上、从左往右</li>
+                    <li class="note-item">过滤操作要求（一贴、二低、三靠）：
+                        <ul>
+                            <li>一贴：滤纸紧贴漏斗内壁，无气泡残留</li>
+                            <li>二低：
+                                <ul>
+                                    <li>滤纸边缘低于漏斗边缘</li>
+                                    <li>漏斗内液面低于滤纸边缘</li>
+                                </ul>
+                            </li>
+                            <li>三靠：
+                                <ul>
+                                    <li>烧杯尖嘴紧靠玻璃棒</li>
+                                    <li>玻璃棒末端紧靠三层滤纸处</li>
+                                    <li>漏斗下端管口紧靠烧杯内壁</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="note-item">过滤时玻璃棒作用：<strong>引流</strong></li>
+                    <li class="note-item">过滤时所用的仪器为铁架台、漏斗、烧杯、玻璃棒；用品为滤纸</li>
+                    <li class="note-item">蒸发时玻璃棒作用：搅拌，<strong>使液体受热均匀，防止液体飞溅</strong></li>
+                    <li class="note-item">蒸发时所用的仪器为铁架台、蒸发皿、酒精灯、玻璃棒、坩埚钳、电子点火器、陶土网（将受热后的蒸发皿放置在陶土网上冷却，以免损坏桌面或因骤冷导致蒸发皿破裂）</li>
+                    <li class="note-item">蒸发停止时机：蒸发皿中有大量固体析出时，利用余热蒸干</li>
+                    <li class="note-item">粗盐产率公式：<span class="chem-formula">产率=</span><span class="formula">\frac{m_{\text{精盐}}}{m_{\text{粗盐}}} </span><span class="chem-formula">×100%</span></li>
+                    <li class="note-item">粗盐产率分析
+                        <ul>
+                            <li>偏大原因：①蒸发后精盐未蒸干；②过滤时滤纸破损；③液面高于滤纸边缘</li>
+                            <li>偏小原因：①溶解时水太少导致精盐未完全溶解；②蒸发时液体溅出；③过滤时有液体残留；④称量时蒸发皿中有残留固体</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">蒸馏水用量对粗盐提纯的影响：过多增加过滤、蒸发操作时间；过少不能将粗盐中可溶物完全溶解</li>
+                    <li class="note-item">未说明药品用量时的取用规则：固体粉末铺满试管底部、块状取1块，液体取<span class="chem-formula">1~2mL</span></li>
+                    <li class="note-item">酒精灯点燃方法：用火柴或电子打火器点燃，禁止<strong>用燃着的酒精灯引燃，串联酒精灯</strong></li>
+                    <li class="note-item">酒精灯熄灭方法：用灯帽盖灭，禁止<strong>用嘴吹灭</strong></li>
+                    <li class="note-item">试管加热时铁夹夹持位置：距试管口<span class="formula">\frac{1}{3}</span>处</li>
+                    <li class="note-item">固体加热时试管口朝向：略向下倾斜，防止冷凝水倒流炸裂试管</li>
+                    <li class="note-item">试管内液体加热量：不超过试管容积的<span class="formula">\frac{1}{3}</span>，避免液体沸腾飞溅</li>
+                    <li class="note-item">加热仪器
+                        <ul>
+                            <li>可直接加热：试管、蒸发皿、坩埚、燃烧匙</li>
+                            <li>需垫陶土网加热：烧杯、烧瓶、锥形瓶，使受热均匀</li>
+                            <li>不能加热：量筒、集气瓶、漏斗、胶头滴管</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">试管加热前的要求：外壁必须干燥，先预热再集中加热</li>
+                    <li class="note-item">胶头滴管使用要求：垂直悬空在容器口上方滴加，禁止伸入容器内</li>
+                    <li class="note-item">实验室取用药品“三不”原则：不摸、不闻、不尝</li>
+                    <li class="note-item">实验剩余药品处理方法：放入指定容器，不放回原瓶、不随意丢弃、不能<strong>给吕楷鑫喝</strong>、不能创造<strong>新的化学物质</strong></li>
+                    <li class="note-item">不要学习高老师忘记贴标签，导致浪费一节课来分清两瓶药品</li>
+                    <li class="note-item">在实验室中切忌<strong>不遵守化学实验室守则</strong></li>
+                    
+                    <!-- 专题三 锚点（第40~72条） -->
+                    <span id="topic3" class="topic-anchor"></span>
+                    <li class="note-item">空气的主要成分（体积分数）：氮气约<span class="chem-formula"></span>78%</span>、氧气约<span class="chem-formula">21%</span>、稀有气体约<span class="chem-formula">0.94%</span>、二氧化碳约<span class="chem-formula">0.03%</span>、其他气体/杂质约<span class="chem-formula">0.03%</span></li>
+                    <li class="note-item">氮气的性质与用途：无色无味气体、难溶于水，不与红磷反应/不燃烧/不助燃；用途为食品保鲜、作保护气</li>
+                    <li class="note-item">稀有气体：化学性质很稳定，常用作保护气；通电时能发出不同颜色的光，可制作霓虹灯等电光源</li>
+                    <li class="note-item">红磷燃烧测空气中氧含量（方程式）：<span class="formula">2P + 5O_2 \xlongequal{\triangle} 2P_2O_5</span></li>
+                    <li class="note-item">红磷燃烧测空气中氧含量（现象）：产生大量白烟，放热，冷却后水倒吸入集气瓶，体积约占集气瓶1/5</li>
+                    <li class="note-item">红磷测氧含量结果偏差原因：
+                        <ul>
+                            <li>偏小：红磷量不足、装置气密性差、未冷却至室温就打开止水夹</li>
+                            <li>偏大：未夹紧止水夹、点燃红磷后未及时塞紧瓶塞</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">氧气的性质：物理性质（无色无味气体、密度略大于空气、难溶于水）；化学性质（助燃性，能与多种物质发生氧化反应）</li>
+                    <li class="note-item">与氧气发生的反应是氧化反应</li>
+                    <li class="note-item">氧化物的定义：由两种元素组成，且一种是氧元素的化合物</li>
+                    <li class="note-item">碳的燃烧（现象）：空气中红热；氧气中发出白光、放热</li>
+                    <li class="note-item">碳的燃烧（方程式）：<span class="formula">C + O_2 \xlongequal{\text{点燃}} CO_2</span>（充分燃烧）</li>
+                    <li class="note-item">铁的燃烧（现象）：空气中不燃烧，仅发生缓慢氧化；氧气中火星四射、放热，生成黑色固体</li>
+                    <li class="note-item">铁的燃烧（方程式）：<span class="formula">3Fe + 2O_2 \xlongequal{\text{点燃}} Fe_3O_4</span></li>
+                    <li class="note-item">铁在氧气中燃烧的实验注意事项：
+                        <ul>
+                            <li>系火柴：引燃铁丝</li>
+                            <li>瓶底放水/细沙：防止高温熔融物溅落，导致集气瓶受热不均炸裂</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">二氧化碳的物理性质：无色无味气体、密度比空气大、能溶于水</li>
+                    <li class="note-item">二氧化碳与水的反应（方程式）：<span class="formula">CO_2 + H_2O \xlongequal{\quad} H_2CO_3</span></li>
+                    <li class="note-item">二氧化碳与水的反应（现象）：使紫色石蕊溶液变红</li>
+                    <li class="note-item">碳酸受热分解（方程式）：<span class="formula">H_2CO_3 \xlongequal{\triangle} CO_2\uparrow + H_2O</span></li>
+                    <li class="note-item">碳酸受热分解（现象）：石蕊溶液由红色恢复为紫色</li>
+                    <li class="note-item">二氧化碳与澄清石灰水的反应（方程式）：<span class="formula">Ca(OH)_2 + CO_2 \xlongequal{\quad} CaCO_3\downarrow + H_2O</span></li>
+                    <li class="note-item">二氧化碳与澄清石灰水的反应（现象）：澄清石灰水变浑浊（用于检验<span class="chem-formula">CO₂</span>）</li>
+                    <li class="note-item">工业制氧：采用分离液态空气法，利用各气体沸点不同（物理变化）</li>
+                    <li class="note-item">启普发生器：适用于固体与液体反应制取气体，优点是随开随用、随关随停，<strong>不能加热</strong></li>
+                    <li class="note-item">实验室制氧气（加热高锰酸钾，方程式）：<span class="formula">2KMnO_4 \xlongequal{\triangle} K_2MnO_4 + MnO_2 + O_2\uparrow</span></li>
+                    <li class="note-item">实验室制氧气（过氧化氢催化，方程式）：<span class="formula">2H_2O_2 \xlongequal{MnO_2} 2H_2O + O_2\uparrow</span></li>
+                    <li class="note-item">实验室制氧气（加热氯酸钾，方程式）：<span class="formula">2KClO_3 \xlongequal[\triangle]{MnO_2} 2KCl + 3O_2\uparrow</span></li>
+                    <li class="note-item">实验室制二氧化碳（方程式）：<span class="formula">CaCO_3 + 2HCl \xlongequal{\quad} CaCl_2 + CO_2\uparrow + H_2O</span></li>
+                    <li class="note-item">实验室制二氧化碳不用硫酸的原因：生成微溶于水的<span class="chem-formula">CaSO₄</span>，覆盖在碳酸钙表面，阻止反应继续进行</li>
+                    <li class="note-item">多功能瓶有长短两根导管，长导管深入瓶底，短导管仅露出橡胶塞。可用于收集氧气、二氧化碳等</li>
+                    <li class="note-item">多功能瓶长进短出收集氧气，带火星木条放短导管口复燃则满，因氧气密度大集满后从短管逸出</li>
+                    <li class="note-item">多功能瓶长进短出收集二氧化碳，燃着木条放短导管口熄灭则满，因二氧化碳不助燃且密度大</li>
+                    <li class="note-item">三种固液常温型气体发生装置对比：
+                        <ul>
+                            <li><strong>试管直连导管</strong>：装置最简易，固体液体一次性加入密封，操作快捷，但无法控制反应速率与启停</li>
+                            <li><strong>分液漏斗+容器</strong>：通过旋钮控制液体滴加速率，精准调控反应速率，气密性好，无需液封</li>
+                            <li><strong>长颈漏斗+容器</strong>：漏斗下端需液封防漏气，可随时添加液体，不能控制速率，搭配止水夹可实现反应启停</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">发生装置选择：先看反应条件（加热或常温），再看反应物状态（固固、固液等）；块状固体适合搭配止水夹控制反应启停，粉末状固体易堵塞导管，加热时需在试管口放一团棉花</li>
+                    <li class="note-item">气体收集的三种方法：排水法（适用于难溶于水、不与水反应的气体）、向上排空气法（适用于密度比空气大的气体）、向下排空气法（适用于密度比空气小的气体）</li>
+                    
+                    <!-- 专题五 锚点（第73~95条） -->
+                    <span id="topic5" class="topic-anchor"></span>
+                    <li class="note-item">物质的<strong>构成</strong>与<strong>组成</strong>（核心区分）：
+                        <ul>
+                            <li>宏观（<strong>组成</strong>）：物质由元素组成，仅说种类、不说个数</li>
+                            <li>微观（<strong>构成</strong>）：物质由离子、分子、原子构成，既说种类、也说个数</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">离子的定义与对应物质：带电荷的微观粒子；对应物质为金属化合物（如<span class="chem-formula">NaCl</span>）</li>
+                    <li class="note-item">分子的定义与对应物质：由原子构成的微观粒子；对应物质为非金属单质（如<span class="chem-formula">O₂、N₂</span>）、非金属化合物（如<span class="chem-formula">CO₂、H₂O</span>）</li>
+                    <li class="note-item">原子的定义与对应物质：化学变化中的最小微观粒子；对应物质为金属单质（如<span class="chem-formula">Fe</span>、<span class="chem-formula">Cu</span>）、非金属固体单质（如<span class="chem-formula">C</span>、<span class="chem-formula">P</span>）、稀有气体（如<span class="chem-formula">He</span>、<span class="chem-formula">Ne</span>）</li>
+                    <li class="note-item">元素的定义：质子数相同的同一类原子的总称（宏观层面，是原子的集合）</li>
+                    <li class="note-item">微观粒子的基本性质：①体积小、质量小；②不断运动；③粒子间有间隔；④同种粒子性质相同，不同粒子性质不同</li>
+                    <li class="note-item"><span class="chem-formula">H₂O</span>的宏微观含义：
+                        <ul>
+                            <li>宏观：①代表物质（水）；②由氢元素和氧元素<strong>组成</strong></li>
+                            <li>微观：①代表1个水分子；②1个水分子由2个氢原子和1个氧原子<strong>构成</strong></li>
+                        </ul>
+                    </li>
+                    <li class="note-item"><span class="chem-formula">3CO₂</span>的宏微观含义：
+                        <ul>
+                            <li>化学式前加数字后，只能表示微观意义，无宏观意义</li>
+                            <li>微观：①代表3个二氧化碳分子；②1个二氧化碳分子由1个碳原子和2个氧原子<strong>构成</strong></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">原子的结构：原子由原子核（含质子、中子，氢原子无中子）和核外电子构成</li>
+                    <li class="note-item">原子构成粒子的带电情况：质子（核内，正电）、中子（核内，不带电）、电子（核外，负电）</li>
+                    <li class="note-item">核外电子排布规律：电子层最多容2n²个电子，最外层不超8个（第一层不超2个），先排内层再排外层</li>
+                    <li class="note-item">元素的分布（含量较多的元素）：
+                        <ul>
+                            <li>人体：氧（<span class="chem-formula">O</span>）、碳（<span class="chem-formula">C</span>）、氢（<span class="chem-formula">H</span>）、氮（<span class="chem-formula">N</span>）、钙（<span class="chem-formula">Ca</span>）</li>
+                            <li>地壳：氧（<span class="chem-formula">O</span>）、硅（<span class="chem-formula">Si</span>）、铝（<span class="chem-formula">Al</span>）、铁（<span class="chem-formula">Fe</span>）、钙（<span class="chem-formula">Ca</span>）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">元素周期表的基本排布：按原子序数排，周期数=电子层数，主族数=最外层电子数（0族除外）</li>
+                    <li class="note-item">化合价的定义：表示形成化合物时，一个原子和其他原子相结合的数目</li>
+                    <li class="note-item">化合价的规则：化合物中正负化合价代数和为0；单质中元素化合价为0</li>
+                    <li class="note-item">常见元素的化合价：
+                        <ul>
+                            <li>+1价：<span class="chem-formula">K</span>、<span class="chem-formula">Na</span>、<span class="chem-formula">Ag</span>、<span class="chem-formula">H</span></li>
+                            <li>+2价：<span class="chem-formula">Ca</span>、<span class="chem-formula">Mg</span>、<span class="chem-formula">Ba</span>、<span class="chem-formula">Zn</span>、<span class="chem-formula">Cu</span>、<span class="chem-formula">Fe</span>（亚铁）</li>
+                            <li>+3价：<span class="chem-formula">Al</span>、<span class="chem-formula">Fe</span>（铁）</li>
+                            <li>-1价：<span class="chem-formula">F</span>、<span class="chem-formula">Cl</span></li>
+                            <li>-2价：<span class="chem-formula">O</span>、<span class="chem-formula">S</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">常见原子团的化合价：
+                        <ul>
+                            <li>+1价：<span class="chem-formula">NH₄⁺</span>（铵根）</li>
+                            <li>-1价：<span class="chem-formula">OH⁻</span>（氢氧根）、<span class="chem-formula">NO₃⁻</span>（硝酸根）</li>
+                            <li>-2价：<span class="chem-formula">CO₃²⁻</span>（碳酸根）、<span class="chem-formula">SO₄²⁻</span>（硫酸根）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">金属化合物的读写规则：
+                        <ul>
+                            <li>读法：从右向左读“某化某”</li>
+                            <li>写法：正价在前，负价在后</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">非金属化合物的读写规则：
+                        <ul>
+                            <li>读法：读“几某化几某”</li>
+                            <li>写法：正价在前，负价在后</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">易混淆物质的分类：
+                        <ul>
+                            <li>冰水混合物（<span class="chem-formula">H₂O</span>）：属于化合物（纯净物）</li>
+                            <li>食盐（以<span class="chem-formula">NaCl</span>为主要成分）：属于混合物</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">原子结构模型（实心球模型）：道尔顿1803年提出，认为原子是不可再分的实心球体</li>
+                    <li class="note-item">原子结构模型（葡萄干面包模型）：汤姆孙1903年提出，认为原子像蛋糕、电子像葡萄干嵌在其中（无核结构）</li>
+                    <li class="note-item">原子结构模型（核式结构模型）：卢瑟福1911年提出，认为原子中心有带电原子核，核外电子绕核运动</li>
+                    <!-- 专题六 锚点（第96~99条） -->
+                    <span id="topic6" class="topic-anchor"></span>
+                    <li class="note-item">化学方程式书写的两条原则：①以客观事实为依据；②符合质量守恒定律（等号两边原子种类、数目相等，即配平）</li>
+                    <li class="note-item">化学反应的原子变化规律：原子是化学变化中的最小微粒，反应前后原子的种类、个数不变</li>
+                    <li class="note-item">化学方程式的符号标注规则：
+                        <ul>
+                            <li>加热：用“△”表示</li>
+                            <li>气体生成物：反应物无气体时，用“↑”标注</li>
+                            <li>沉淀生成物：溶液中反应、反应物无难溶物时，用“↓”标注</li>
+                            <li>反应条件：写在等号上下</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-1/19）</p>
+            <p>记录人：胡锦乐</p>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.doc</button>
+
+    <script>
+        function downloadChemWord() {
+            // 化学99条大全的完整内容（Word可识别的HTML格式，带样式）
+            const wordContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+                    <head>
+                        <meta charset="utf-8">
+                        <style>
+                            body { font-family: 'SimSun', '宋体', serif; margin: 2cm; }
+                            h1 { 
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                                color: #5f52ff; 
+                                text-align: center; 
+                                font-size: 18pt; 
+                                border-bottom: 2px solid rgba(95, 82, 255, 0.7); 
+                                padding-bottom: 10px;
+                                margin-bottom: 20px;
+                            }
+                            h2 { 
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                                color: #5f52ff; 
+                                font-size: 14pt; 
+                                margin-top: 20px;
+                                margin-bottom: 10px;
+                            }
+                            ol { 
+                                list-style-type: none;
+                                counter-reset: item;
+                                padding-left: 0;
+                            }
+                            li { 
+                                font-size: 11pt; 
+                                line-height: 1.8; 
+                                margin-bottom: 8px;
+                                color: #333;
+                                counter-increment: item;
+                                position: relative;
+                                padding-left: 35px;
+                            }
+                            li::before {
+                                content: counter(item) ".";
+                                position: absolute;
+                                left: 0;
+                                color: #5f52ff;
+                                font-weight: bold;
+                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
+                            }
+                            ul { 
+                                list-style-type: disc; 
+                                padding-left: 30px;
+                            }
+                            .highlight { 
+                                color: #5f52ff; 
+                                font-weight: bold;
+                            }
+                            .chem-formula {
+                                font-family: 'Times New Roman', serif;
+                            }
+                            .topic-divider {
+                                border-top: 1px dashed rgba(95, 82, 255, 0.5);
+                                margin: 15px 0;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>化学99条大全-本学期核心知识点</h1>
+                        <ol>
+                            <li>不能在化学课上挑衅、激怒化学老师</li>
+                            <li>物理变化：无新物质生成的变化（如玻璃破碎）</li>
+                            <li>化学变化：有新物质生成的变化（如蜡烛燃烧）</li>
+                            <li>物理性质：无需化学变化就能体现的性质（如颜色、状态）</li>
+                            <li>化学性质：需通过化学变化才能体现的性质（如可燃性、酸碱性）</li>
+                            <li>元素符号书写规则：首字母大写，后续字母小写（如Fe）</li>
+                            <li>固体药品取用工具：<ul><li>块状：镊子</li><li>粉末状：药匙或纸槽</li></ul></li>
+                            <li>液体药品取用工具：<ul><li>少量：胶头滴管</li><li>大量：倾倒法（标签向手心、瓶口紧挨容器口）</li><li>定量：量筒（搭配胶头滴管）</li></ul></li>
+                            <li>量筒读数方法：视线与液体凹液面最低处保持水平</li>
+                            <li>粗盐成分：主要成分为氯化钠（NaCl），含氯化镁、泥沙等杂质</li>
+                            <li>粗盐溶解本质：完全溶解粗盐中的可溶性物质</li>
+                            <li>粗盐提纯核心流程：溶解→过滤→蒸发</li>
+                            <li>量筒的选择：选择量程内最小的</li>
+                            <li>电子天平的使用：<ul><li>将电子天平放在水平桌面上，使水准泡在圈中央</li><li>按“去皮”键进行去皮，不是归零、调零</li><li>添加粗盐至示数接近<span class="chem-formula">5.0g</span>（不能超过<span class="chem-formula">5.0g</span>）时，用另一只手轻敲持药匙的手腕或用食指轻敲药匙柄</li><li>用手指轻轻弹击称量纸，确保称量纸上没有粗盐附着</li><li>称量纸上放无腐蚀性固体药品，烧杯里比本身小的任何东西都能放</li></ul></li>
+                            <li>粗盐溶解操作要点及玻璃棒作用：加水，用玻璃棒搅拌，加速溶解</li>
+                            <li>溶解时所用的仪器：烧杯、玻璃棒</li>
+                            <li>实验仪器搭建顺序：从下往上、从左往右</li>
+                            <li>过滤操作要求（一贴、二低、三靠）：<ul><li>一贴：滤纸紧贴漏斗内壁，无气泡残留</li><li>二低：<ul><li>滤纸边缘低于漏斗边缘</li><li>漏斗内液面低于滤纸边缘</li></ul></li><li>三靠：<ul><li>烧杯尖嘴紧靠玻璃棒</li><li>玻璃棒末端紧靠三层滤纸处</li><li>漏斗下端管口紧靠烧杯内壁</li></ul></li></ul></li>
+                            <li>过滤时玻璃棒作用：引流</li>
+                            <li>过滤时所用的仪器为铁架台、漏斗、烧杯、玻璃棒；用品为滤纸</li>
+                            <li>蒸发时玻璃棒作用：搅拌，使液体受热均匀，防止液体飞溅</li>
+                            <li>蒸发时所用的仪器为铁架台、蒸发皿、酒精灯、玻璃棒、坩埚钳、电子点火器、陶土网（将受热后的蒸发皿放置在陶土网上冷却，以免损坏桌面或因骤冷导致蒸发皿破裂）</li>
+                            <li>蒸发停止时机：蒸发皿中有大量固体析出时，利用余热蒸干</li>
+                            <li>粗盐产率公式：产率=（m精盐÷m粗盐）×100%</li>
+                            <li>粗盐产率分析：<ul><li>偏大原因：①蒸发后精盐未蒸干；②过滤时滤纸破损；③液面高于滤纸边缘</li><li>偏小原因：①溶解时水太少导致精盐未完全溶解；②蒸发时液体溅出；③过滤时有液体残留；④称量时蒸发皿中有残留固体</li></ul></li>
+                            <li>蒸馏水用量对粗盐提纯的影响：过多增加过滤、蒸发操作时间；过少不能将粗盐中可溶物完全溶解</li>
+                            <li>未说明药品用量时的取用规则：固体粉末铺满试管底部、块状取1块，液体取<span class="chem-formula">1~2mL</span></li>
+                            <li>酒精灯点燃方法：用火柴或电子打火器点燃，禁止用燃着的酒精灯引燃，串联酒精灯</li>
+                            <li>酒精灯熄灭方法：用灯帽盖灭，禁止用嘴吹灭</li>
+                            <li>试管加热时铁夹夹持位置：距试管口1/3处</li>
+                            <li>固体加热时试管口朝向：略向下倾斜，防止冷凝水倒流炸裂试管</li>
+                            <li>试管内液体加热量：不超过试管容积的1/3，避免液体沸腾飞溅</li>
+                            <li>加热仪器：<ul><li>可直接加热：试管、蒸发皿、坩埚、燃烧匙</li><li>需垫陶土网加热：烧杯、烧瓶、锥形瓶，使受热均匀</li><li>不能加热：量筒、集气瓶、漏斗、胶头滴管</li></ul></li>
+                            <li>试管加热前的要求：外壁必须干燥，先预热再集中加热</li>
+                            <li>胶头滴管使用要求：垂直悬空在容器口上方滴加，禁止伸入容器内</li>
+                            <li>实验室取用药品“三不”原则：不摸、不闻、不尝</li>
+                            <li>实验剩余药品处理方法：放入指定容器，不放回原瓶、不随意丢弃、不能给吕楷鑫喝、不能创造新的化学物质</li>
+                            <li>不要学习高老师忘记贴标签，导致浪费一节课来分清两瓶药品</li>
+                            <li>在实验室中切忌不遵守化学实验室守则</li>
+                            <li>空气的主要成分（体积分数）：氮气约<span class="chem-formula">78%</span>、氧气约<span class="chem-formula">21%</span>、稀有气体约<span class="chem-formula">0.94%</span>、二氧化碳约<span class="chem-formula">0.03%</span>、其他气体/杂质约<span class="chem-formula">0.03%</span></li>
+                            <li>氮气的性质与用途：无色无味气体、难溶于水，不与红磷反应/不燃烧/不助燃；用途为食品保鲜、作保护气</li>
+                            <li>稀有气体：化学性质很稳定，常用作保护气；通电时能发出不同颜色的光，可制作霓虹灯等电光源</li>
+                            <li>红磷燃烧测空气中氧含量（方程式）：<span class="chem-formula">2P + 5O₂ ═══（条件：△）2P₂O₅</span></li>
+                            <li>红磷燃烧测空气中氧含量（现象）：产生大量白烟，放热，冷却后水倒吸入集气瓶，体积约占集气瓶1/5</li>
+                            <li>红磷测氧含量结果偏差原因：<ul><li>偏小：红磷量不足、装置气密性差、未冷却至室温就打开止水夹</li><li>偏大：未夹紧止水夹、点燃红磷后未及时塞紧瓶塞</li></ul></li>
+                            <li>氧气的性质：物理性质（无色无味气体、密度略大于空气、难溶于水）；化学性质（助燃性，能与多种物质发生氧化反应）</li>
+                            <li>与氧气发生的反应是氧化反应</li>
+                            <li>氧化物的定义：由两种元素组成，且一种是氧元素的化合物</li>
+                            <li>碳的燃烧（现象）：空气中红热；氧气中发出白光、放热</li>
+                            <li>碳的燃烧（方程式）：<span class="chem-formula">C + O₂ ═══（条件：△）CO₂</span>（充分燃烧）</li>
+                            <li>铁的燃烧（现象）：空气中不燃烧，仅发生缓慢氧化；氧气中火星四射、放热，生成黑色固体</li>
+                            <li>铁的燃烧（方程式）：<span class="chem-formula">3Fe + 2O₂ ═══（条件：△）Fe₃O₄</span></li>
+                            <li>铁在氧气中燃烧的实验注意事项：<ul><li>系火柴：引燃铁丝</li><li>瓶底放水/细沙：防止高温熔融物溅落，导致集气瓶受热不均炸裂</li></ul></li>
+                            <li>二氧化碳的物理性质：无色无味气体、密度比空气大、能溶于水</li>
+                            <li>二氧化碳与水的反应（方程式）：<span class="chem-formula">CO₂ + H₂O = H₂CO₃</span></li>
+                            <li>二氧化碳与水的反应（现象）：使紫色石蕊溶液变红</li>
+                            <li>碳酸受热分解（方程式）：<span class="chem-formula">H₂CO₃ ═══（条件：△）CO₂↑ + H₂O</span></li>
+                            <li>碳酸受热分解（现象）：石蕊溶液由红色恢复为紫色</li>
+                            <li>二氧化碳与澄清石灰水的反应（方程式）：<span class="chem-formula">Ca(OH)₂ + CO₂ = CaCO₃↓ + H₂O</span></li>
+                            <li>二氧化碳与澄清石灰水的反应（现象）：澄清石灰水变浑浊（用于检验CO₂）</li>
+                            <li>工业制氧：采用分离液态空气法，利用各气体沸点不同（物理变化）</li>
+                            <li>启普发生器：适用于固体与液体反应制取气体，优点是随开随用、随关随停，不能加热</li>
+                            <li>实验室制氧气（加热高锰酸钾，方程式）：<span class="chem-formula">2KMnO₄ ═══（条件：△）K₂MnO₄ + MnO₂ + O₂↑</span></li>
+                            <li>实验室制氧气（过氧化氢催化，方程式）：<span class="chem-formula">2H₂O₂ ═══（条件：MnO₂）2H₂O + O₂↑</span></li>
+                            <li>实验室制氧气（加热氯酸钾，方程式）：<span class="chem-formula">2KClO₃ ═══（条件：MnO₂、△）2KCl + 3O₂↑</span></li>
+                            <li>实验室制二氧化碳（方程式）：<span class="chem-formula">CaCO₃ + 2HCl = CaCl₂ + CO₂↑ + H₂O</span></li>
+                            <li>实验室制二氧化碳不用硫酸的原因：生成微溶于水的CaSO₄，覆盖在碳酸钙表面，阻止反应继续进行</li>
+                            <li>多功能瓶有长短两根导管，长导管深入瓶底，短导管仅露出橡胶塞。可用于收集氧气、二氧化碳等</li>
+                            <li>多功能瓶长进短出收集氧气，带火星木条放短导管口复燃则满，因氧气密度大集满后从短管逸出</li>
+                            <li>多功能瓶长进短出收集二氧化碳，燃着木条放短导管口熄灭则满，因二氧化碳不助燃且密度大</li>
+                            <li>三种固液常温型气体发生装置对比：<ul><li>试管直连导管：装置最简易，固体液体一次性加入密封，操作快捷，但无法控制反应速率与启停</li><li>分液漏斗+容器：通过旋钮控制液体滴加速率，精准调控反应速率，气密性好，无需液封</li><li>长颈漏斗+容器：漏斗下端需液封防漏气，可随时添加液体，不能控制速率，搭配止水夹可实现反应启停</li></ul></li>
+                            <li>发生装置选择：先看反应条件（加热或常温），再看反应物状态（固固、固液等）；块状固体适合搭配止水夹控制反应启停，粉末状固体易堵塞导管，加热时需在试管口放一团棉花</li>
+                            <li>气体收集的三种方法：排水法（适用于难溶于水、不与水反应的气体）、向上排空气法（适用于密度比空气大的气体）、向下排空气法（适用于密度比空气小的气体）</li>
+                            <li>物质的构成与组成（核心区分）：<ul><li>宏观（组成）：物质由元素组成，仅说种类、不说个数</li><li>微观（构成）：物质由离子、分子、原子构成，既说种类、也说个数</li></ul></li>
+                            <li>离子的定义与对应物质：带电荷的微观粒子；对应物质为金属化合物（如NaCl）</li>
+                            <li>分子的定义与对应物质：由原子构成的微观粒子；对应物质为非金属单质（如<span class="chem-formula">O₂、N₂</span>）、非金属化合物（如<span class="chem-formula">CO₂、H₂O</span>）</li>
+                            <li>原子的定义与对应物质：化学变化中的最小微观粒子；对应物质为金属单质（如Fe、Cu）、非金属固体单质（如C、P）、稀有气体（如He、Ne）</li>
+                            <li>元素的定义：质子数相同的同一类原子的总称（宏观层面，是原子的集合）</li>
+                            <li>微观粒子的基本性质：①体积小、质量小；②不断运动；③粒子间有间隔；④同种粒子性质相同，不同粒子性质不同</li>
+                            <li><span class="chem-formula">H₂O</span>的宏微观含义：<ul><li>宏观：①代表物质（水）；②由氢元素和氧元素组成</li><li>微观：①代表1个水分子；②1个水分子由2个氢原子和1个氧原子构成</li></ul></li>
+                            <li><span class="chem-formula">3CO₂</span>的宏微观含义：<ul><li>宏观：①代表物质（二氧化碳）；②由碳元素和氧元素组成</li><li>微观：①代表3个二氧化碳分子；②1个二氧化碳分子由1个碳原子和2个氧原子构成</li></ul></li>
+                            <li>原子的结构：原子由原子核（含质子、中子，氢原子无中子）和核外电子构成</li>
+                            <li>原子构成粒子的带电情况：质子（核内，正电）、中子（核内，不带电）、电子（核外，负电）</li>
+                            <li>核外电子排布规律：电子层最多容2n²个电子，最外层不超8个（第一层不超2个），先排内层再排外层</li>
+                            <li>元素的分布（含量较多的元素）：<ul><li>人体：氧（O）、碳（C）、氢（H）、氮（N）、钙（Ca）</li><li>地壳：氧（O）、硅（Si）、铝（Al）、铁（Fe）、钙（Ca）</li></ul></li>
+                            <li>元素周期表的基本排布：按原子序数排，周期数=电子层数，主族数=最外层电子数（0族除外）</li>
+                            <li>化合价的定义：表示形成化合物时，一个原子和其他原子相结合的数目</li>
+                            <li>化合价的规则：化合物中正负化合价代数和为0；单质中元素化合价为0</li>
+                            <li>常见元素的化合价：<ul><li>+1价：K、Na、Ag、H</li><li>+2价：Ca、Mg、Ba、Zn、Cu、Fe（亚铁）</li><li>+3价：Al、Fe（铁）</li><li>-1价：F、Cl</li><li>-2价：O、S</li></ul></li>
+                            <li>常见原子团的化合价：<ul><li>+1价：<span class="chem-formula">NH₄⁺</span>（铵根）</li><li>-1价：<span class="chem-formula">OH⁻</span>（氢氧根）、<span class="chem-formula">NO₃⁻</span>（硝酸根）</li><li>-2价：<span class="chem-formula">CO₃²⁻</span>（碳酸根）、<span class="chem-formula">SO₄²⁻</span>（硫酸根）</li></ul></li>
+                            <li>金属化合物的读写规则：<ul><li>读法：从右向左读“某化某”</li><li>写法：正价在前，负价在后</li></ul></li>
+                            <li>非金属化合物的读写规则：<ul><li>读法：读“几某化几某”</li><li>写法：正价在前，负价在后</li></ul></li>
+                            <li>易混淆物质的分类：<ul><li>冰水混合物（<span class="chem-formula">H₂O</span>）：属于化合物（纯净物）</li><li>食盐（以NaCl为主要成分）：属于混合物</li></ul></li>
+                            <li>原子结构模型（实心球模型）：道尔顿1803年提出，认为原子是不可再分的实心球体</li>
+                            <li>原子结构模型（葡萄干面包模型）：汤姆孙1903年提出，认为原子像蛋糕、电子像葡萄干嵌在其中（无核结构）</li>
+                            <li>原子结构模型（核式结构模型）：卢瑟福1911年提出，认为原子中心有带电原子核，核外电子绕核运动</li>
+                            <li>化学方程式书写的两条原则：①以客观事实为依据；②符合质量守恒定律（等号两边原子种类、数目相等，即配平）</li>
+                            <li>化学反应的原子变化规律：原子是化学变化中的最小微粒，反应前后原子的种类、个数不变</li>
+                            <li>化学方程式的符号标注规则：<ul><li>加热：用“△”表示</li><li>气体生成物：反应物无气体时，用“↑”标注</li><li>沉淀生成物：溶液中反应、反应物无难溶物时，用“↓”标注</li><li>反应条件：写在等号上下</li></ul></li>
+                        </ol>
+                    </body>
+                </html>
+            `;
+
+            // 编码内容，防止特殊字符出错
+            const encodedContent = encodeURIComponent(wordContent);
+            // 创建下载链接
+            const link = document.createElement('a');
+            link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
+            link.download = "化学99条大全-本学期核心知识点.doc";
+            // 触发下载
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    </footer>
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    
+    <script>
+        // 批量渲染所有化学公式
+        document.querySelectorAll('.formula').forEach(el => {
+            katex.render(el.textContent, el, {
+                displayMode: false,
+                throwOnError: false
+            });
+        });
+    </script>
+</body>
+</html>
