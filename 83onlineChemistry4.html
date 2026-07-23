@@ -127,6 +127,106 @@
             font-size: calc(1.5 * var(--base-font-size));
             padding-bottom: 0.8rem;
             border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mindmap-btn {
+            width: 40px;
+            height: 40px;
+            background: #5f52ff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(95, 82, 255, 0.3);
+        }
+        .mindmap-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(95, 82, 255, 0.4);
+        }
+        .mindmap-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+        .mindmap-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .mindmap-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .mindmap-box {
+            background: white;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+            text-align: center;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .mindmap-overlay.hide .mindmap-box {
+            transform: scale(0.8);
+        }
+        .mindmap-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+            z-index: 10;
+        }
+        .mindmap-close {
+            display: block;
+            width: 100%;
+            margin-top: 12px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mindmap-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .mindmap-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        @media (max-width: 768px) {
+            .mindmap-close {
+                display: none;
+            }
+            .mindmap-close-mobile {
+                display: block;
+            }
         }
         .topic-title {
             font-size: calc(1.3 * var(--base-font-size));
@@ -411,6 +511,8 @@
         .settings-header h2 {
             margin: 0;
             color: #5f52ff;
+            font-size: calc(1.5 * var(--base-font-size));
+            font-weight: bold;
         }
         .settings-close {
             background: none;
@@ -578,6 +680,13 @@
         }
         body.theme-green .btn-item a.active {
             background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        }
+        body.theme-green .mindmap-btn {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+        body.theme-green .mindmap-btn:hover {
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
         }
         body.theme-green .topic-title {
             color: #000;
@@ -812,16 +921,25 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/7/18 <span class="announcement-version">Ver6.1.13</span></div>
+            <div class="announcement-time">2026/7/22 <span class="announcement-version">Ver6.0.0</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>完结了八年级化学笔记</li>
-                    <li>去掉了期末考试倒计时功能</li>
+                    <li>添加了思维导图功能，点击专题标题旁的按钮查看知识结构</li>
                 </ol>
             </div>
             <div class="announcement-signature">83online运营团队</div>
             <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <!-- 思维导图弹窗 -->
+    <div class="mindmap-overlay hide" id="mindmap-overlay">
+        <div class="mindmap-box">
+            <span class="mindmap-close-mobile" onclick="closeMindmap()">×</span>
+            <div id="mindmap-content">
+                <!-- 图片将在这里显示 -->
+            </div>
+            <button class="mindmap-close" onclick="closeMindmap()">关闭</button>
         </div>
     </div>
     <script>
@@ -830,6 +948,15 @@
             setTimeout(() => {
                 document.getElementById('announcement').style.display = 'none';
             }, 400);
+        }
+        function openMindmap(title) {
+            var overlay = document.getElementById('mindmap-overlay');
+            var content = document.getElementById('mindmap-content');
+            content.innerHTML = '<img src="https://img.zxxk.com/aed/ai/upload/20260722/5bbfc7a377e94ca7a68de023bfff4858.png" class="mindmap-image" alt="思维导图">';
+            overlay.classList.remove('hide');
+        }
+        function closeMindmap() {
+            document.getElementById('mindmap-overlay').classList.add('hide');
         }
         function openSettings() {
             document.getElementById('settings-overlay').classList.add('show');
@@ -1208,8 +1335,8 @@
                 <h3>界面外观</h3>
                 <div class="setting-item">
                     <span class="setting-label">卡片透明度</span>
-                    <input type="range" class="setting-slider" id="cardOpacitySlider" min="0" max="80" value="60" oninput="updateCardOpacity(this.value)">
-                    <span class="setting-value" id="cardOpacityValue">85%</span>
+                    <input type="range" class="setting-slider" id="cardOpacitySlider" min="0" max="80" value="10" oninput="updateCardOpacity(this.value)">
+                    <span class="setting-value" id="cardOpacityValue">10%</span>
                 </div>
                 <div class="setting-item" style="margin-top: 0.8rem;">
                     <span class="setting-label">背景图</span>
@@ -1269,7 +1396,7 @@
     <!-- 主内容 -->
     <div class="container">
         <div class="note-section">
-            <div class="unit-title">专题4 水的性质与组成</div>
+            <div class="unit-title">专题4 水的性质与组成<button class="mindmap-btn" onclick="openMindmap('专题4 水的性质与组成')"><svg viewBox="0 0 24 24" fill="white"><rect x="2" y="9" width="6" height="6" rx="2"/><line x1="8" y1="12" x2="14" y2="12" stroke="white" stroke-width="2"/><rect x="14" y="2" width="6" height="4" rx="1.5"/><rect x="14" y="10" width="6" height="4" rx="1.5"/><rect x="14" y="18" width="6" height="4" rx="1.5"/></svg></button></div>
             <div class="note-content">
                 <h3 class="topic-title">课题1 水的性质</h3>
                 <div class="textbook-title">水为什么有三态变化</div>
