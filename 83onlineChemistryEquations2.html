@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九年级全一册 化学方程式大全</title>
+    <!-- 引入KaTeX CSS与JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <style>
+        /* 全局字号 */
+        :root {
+            --base-font-size: 13px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        body.bg-image-hidden.theme-blue {
+            background: #87CEEB !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden.theme-green {
+            background: #90EE90 !important;
+            background-image: none !important;
+        }
+        body.bg-image-hidden .settings-overlay {
+            background-image: none !important;
+            background-color: #f5f7fa;
+        }
+        body.bg-image-hidden.theme-blue .settings-overlay {
+            background-color: #87CEEB !important;
+        }
+        body.bg-image-hidden.theme-green .settings-overlay {
+            background-color: #90EE90 !important;
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+        }
+        /* 设置按钮样式 */
+        .settings-btn {
+            position: absolute;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        /* 设置界面样式 */
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-size: cover;
+            background-position: center;
+            background-color: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        body.theme-green .settings-overlay {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+        }
+        .settings-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .settings-content {
+            background: white;
+            border-radius: 12px;
+            width: 70%;
+            max-width: 600px;
+            min-height: 400px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        .settings-overlay.show .settings-content {
+            transform: translateY(0);
+        }
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .settings-header h2 {
+            margin: 0;
+            color: #5f52ff;
+        }
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+        .settings-close:hover {
+            color: #5f52ff;
+        }
+        /* 设置控件样式 */
+        .settings-section {
+            margin-bottom: 1.5rem;
+        }
+        .settings-section h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 0.8rem;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            min-height: 2rem;
+        }
+        .setting-label {
+            font-size: 0.9rem;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .setting-slider {
+            flex: 1;
+            min-width: 120px;
+            height: 6px;
+            margin-left: 0.8rem;
+            margin-right: 0.5rem;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #ddd;
+            border-radius: 3px;
+            outline: none;
+        }
+        .setting-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #5f52ff;
+            cursor: pointer;
+        }
+        .setting-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #5f52ff;
+            cursor: pointer;
+            border: none;
+        }
+        .setting-value {
+            min-width: 50px;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #5f52ff;
+            font-weight: bold;
+        }
+        .setting-toggle {
+            width: 50px;
+            height: 26px;
+            background: #ddd;
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .setting-toggle::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .setting-toggle.active {
+            background: #5f52ff;
+        }
+        .setting-toggle.active::after {
+            transform: translateX(24px);
+        }
+        /* 主题按钮样式 */
+        .theme-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .theme-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-btn:hover {
+            border-color: #5f52ff;
+        }
+        .theme-btn.active {
+            border-color: #5f52ff;
+            background: rgba(95, 82, 255, 0.1);
+        }
+        .theme-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .theme-name {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        /* 绿色主题样式 */
+        body.theme-green {
+            background-image: url("https://img2.baidu.com/it/u=290130269,3340288696&fm=253&fmt=auto&app=138&f=JPEG?w=712&h=500");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        body.theme-green header {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .unit-nav h2 {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .btn-item a {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+        }
+        body.theme-green .btn-item a:hover {
+            background: linear-gradient(135deg, #388e3c, #4caf50);
+        }
+        body.theme-green .btn-item a.active {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        }
+        body.theme-green .unit-title {
+            color: #2e7d32;
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .textbook-title {
+            color: #2e7d32;
+            border-left-color: #4caf50;
+        }
+        body.theme-green .equation-item::before {
+            color: #4caf50;
+        }
+        body.theme-green .tag {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        body.theme-green .back-to-top {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .back-to-top:hover {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+        }
+        body.theme-green footer {
+            background: linear-gradient(135deg, rgba(33, 150, 83, 0.7), rgba(76, 175, 80, 0.7));
+        }
+        body.theme-green .settings-content h3 {
+            color: #2e7d32;
+        }
+        body.theme-green .setting-slider::-webkit-slider-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-slider::-moz-range-thumb {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .setting-value {
+            color: #2e7d32;
+        }
+        body.theme-green .theme-btn.active {
+            border-color: #2e7d32;
+            background: rgba(46, 125, 50, 0.1);
+        }
+        body.theme-green .settings-header h2 {
+            color: #2e7d32;
+        }
+        body.theme-green .settings-header {
+            border-bottom-color: rgba(46, 125, 50, 0.2);
+        }
+        body.theme-green .setting-toggle.active {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+        }
+        body.theme-green .settings-close:hover {
+            color: #2e7d32;
+        }
+        /* 移动端设置按钮适配 */
+        @media (max-width: 768px) {
+            .settings-btn {
+                right: 1rem;
+            }
+            .settings-content {
+                width: 85%;
+                padding: 1.5rem;
+                min-height: 350px;
+            }
+            .tag-filter {
+                display: none;
+            }
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: calc(1.8 * var(--base-font-size));
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .time-range {
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 导航栏样式 */
+        .nav-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            flex-shrink: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .unit-nav {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .unit-nav h2 {
+            color: #5f52ff;
+            margin-bottom: 1rem;
+            font-size: calc(1.2 * var(--base-font-size));
+            border-left: 4px solid #5f52ff;
+            padding-left: 0.8rem;
+        }
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            padding: 0 2rem;
+        }
+        .btn-item {
+            flex: 0 0 calc((100% - 3 * 1.5rem) / 4);
+            max-width: calc((100% - 3 * 1.5rem) / 4);
+        }
+        .btn-item a {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            background: #5f52ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: calc(0.95 * var(--base-font-size));
+            white-space: nowrap;
+            text-align: center;
+        }
+        .btn-item a:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        /* 主内容样式 */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-shrink: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .note-section {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 60px;
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .unit-title {
+            color: #5f52ff;
+            font-weight: bold;
+            font-size: calc(1.5 * var(--base-font-size));
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(95, 82, 255, 0.2);
+        }
+        .tag-filter {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid #5f52ff;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            min-width: 120px;
+            color: #5f52ff;
+        }
+        body.theme-green .tag-filter {
+            border-color: #2e7d32;
+            color: #2e7d32;
+        }
+        .topic-title {
+            font-size: calc(1.3 * var(--base-font-size));
+            color: #333;
+            margin: 1.8rem 0 1rem;
+        }
+        .textbook-title {
+            color: #3366cc;
+            font-size: calc(1.1 * var(--base-font-size));
+            margin: 1.5rem 0 0.8rem;
+            padding-left: 0.5rem;
+            border-left: 3px solid #3366cc;
+        }
+        .note-content {
+            margin-left: 0.8rem;
+        }
+        /* 方程式列表样式 */
+        .equation-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .equation-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed rgba(95, 82, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .equation-item::before {
+            content: attr(data-index);
+            display: inline-block;
+            width: 2rem;
+            font-weight: bold;
+            color: #5f52ff;
+            margin-right: 0.8rem;
+        }
+        .equation-item > ul {
+            width: 100%;
+            margin: 0.5rem 0 0 2.8rem;
+            list-style: disc;
+        }
+        .equation-item > ul > li {
+            margin: 0.3rem 0;
+        }
+        .equation-item > ul > li > ul {
+            margin-left: 1.5rem;
+            list-style: circle;
+        }
+        .equation-item > ul > li > ul > li {
+            margin: 0.2rem 0;
+        }
+        /* 反应标签统一样式 */
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: rgba(95, 82, 255, 0.1);
+            color: #5f52ff;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-left: 0.5rem;
+        }
+        body.theme-green .tag {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: auto;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 二维码容器 */
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: #4a3ed8;
+        }
+        /* 化学方程式样式 */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 1em;
+            display: inline;
+        }
+        /* 更新公告 */
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 14px;
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: 12px;
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.95 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-color: #f5f7fa;
+                font-size: calc(var(--base-font-size) - 2px);
+            }
+            h1 {
+                font-size: calc(1.5rem - 2px);
+            }
+            .note-section {
+                padding: 1.5rem;
+                padding-bottom: 50px;
+            }
+            .footer-info p:first-child {
+                display: none;
+            }
+            .contact-info {
+                display: none;
+            }
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: calc(1.1rem - 2px);
+            }
+            .announcement-close {
+                display: none;
+            }
+            .announcement-close-mobile {
+                display: block;
+            }
+            .btn-container {
+                gap: 0.5rem;
+                padding: 0 0.5rem;
+            }
+            .btn-item {
+                flex: 0 0 calc((100% - 3 * 0.5rem) / 4);
+                max-width: calc((100% - 3 * 0.5rem) / 4);
+            }
+            .btn-item a {
+                padding: 0.6rem 0.4rem;
+                font-size: calc(0.9rem - 2px);
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/7/114 <span class="announcement-version">Ver1.0.3</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>九年级化学方程式大全上线了</li>
+                </ol>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        function initEquationIndex() {
+            var equationItems = document.querySelectorAll('.equation-item');
+            equationItems.forEach(function(item, index) {
+                item.setAttribute('data-index', index + 1);
+            });
+        }
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        function openSettings() {
+            document.getElementById('settings-overlay').classList.add('show');
+        }
+        function closeSettings() {
+            document.getElementById('settings-overlay').classList.remove('show');
+        }
+        function updateFontSize(value) {
+            document.getElementById('fontSizeValue').textContent = value + '%';
+            document.documentElement.style.setProperty('--base-font-size', (13 * value / 100) + 'px');
+        }
+        function updateLineHeight(value) {
+            document.getElementById('lineHeightValue').textContent = value;
+            document.body.style.lineHeight = value;
+        }
+        function updateLetterSpacing(value) {
+            document.getElementById('letterSpacingValue').textContent = value + 'em';
+            document.body.style.letterSpacing = value + 'em';
+        }
+        function updateTheme(theme) {
+            var classes = document.body.className.split(' ').filter(c => !c.startsWith('theme-'));
+            document.body.className = classes.join(' ') + ' theme-' + theme;
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        function toggleBackgroundImage() {
+            var toggle = document.getElementById('bgImageToggle');
+            toggle.classList.toggle('active');
+            if (toggle.classList.contains('active')) {
+                document.body.classList.remove('bg-image-hidden');
+            } else {
+                document.body.classList.add('bg-image-hidden');
+            }
+        }
+        function toggleTags() {
+            var toggle = document.getElementById('tagToggle');
+            toggle.classList.toggle('active');
+            var tags = document.querySelectorAll('.tag');
+            var tagFilter = document.getElementById('tagFilter');
+            
+            if (toggle.classList.contains('active')) {
+                tags.forEach(tag => tag.style.display = 'inline-block');
+                tagFilter.style.display = 'block';
+            } else {
+                tags.forEach(tag => tag.style.display = 'none');
+                tagFilter.style.display = 'none';
+            }
+        }
+        function filterByTag() {
+            var selectedTag = document.getElementById('tagFilter').value;
+            var equationItems = document.querySelectorAll('.equation-item');
+            var topics = document.querySelectorAll('.topic-title');
+            var textbooks = document.querySelectorAll('.textbook-title');
+            var equationLists = document.querySelectorAll('.equation-list');
+            
+            if (!selectedTag) {
+                topics.forEach(topic => topic.style.display = 'block');
+                textbooks.forEach(textbook => textbook.style.display = 'block');
+                equationLists.forEach(list => list.style.display = 'block');
+                equationItems.forEach(item => item.style.display = 'list-item');
+                return;
+            }
+            
+            topics.forEach(topic => topic.style.display = 'none');
+            textbooks.forEach(textbook => textbook.style.display = 'none');
+            equationLists.forEach(list => list.style.display = 'none');
+            
+            equationItems.forEach(item => {
+                var tags = item.querySelectorAll('.tag');
+                var hasTag = false;
+                tags.forEach(tag => {
+                    if (tag.textContent === selectedTag) {
+                        hasTag = true;
+                    }
+                });
+                
+                if (hasTag) {
+                    item.style.display = 'list-item';
+                    var list = item.parentElement;
+                    list.style.display = 'block';
+                    var textbook = list.previousElementSibling;
+                    if (textbook && textbook.classList.contains('textbook-title')) {
+                        textbook.style.display = 'block';
+                        var topic = textbook.previousElementSibling;
+                        if (topic && topic.classList.contains('topic-title')) {
+                            topic.style.display = 'block';
+                        }
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        window.addEventListener('DOMContentLoaded', function() {
+            initEquationIndex();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 九（3）班 化学方程式大全</h1>
+            <p class="time-range">九年级全一册</p>
+        </div>
+        <button class="settings-btn" onclick="openSettings()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.14,12.94c0.04-0.31,0.06-0.63,0.06-0.94c0-0.31-0.02-0.63-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94l-0.36-2.54c-0.05-0.24-0.26-0.41-0.5-0.41h-3.84c-0.24,0-0.45,0.17-0.5,0.41l-0.36,2.54c-0.59,0.24-1.12,0.56-1.62,0.94l-2.39-0.96c-0.22-0.08-0.47,0-0.59,0.22l-1.92,3.32c-0.12,0.2-0.07,0.47,0.12,0.61l2.03,1.58C4.84,11.37,4.8,11.69,4.8,12s0.02,0.63,0.06,0.94l-2.03,1.58c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54c0.05,0.24,0.26,0.41,0.5,0.41h3.84c0.24,0,0.45-0.17,0.5-0.41l0.36-2.54c0.59-0.24,1.12-0.56,1.62-0.94l2.39,0.96c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.2,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+            </svg>
+        </button>
+    </header>
+    <!-- 设置界面 -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>设置</h2>
+                <button class="settings-close" onclick="closeSettings()">×</button>
+            </div>
+            <div class="settings-section">
+                <h3>文字排版</h3>
+                <div class="setting-item">
+                    <span class="setting-label">字号缩放</span>
+                    <input type="range" class="setting-slider" id="fontSizeSlider" min="80" max="120" value="100" oninput="updateFontSize(this.value)">
+                    <span class="setting-value" id="fontSizeValue">100%</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">行间距</span>
+                    <input type="range" class="setting-slider" id="lineHeightSlider" min="1" max="3" step="0.1" value="1.5" oninput="updateLineHeight(this.value)">
+                    <span class="setting-value" id="lineHeightValue">1.5</span>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">字间距</span>
+                    <input type="range" class="setting-slider" id="letterSpacingSlider" min="0" max="0.5" step="0.05" value="0" oninput="updateLetterSpacing(this.value)">
+                    <span class="setting-value" id="letterSpacingValue">0em</span>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>显示设置</h3>
+                <div class="setting-item">
+                    <span class="setting-label">背景图显示</span>
+                    <div class="setting-toggle active" id="bgImageToggle" onclick="toggleBackgroundImage()"></div>
+                </div>
+                <div class="setting-item" style="margin-top: 0.8rem;">
+                    <span class="setting-label">反应标签显示</span>
+                    <div class="setting-toggle active" id="tagToggle" onclick="toggleTags()"></div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>主题色彩</h3>
+                <div class="setting-item">
+                    <div class="theme-buttons">
+                        <button class="theme-btn theme-blue active" onclick="updateTheme('blue')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #4285f4, #5f52ff);"></span>
+                            <span class="theme-name">蓝色</span>
+                        </button>
+                        <button class="theme-btn theme-green" onclick="updateTheme('green')">
+                            <span class="theme-color" style="background: linear-gradient(135deg, #1b5e20, #4caf50, #81c784);"></span>
+                            <span class="theme-name">绿色</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航栏 -->
+    <div class="nav-container">
+        <div class="unit-nav">
+            <h2>专题导航</h2>
+            <div class="btn-container">
+                <div class="btn-item"><a href="#topic7">专题七</a></div>
+                <div class="btn-item"><a href="#topic8">专题八</a></div>
+                <div class="btn-item"><a href="#topic9">专题九</a></div>
+                <div class="btn-item"><a href="#topic10">专题十</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- 主内容 -->
+    <div class="container">
+        <div class="note-section">
+            <div class="section-header">
+                <div class="unit-title">九年级全一册 化学方程式大全</div>
+                <select class="tag-filter" id="tagFilter" onchange="filterByTag()">
+                    <option value="">全部标签</option>
+                    <option value="氧化反应">氧化反应</option>
+                    <option value="还原反应">还原反应</option>
+                    <option value="化合反应">化合反应</option>
+                    <option value="分解反应">分解反应</option>
+                    <option value="复分解反应">复分解反应</option>
+                    <option value="置换反应">置换反应</option>
+                    <option value="点燃">点燃</option>
+                    <option value="加热">加热</option>
+                    <option value="通电">通电</option>
+                    <option value="催化剂">催化剂</option>
+                </select>
+            </div>
+            <div class="note-content">
+                
+                <h3 class="topic-title" id="topic7">专题七 溶液</h3>
+                
+                <div class="textbook-title">课题1 初探溶液</div>
+                <ul class="equation-list">
+                    <li class="equation-item">还没学呢> 
+                        <span class="tag">氧化反应</span>
+                        <ul>
+                            <li><strong>说明：</strong>没有说明</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题2 探究物质的溶解性</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <div class="textbook-title">课题3 学会定量表示溶液的组成</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <h3 class="topic-title" id="topic8">专题八 酸、碱、盐</h3>
+                
+                <div class="textbook-title">课题1 初识酸和碱</div>
+                <ul class="equation-list">
+                    <li class="equation-item">还没学呢> 
+                        <span class="tag">氧化反应</span>
+                        <ul>
+                            <li><strong>说明：</strong>没有说明</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题2 认识酸、碱、盐的性质与应用</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <div class="textbook-title">课题3 调节土壤酸碱性与施用营养元素</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <h3 class="topic-title" id="topic9">专题九 化学反应的调控</h3>
+                
+                <div class="textbook-title">课题1 认识燃烧与燃料</div>
+                <ul class="equation-list">
+                    <li class="equation-item">还没学呢> 
+                        <span class="tag">氧化反应</span>
+                        <ul>
+                            <li><strong>说明：</strong>没有说明</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题2 调控燃烧的方法</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <div class="textbook-title">课题3 防止金属腐蚀的措施</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <h3 class="topic-title" id="topic10">专题十 化学与人类社会进步</h3>
+                
+                <div class="textbook-title">课题1 化学引领新能源的开发</div>
+                <ul class="equation-list">
+                    <li class="equation-item">还没学呢> 
+                        <span class="tag">氧化反应</span>
+                        <ul>
+                            <li><strong>说明：</strong>没有说明</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="textbook-title">课题2 健康生活离不开化学</div>
+                <ul class="equation-list">
+                </ul>
+                
+                <div class="textbook-title">课题3 化学为人类提供丰富的材料</div>
+                <ul class="equation-list">
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2026 上海市北郊学校九（3）班 九年级化学方程式大全</p>
+            <p>记录人：胡锦乐</p>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">official83online@163.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?" 
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
+            });
+        });
+    </script>
+</body>
+</html>

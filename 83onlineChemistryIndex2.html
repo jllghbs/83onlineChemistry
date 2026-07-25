@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>化学目录</title>
+    <style>
+        :root {
+            --base-font-size: 13px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: var(--base-font-size);
+        }
+        body {
+            background-image: url("https://img0.baidu.com/it/u=2406950429,207081447&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500");
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        /* 头部样式 */
+        header {
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            color: white;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: calc(1.8 * var(--base-font-size));
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .subtitle {
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: normal;
+        }
+        /* 目录容器 */
+        .catalog-container {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+        }
+        .catalog-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        /* 主题样式 */
+        .theme {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.2);
+            padding-bottom: 1.5rem;
+        }
+        .theme:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .theme-title {
+            color: #5f52ff;
+            font-size: calc(1.2 * var(--base-font-size));
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .theme-title:hover {
+            color: #4639e0;
+        }
+        .theme-title::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background: #5f52ff;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        .theme-title:hover::before {
+            background: #4639e0;
+        }
+        /* 折叠箭头 */
+        .toggle-icon {
+            margin-left: auto;
+            font-size: calc(1 * var(--base-font-size));
+            transition: transform 0.3s ease;
+        }
+        .rotate {
+            transform: rotate(90deg);
+        }
+        /* 主题简介：默认展开 */
+        .theme-intro {
+            background: rgba(247, 248, 252, 0.9);
+            padding: 1rem 1.2rem;
+            border-left: 3px solid #5f52ff;
+            margin-left: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-size: calc(0.95 * var(--base-font-size));
+            color: #444;
+            border-radius: 0 6px 6px 0;
+            display: block;
+            max-height: 500px;
+            overflow: hidden;
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hide {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-10px);
+            padding: 0 1.2rem;
+            margin-bottom: 0;
+            border-left-width: 0;
+            margin-left: 0;
+        }
+        /* 专题列表 */
+        .topic-list {
+            list-style: none;
+            margin-left: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .topic-item {
+            background: rgba(240, 242, 248, 0.8);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .topic-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: rgba(235, 238, 250, 0.9);
+        }
+        /* 可点击提示 */
+        .topic-item::after {
+            content: "点击进入详情";
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: calc(0.8 * var(--base-font-size));
+            color: #5f52ff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .topic-item:hover::after {
+            opacity: 1;
+        }
+        .topic-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #333;
+            text-decoration: none;
+            font-size: calc(1.05 * var(--base-font-size));
+        }
+        .topic-link::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #5f52ff;
+            border-radius: 50%;
+        }
+        .topic-link:hover {
+            color: #5f52ff;
+        }
+        .topic-link.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .topic-link.disabled::before {
+            background: #999;
+        }
+        .topic-link.disabled span {
+            color: #999;
+        }
+        .topic-link span {
+            font-weight: 500;
+            color: #3366cc;
+            margin-right: 0.5rem;
+        }
+        /* 课题列表 */
+        .lesson-list {
+            list-style: none;
+            margin-left: 2.5rem;
+            margin-top: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .lesson-item {
+            color: #555;
+            font-size: calc(0.95 * var(--base-font-size));
+            padding-left: 0.8rem;
+            border-left: 2px solid #ddd;
+        }
+        .lesson-item::before {
+            content: "•";
+            color: #5f52ff;
+            font-weight: bold;
+            display: inline-block;
+            width: 1rem;
+            margin-left: -1rem;
+        }
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: white;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.7), rgba(95, 82, 255, 0.7));
+            margin-top: 3rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            width: 100%;
+        }
+        .footer-info {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .seewo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+            line-height: 30px;
+        }
+        .seewo-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        /* 联系方式样式 */
+        .contact-info {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .contact-info span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: calc(0.95 * var(--base-font-size));
+            margin-right: 0.5rem;
+        }
+        .contact-icons {
+            display: inline-flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-decoration: none;
+        }
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+        .contact-icon .icon {
+            font-size: calc(1 * var(--base-font-size));
+        }
+        .contact-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            vertical-align: middle;
+        }
+        .qr-container {
+            position: relative;
+        }
+        .qr-code {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+            z-index: 1000;
+        }
+        .qr-container:hover .qr-code {
+            opacity: 1;
+            visibility: visible;
+        }
+        .qr-code img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+        }
+        .qr-code p {
+            margin: 5px 0 0;
+            font-size: calc(0.8 * var(--base-font-size));
+            color: #333;
+            text-align: center;
+        }
+        .qr-code .contact-text {
+            font-size: calc(1 * var(--base-font-size));
+            font-weight: 600;
+            color: #5f52ff;
+            white-space: nowrap;
+        }
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                background-image: url("https://preview.qiantucdn.com/auto_machine/20231023/4d56390b-6966-4c07-a653-c4b6b76989f2.jpg!w800");
+                background-size: cover;
+                background-attachment: scroll;
+            }
+            h1 {
+                font-size: calc(1.5 * var(--base-font-size));
+            }
+            .catalog-card {
+                padding: 1.5rem;
+            }
+            .theme-title {
+                font-size: calc(1.1 * var(--base-font-size));
+            }
+            .theme-intro {
+                font-size: calc(0.9 * var(--base-font-size));
+                padding: 0.8rem 1rem;
+            }
+            .topic-link {
+                font-size: calc(0.95 * var(--base-font-size));
+            }
+            .lesson-item {
+                font-size: calc(0.9 * var(--base-font-size));
+            }
+            .topic-item::after {
+                content: "点击进入";
+                font-size: calc(0.75 * var(--base-font-size));
+            }
+            .contact-info {
+                display: none;
+            }
+        }
+        /* 更新公告 */
+        .announcement-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .announcement-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .announcement-box {
+            background: white;
+            border-radius: 12px;
+            width: 60%;
+            max-width: 500px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .announcement-overlay.hide .announcement-box {
+            transform: scale(0.8);
+        }
+        .announcement-time {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(66, 133, 244, 0.7);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(95, 82, 255, 0.3);
+        }
+        .announcement-version {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(1 * var(--base-font-size));
+            color: rgba(66, 133, 244, 0.7);
+        }
+        .announcement-title {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(1.38 * var(--base-font-size));
+            font-weight: bold;
+            color: #5f52ff;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .announcement-content ol {
+            margin: 0;
+            padding-left: 24px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(1 * var(--base-font-size));
+            color: #5f52ff;
+            line-height: 2;
+        }
+        .announcement-signature {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(0.92 * var(--base-font-size));
+            color: rgba(95, 82, 255, 0.7);
+            text-align: right;
+            margin-top: 12px;
+        }
+        .announcement-close {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+            padding: 0.5rem 1.2rem;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            font-size: calc(1 * var(--base-font-size));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .announcement-close:hover {
+            background: #4a3ed8;
+            transform: translateY(-2px);
+        }
+        .announcement-close-mobile {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: calc(1.85 * var(--base-font-size));
+            color: rgba(95, 82, 255, 0.7);
+            cursor: pointer;
+            line-height: 1;
+        }
+        .announcement-close-mobile:hover {
+            color: #5f52ff;
+        }
+        @media (max-width: 768px) {
+            .announcement-close {
+                display: none;
+            }
+            .announcement-close-mobile {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 更新公告 -->
+    <div class="announcement-overlay" id="announcement">
+        <div class="announcement-box">
+            <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
+            <div class="announcement-time">2026/07/17 <span class="announcement-version">Ver1.0.42</span></div>
+            <div class="announcement-title">更新公告</div>
+            <div class="announcement-content">
+                <ol>
+                    <li>九年级99条知识大全和化学方程式大全已上线，目录全部更新完毕</li>
+                </ol>
+            </div>
+            <div class="announcement-signature">83online运营团队</div>
+            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
+                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
+            </div>
+            <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
+        </div>
+    </div>
+    <script>
+        function closeAnnouncement() {
+            document.getElementById('announcement').classList.add('hide');
+            setTimeout(() => {
+                document.getElementById('announcement').style.display = 'none';
+            }, 400);
+        }
+        
+        function updateCountdown() {
+            const today = new Date();
+            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const timeDiff = examDate - today;
+            
+            if (timeDiff <= 0) {
+                document.getElementById('countdown-container').style.display = 'none';
+                return;
+            }
+            
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            const countdownElement = document.getElementById('countdown');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                countdownElement.innerHTML = `<div style="font-size: var(--base-font-size); color: #5f52ff;">距离期末考试</div><div style="font-size: calc(1.69 * var(--base-font-size)); font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+            } else {
+                countdownElement.innerHTML = `<div style="font-size: calc(1.23 * var(--base-font-size)); color: #5f52ff;">距离期末考试</div><div style="font-size: calc(2 * var(--base-font-size)); font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+    <!-- 头部 -->
+    <header>
+        <div class="header-container">
+            <h1>上海市北郊学校 九（3）班 化学笔记</h1>
+            <p class="subtitle">完整知识点目录导航 | 专题标题均为可点击链接</p>
+        </div>
+    </header>
+    <!-- 目录主体 -->
+    <div class="catalog-container">
+        <div class="catalog-card">
+            <!-- 主题五 -->
+            <div class="theme">
+                <h2 class="theme-title" data-target="intro1">
+                    主题五：常见的物质（下）
+                    <span class="toggle-icon rotate" id="icon1">▶</span>
+                </h2>
+                <div class="theme-intro" id="intro1">
+                    酸、碱、盐及其水溶液等是我们身边经常会遇见的物质，它们的组成较为复杂且多样。这些物质和氧气、二氧化碳、水等都是从元素及其化合物角度认识物质性质的载体，帮助我们建立物质性质决定用途等化学观念。在主题五的学习中，我们将建构认识物质性质的思路与方法，形成合理使用化学品、保护和节约资源的可持续发展意识，培养社会责任感。
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry7.html" class="topic-link">
+                            <span>专题七</span>：溶液
+                        </a>
+                        <ul class="lesson-list">
+                            <li class="lesson-item">课题1：初探溶液</li>
+                            <li class="lesson-item">课题2：探究物质的溶解性</li>
+                            <li class="lesson-item">课题3：学会定量表示溶液的组成</li>
+                        </ul>
+                    </li>
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry8.html" class="topic-link">
+                            <span>专题八</span>：酸、碱、盐
+                        </a>
+                        <ul class="lesson-list">
+                            <li class="lesson-item">课题1：初识酸和碱</li>
+                            <li class="lesson-item">课题2：认识酸、碱、盐的性质与应用</li>
+                            <li class="lesson-item">课题3：调节土壤酸碱性与施用营养元素</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- 主题六 -->
+            <div class="theme">
+                <h2 class="theme-title" data-target="intro2">
+                    主题六：物质的化学变化（下）
+                    <span class="toggle-icon rotate" id="icon2">▶</span>
+                </h2>
+                <div class="theme-intro" id="intro2">
+                    化学变化需要一定的条件，化学反应具有广泛的应用价值。通过对燃烧、铁生锈等反应条件的探究，能够让我们体会合理利用、调控化学反应的意义，并充分认识化学在解决与资源、能源、材料、环境、人类健康等相关问题中所发挥的重要作用。在主题六的学习中，我们将学会从变化与转化的视角探究物质的组成，能从元素、原子和分子的视角理解物质的变化与转化，认识科学家利用和设计化学反应实现物质转化、创造新物质的本质。
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry9.html" class="topic-link">
+                            <span>专题九</span>：化学反应的调控
+                        </a>
+                        <ul class="lesson-list">
+                            <li class="lesson-item">课题1：认识燃烧与燃料</li>
+                            <li class="lesson-item">课题2：调控燃烧的方法</li>
+                            <li class="lesson-item">课题3：防止金属腐蚀的措施</li>
+                        </ul>
+                    </li>
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry10.html" class="topic-link">
+                            <span>专题十</span>：化学与人类社会进步
+                        </a>
+                        <ul class="lesson-list">
+                            <li class="lesson-item">课题1：化学引领新能源的开发</li>
+                            <li class="lesson-item">课题2：健康生活离不开化学</li>
+                            <li class="lesson-item">课题3：化学为人类提供丰富的材料</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- 化学99条知识大全 -->
+            <div class="theme">
+                <h2 class="theme-title">
+                    化学99条知识大全
+                </h2>
+                <div class="theme-intro">
+                    汇总九年级核心知识点、易错点（考试的时候千万别往考卷上默99条！！！）
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry297.html" class="topic-link">
+                            <span>点击查看</span>：九上99条化学知识大全
+                        </a>
+                    </li>
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistry396.html" class="topic-link">
+                            <span>点击查看</span>：九下99条化学知识大全
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 化学方程式大全 -->
+            <div class="theme">
+                <h2 class="theme-title">
+                    化学方程式大全
+                </h2>
+                <div class="theme-intro">
+                    汇总九年级全一册所有化学方程式，方便查阅和背诵
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistryEquations2.html" class="topic-link">
+                            <span>点击查看</span>：九年级全一册化学方程式大全
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- AI高老师 -->
+            <div class="theme">
+                <h2 class="theme-title">
+                    AI高老师
+                </h2>
+                <div class="theme-intro">
+                    高老师的AI智能体，可以进行自由对话
+                </div>
+                <ul class="topic-list">
+                    <li class="topic-item">
+                        <a href="https://dkfile.net/jllghbs/83onlineChemistryAI.html" class="topic-link">
+                            <span>点击查看</span>：上海市北郊学校 AI高老师
+                        </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-info">
+            <p>© 2026 上海市北郊学校九（3）班 化学笔记</p>
+            <p>记录人：胡锦乐</p>
+            <div class="seewo-info">
+                <span>使用工具：</span>
+                <img src="https://img0.baidu.com/it/u=1051435012,2463107213&fm=253&fmt=auto&app=138&f=JPEG?"
+                     alt="希沃" class="seewo-logo">
+                <span>希沃白板</span>
+            </div>
+            <div class="contact-info">
+                <span>联系方式：</span>
+                <div class="contact-icons">
+                    <div class="contact-icon qr-container" title="电话">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/1aef4ff42fed4889a37c0b67bdf74356.png" alt="电话" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">17740838150</p>
+                            <p>电话</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="邮箱">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
+                        <div class="qr-code">
+                            <p class="contact-text">official83online@163.com</p>
+                            <p>邮箱</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="小红书">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/4f1b5b189222482fba58d891c123e2b2.png" alt="小红书" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/cc44ef214cfc43de964cbfc9b92b32b7.jpg" alt="小红书二维码">
+                            <p>小红书</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="微信">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/b358affab2854fdc9940a352624d0560.png" alt="微信" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/0ed12bbead064ab4b93996292c7c70e3.png" alt="微信二维码">
+                            <p>微信</p>
+                        </div>
+                    </div>
+                    <div class="contact-icon qr-container" title="QQ">
+                        <img src="https://img.zxxk.com/aed/ai/upload/20260524/2117be5f0e044e65aa378b5848e0bc50.png" alt="QQ" class="contact-logo">
+                        <div class="qr-code">
+                            <img src="https://img.zxxk.com/aed/ai/upload/20260524/9c9f8c5976a24c6094af2e190db6e4c1.png" alt="QQ二维码">
+                            <p>QQ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- 展开/合拢切换 -->
+    <script>
+        // 获取所有带有data-target属性的主题标题（只有主题一到主题四有收起功能）
+        const themeTitles = document.querySelectorAll('.theme-title[data-target]');
+        // 遍历绑定点击事件
+        themeTitles.forEach(title => {
+            title.addEventListener('click', () => {
+                // 获取目标简介和对应箭头
+                const targetId = title.getAttribute('data-target');
+                const intro = document.getElementById(targetId);
+                const iconId = `icon${targetId.slice(-1)}`;
+                const icon = document.getElementById(iconId);
+                // 获取当前主题下的专题列表
+                const theme = title.parentElement;
+                const topicList = theme.querySelector('.topic-list');
+                // 切换隐藏/显示和箭头旋转
+                intro.classList.toggle('hide');
+                topicList.classList.toggle('hide');
+                icon.classList.toggle('rotate');
+            });
+        });
+    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
