@@ -430,6 +430,79 @@ footer {
         margin: 0;
         padding: 0;
     }
+    /* 饱和溶液与不饱和溶液转化图 */
+    .conversion-diagram {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        margin: 0.8rem 0 0.8rem 1rem;
+        flex-wrap: wrap;
+    }
+    .conv-text {
+        font-size: calc(0.95 * var(--base-font-size));
+        color: #000;
+        white-space: nowrap;
+    }
+    .conv-arrow-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        flex: 1 1 180px;
+        min-width: 140px;
+        max-width: 280px;
+    }
+    .conv-double-arrow {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .conv-label-top, .conv-label-bottom {
+        font-size: calc(0.8 * var(--base-font-size));
+        color: #333;
+        line-height: 1.3;
+        text-align: center;
+    }
+    /* 溶解度曲线图 */
+    .curve-wrap {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin: 0.6rem 0 0.4rem 1rem;
+    }
+    .solubility-curve {
+        width: 100%;
+        max-width: 380px;
+        height: auto;
+        display: block;
+        flex: 1 1 300px;
+    }
+    .curve-legend {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1 1 220px;
+        font-size: calc(0.95 * var(--base-font-size));
+        line-height: 1.9;
+    }
+    /* 饱和溶液质量比例对齐表 */
+    .ratio-grid {
+        display: grid;
+        grid-template-columns: repeat(5, auto);
+        column-gap: 0.7rem;
+        row-gap: 0.1rem;
+        width: fit-content;
+        margin: 0.3rem 0 0.5rem 1.2rem;
+        font-family: 'Times New Roman', '宋体', serif;
+        font-size: calc(1.05 * var(--base-font-size));
+        color: #000;
+    }
+    .ratio-grid span {
+        text-align: center;
+        white-space: nowrap;
+    }
     /* KateX公式样式 */
     .formula {
         font-family: 'Times New Roman', serif;
@@ -444,6 +517,18 @@ footer {
         }
         .announcement-close-mobile {
             display: block;
+        }
+        .conversion-diagram {
+            gap: 0.5rem;
+            margin-left: 0.4rem;
+        }
+        .conv-arrow-wrap {
+            flex: 1 1 120px;
+            min-width: 110px;
+        }
+        .curve-wrap {
+            margin-left: 0;
+            gap: 0.6rem;
         }
     }
     /* 设置按钮样式 */
@@ -917,11 +1002,11 @@ footer {
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/07/23 <span class="announcement-version">Ver3.0.0</span></div>
+            <div class="announcement-time">2026/09/09 <span class="announcement-version">Ver3.0.11</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>添加了思维导图功能，点击专题标题旁的按钮查看知识结构</li>
+                    <li>更新了课题2 探究物质的溶解性</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1418,20 +1503,135 @@ footer {
                 <h3 class="topic-title">课题1 初探溶液</h3>
                 <div class="textbook-title">溶液是如何形成的</div>
                 <ul>
+                    <li><strong>1. 分散系</strong></li>
+                    <ul>
+                        <li>溶液：均一、稳定的混合物，外观澄清透明</li>
+                        <li>浊液</li>
+                        <ul>
+                            <li>乳浊液：液体与液体不互溶</li>
+                            <li>悬浊液：固体与液体不互溶</li>
+                        </ul>
+                    </ul>
+                    <li><strong>2. 溶液组成</strong></li>
+                    <ul>
+                        <li>溶质：被溶解的物质</li>
+                        <li>溶剂：溶解其他物质的物质</li>
+                    </ul>
                 </ul>
                 <div class="textbook-title">物质溶解时是否伴随能量变化</div>
                 <ul>
+                    <li><span class="chem-formula">KNO<sub>3</sub></span>溶于水，溶液温度降低，吸收热量</li>
+                    <li><span class="chem-formula">NaOH</span>溶于水，溶液温度升高，放出热量</li>
                 </ul>
                 <div class="textbook-title">物质会无限地溶解在溶剂中吗</div>
                 <ul>
+                    <li><strong>1. 饱和溶液与不饱和溶液</strong></li>
+                    <ul>
+                        <li>在某温度下，一定量溶剂（水）中，不能再溶解该溶质</li>
+                        <li>在某温度下，一定量溶剂（水）中，还能继续溶解该溶质</li>
+                    </ul>
+                    <li><strong>2. 饱和溶液与不饱和溶液的相互转化</strong></li>
+                    <div class="conversion-diagram">
+                        <span class="conv-text conv-left">饱和溶液</span>
+                        <div class="conv-arrow-wrap">
+                            <div class="conv-label-top">增加溶剂、改变温度</div>
+                            <svg class="conv-double-arrow" viewBox="0 0 200 44" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="20" y1="15" x2="180" y2="15"/>
+                                <line x1="180" y1="15" x2="168" y2="7"/>
+                                <line x1="20" y1="29" x2="180" y2="29"/>
+                                <line x1="20" y1="29" x2="32" y2="37"/>
+                            </svg>
+                            <div class="conv-label-bottom">增加溶质、改变温度、恒温蒸发溶剂</div>
+                        </div>
+                        <span class="conv-text conv-right">不饱和溶液</span>
+                    </div>
                 </ul>
 
+
                 <h3 class="topic-title">课题2 探究物质的溶解性</h3>
+                <!-- 高老师擦掉的是什么来着？ -->
                 <div class="textbook-title">溶物质的溶解性受到哪些因素影响</div>
                 <ul>
+                    <li>溶剂种类√</li>
+                    <li>溶质种类√</li>
+                    <li>温度√</li>
+                    <li>压强√<strong>仅限气体</strong></li>
                 </ul>
                 <div class="textbook-title">如何定量描述物质的溶解性</div>
                 <ul>
+                    <li><strong>1. 溶解度 S 单位：g</strong></li>
+                    <ul>
+                        <li>一定温度下，100g 溶剂（水）中，<strong></strong>达到饱和状态时/最多</strong>能溶解的溶质质量</li>
+                    </ul>
+                    <li><strong>2. 溶解度的含义</strong></li>
+                    <ul>
+                        <li>在20℃时，100g水中最多溶解36g的NaCl<br>（可简写为20℃ <span class="chem-formula">S<sub>NaCl</sub> = 36g</span>：）</li>
+                        <li>饱和溶液中，各质量比为：
+                            <div class="ratio-grid">
+                                <span>m<sub>质</sub></span><span>：</span><span>m<sub>剂</sub></span><span>：</span><span>m<sub>液</sub></span>
+                                <span>36</span><span>：</span><span>100</span><span>：</span><span>136</span>
+                            </div>
+                        </li>
+                        <li>m<sub>质</sub> + m<sub>剂</sub> = m<sub>液</sub></li>
+                    </ul>
+                    <li><strong>3. 温度（压强）对溶解度的影响</strong></li>
+                    <ul>
+                        <li>大部分物质：t↑ S↑</li>
+                        <li><span class="chem-formula">NaCl</span>：S变化不大</li>
+                        <li><span class="chem-formula">Ca(OH)<sub>2</sub></span>：t↑ S↓（反常）</li>
+                        <li>气体：p↑ S↑（压强越大，溶解度越大）</li>
+                    </ul>
+                    <li><strong>4. 溶解度曲线（以 <span class="chem-formula">KNO<sub>3</sub></span> 为例）</strong></li>
+                    <div class="curve-wrap">
+                    <svg class="solubility-curve" viewBox="0 0 340 285" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 坐标轴 -->
+                        <line x1="45" y1="235" x2="45" y2="25" stroke="#333" stroke-width="2"/>
+                        <polyline points="40,35 45,25 50,35" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="45" y1="235" x2="315" y2="235" stroke="#333" stroke-width="2"/>
+                        <polyline points="305,230 315,235 305,240" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="28" y="34" font-size="18" fill="#333">S</text>
+                        <text x="317" y="243" font-size="18" fill="#333">t</text>
+                        <text x="26" y="253" font-size="16" fill="#333">O</text>
+                        <!-- 辅助虚线 -->
+                        <line x1="45" y1="85" x2="175" y2="85" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="45" y1="130" x2="175" y2="130" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="45" y1="175" x2="235" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="175" y1="235" x2="175" y2="85" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <line x1="235" y1="235" x2="235" y2="175" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>
+                        <text x="16" y="90" font-size="15" fill="#333">S₃</text>
+                        <text x="16" y="135" font-size="15" fill="#333">S₂</text>
+                        <text x="16" y="180" font-size="15" fill="#333">S₁</text>
+                        <text x="162" y="255" font-size="15" fill="#333">t₁</text>
+                        <text x="222" y="255" font-size="15" fill="#333">t₂</text>
+                        <!-- 溶解度曲线 -->
+                        <path d="M 45 215 C 95 206, 132 172, 175 130 C 208 98, 234 64, 262 44" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                        <text x="112" y="52" font-size="17" fill="#333" font-style="italic">KNO₃</text>
+                        <!-- 点 A / B / C / D -->
+                        <circle cx="175" cy="85" r="4.5" fill="#333"/>
+                        <text x="185" y="91" font-size="17" fill="#333">A</text>
+                        <circle cx="175" cy="130" r="5.5" fill="#333"/>
+                        <text x="185" y="125" font-size="17" fill="#333">B</text>
+                        <circle cx="175" cy="175" r="4.5" fill="#333"/>
+                        <text x="185" y="181" font-size="17" fill="#333">C</text>
+                        <circle cx="235" cy="175" r="4.5" fill="#333"/>
+                        <text x="245" y="181" font-size="17" fill="#333">D</text>
+                    </svg>
+                    <ul class="curve-legend">
+                        <li>A：过饱和溶液（不稳定）</li>
+                        <li>B：饱和溶液</li>
+                        <li>C、D：不饱和溶液</li>
+                        <li>C：t<sub>1</sub>℃ 时，100g 水中溶有 S<sub>1</sub> g <span class="chem-formula">KNO<sub>3</sub></span></li>
+                        <li>D：t<sub>2</sub>℃ 时，100g 水中溶有 S<sub>1</sub> g <span class="chem-formula">KNO<sub>3</sub></span></li>
+                    </ul>
+                    </div>
+                    <ul>
+                        <li>转化：</li>
+                        <ul>
+                            <li>B→C：<strong>加水</strong></li>
+                            <li>C→D：<strong>升温</strong>（t<sub>1</sub>℃→t<sub>2</sub>℃）</li>
+                            <li>D→B：<strong>降温</strong>到 t<sub>1</sub>℃ 或<strong>加溶质</strong></li>
+                        </ul>
+                    </ul>
                 </ul>
                 <div class="textbook-title">怎样从溶液中提取溶质</div>
                 <ul>
