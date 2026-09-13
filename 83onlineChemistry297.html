@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九上99条化学知识大全</title>
+    <title>番外篇 化学99条大全</title>
     <!-- 引入KaTeX CSS与JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -85,16 +85,6 @@
         }
         body.theme-green .topic-title {
             color: #1b5e20;
-        }
-        body.theme-green .unit-nav h2 {
-            color: #2e7d32;
-            border-left-color: #4caf50;
-        }
-        body.theme-green .unit-list li a {
-            background: linear-gradient(135deg, #2e7d32, #4caf50);
-        }
-        body.theme-green .unit-list li a:hover {
-            background: linear-gradient(135deg, #1b5e20, #388e3c);
         }
         body.theme-green .back-to-top {
             background: linear-gradient(135deg, #2e7d32, #4caf50);
@@ -283,6 +273,15 @@
             color: #5f52ff;
             margin-right: 0.8rem;
         }
+        /* 图片条目的序号垂直居中 */
+        .note-item.item-with-image::before {
+            vertical-align: middle;
+            line-height: 4em;
+        }
+        /* 第五条和第六条随机显示（序号都是5） */
+        .note-item.random-hidden {
+            display: none !important;
+        }
         /* 嵌套ul样式：强制换行+缩进 */
         .note-item > ul {
             width: 100%;
@@ -328,6 +327,76 @@
             border-radius: 50%;
             object-fit: cover;
             vertical-align: middle;
+        }
+        /* 化学方程式/化学式样式 */
+        .chem-formula {
+            font-family: 'Times New Roman', serif;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        /* KateX公式样式 */
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+        .formula + br {
+            display: block;
+            content: "";
+            margin: 0;
+            padding: 0;
+        }
+        /* 返回顶部按钮样式 - 圆形、右下角固定 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #5f52ff;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: #4a3ed8;
+        }
+        /*打印*/
+        .download-btn {
+            padding: 14px 32px;
+            background: rgba(95, 82, 255, 0.85);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(95, 82, 255, 1);
+            box-shadow: 0 8px 25px rgba(95, 82, 255, 0.5);
+        }
+        .download-btn:active {
+            transform: translateY(-1px);
+            background: rgba(95, 82, 255, 0.7);
+            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
         }
         /* 联系方式样式 */
         .contact-info {
@@ -406,55 +475,6 @@
             color: #5f52ff;
             white-space: nowrap;
         }
-        /* 返回顶部按钮样式 - 圆形、右下角固定 */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #5f52ff;
-            color: white;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-            z-index: 999;
-        }
-        .back-to-top:hover {
-            background: #4a3ed8;
-        }
-        /*打印*/
-        .download-btn {
-            padding: 14px 32px;
-            background: rgba(95, 82, 255, 0.85);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 20px;
-            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .download-btn:hover {
-            transform: translateY(-3px);
-            background: rgba(95, 82, 255, 1);
-            box-shadow: 0 8px 25px rgba(95, 82, 255, 0.5);
-        }
-        .download-btn:active {
-            transform: translateY(-1px);
-            background: rgba(95, 82, 255, 0.7);
-            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
-        }
         /* 响应式适配 */
         @media (max-width: 768px) {
             body {
@@ -524,27 +544,6 @@
             .announcement-close-mobile {
                 font-size: 20px;
             }
-        }
-        /* 化学方程式/化学式样式 */
-        .chem-formula {
-            font-family: 'Times New Roman', serif;
-            display: inline;
-            margin: 0;
-            padding: 0;
-        }
-        /* KateX公式样式 */
-        .formula {
-            font-family: 'Times New Roman', serif;
-            font-size: 0.9em;
-            display: inline;
-            margin: 0;
-            padding: 0;
-        }
-        .formula + br {
-            display: block;
-            content: "";
-            margin: 0;
-            padding: 0;
         }
         /* 更新公告 */
         .announcement-overlay {
@@ -784,6 +783,7 @@
         }
         .setting-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
+            appearance: none;
             width: 18px;
             height: 18px;
             background: #5f52ff;
@@ -994,11 +994,11 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/07/12 <span class="announcement-version">Ver1.0.3</span></div>
+            <div class="announcement-time">2026/09/13 <span class="announcement-version">Ver1.0.11</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>九上99条化学知识大全正式上线</li>
+                    <li>更新了专题七 溶液的部分内容</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1110,8 +1110,26 @@
         }
         function initNoteIndex() {
             var noteItems = document.querySelectorAll('.note-item');
+            var visibleCount = 0;
+            var lastRandomGroup = null;
             noteItems.forEach(function(item, index) {
-                item.setAttribute('data-index', index + 1);
+                // 检查元素是否被隐藏
+                if (item.classList.contains('random-hidden')) {
+                    return;
+                }
+                // 检查是否有随机组
+                var randomGroup = item.getAttribute('data-random-group');
+                if (randomGroup) {
+                    // 如果是同一随机组，保持序号相同
+                    if (lastRandomGroup !== randomGroup) {
+                        visibleCount++;
+                        lastRandomGroup = randomGroup;
+                    }
+                    item.setAttribute('data-index', visibleCount);
+                } else {
+                    visibleCount++;
+                    item.setAttribute('data-index', visibleCount);
+                }
             });
         }
         function validateSearchInput(input) {
@@ -1169,6 +1187,8 @@
                     if (node.classList && node.classList.contains('katex') && node.querySelector('.katex-mathml')) {
                         var mathmlText = node.querySelector('.katex-html')?.textContent || '';
                         text += mathmlText;
+                    } else if (tagName === 'img' && node.dataset.searchText) {
+                        text += node.dataset.searchText;
                     } else {
                         text += getDisplayText(node);
                     }
@@ -1192,7 +1212,7 @@
     <!-- 头部 -->
     <header>
         <div class="header-container">
-            <h1>上海市北郊学校 九（3）班 九上99条</h1>
+            <h1>上海市北郊学校 九（3）班 化学99条</h1>
             <p class="time-range">学习周期：？</p>
         </div>
         <button class="settings-btn" onclick="openSettings()">
@@ -1262,12 +1282,12 @@
     <!-- 导航栏（优化宽度，手机端一行显示） -->
     <div class="nav-container">
         <div class="unit-nav">
-            <h2>九年级化学笔记导航</h2>
+            <h2>九上化学笔记单元导航</h2>
             <ul class="unit-list">
-                <li><a href="83onlineChemistry7.html">专题7</a></li>
-                <li><a href="83onlineChemistry8.html">专题8</a></li>
-                <li><a href="83onlineChemistry9.html">专题9</a></li>
-                <li><a href="83onlineChemistry10.html">专题10</a></li>
+                <li><a href="#topic7">专题7</a></li>
+                <li><a href="#topic8">专题8</a></li>
+                <li><a href="#topic9">专题9</a></li>
+                <li><a href="#topic10">专题10</a></li>
             </ul>
         </div>
     </div>
@@ -1287,12 +1307,52 @@
     <!-- 主内容 -->
     <div class="container">
         <div class="note-section">
-            <div class="unit-title">番外篇 九上99条</div>
+            <div class="unit-title">番外篇 化学99条大全</div>
             <div class="note-content">
-                <h3 class="topic-title">九上核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
+                <h3 class="topic-title">本学期核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
                 
                 <ul class="note-list">
-                    <li class="note-item">课还没上呢，敬请期待...</li>
+                    <li class="note-item">不能在化学课上挑衅、激怒化学老师</li>
+                    <li class="note-item">上课禁止写作业（刘育君除外）</li>
+                    <li class="note-item">考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
+                    <!-- 专题七 溶液 -->
+                    <span id="topic7" class="topic-anchor"></span>
+                    <li class="note-item">分散系包含溶液、浊液等，都属于混合物</li>
+                    <li class="note-item">溶液是均一、稳定、外观澄清透明的混合物，例如食盐水（不一定是无色）</li>
+                    <li class="note-item">浊液又分为乳浊液与悬浊液
+                        <ul>
+                            <li>乳浊液是两种互不互溶的液体混合形成的分散系，例如油水混合物</li>
+                            <li>悬浊液是固体和不互溶的液体混合形成的分散系，例如泥水</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">被溶解的物质叫做溶质，溶解其他物质的物质叫做溶剂</li>
+                    <li class="note-item">一定温度下，一定量溶剂中不能继续溶解某溶质的溶液为该溶质的饱和溶液</li>
+                    <li class="note-item">饱和溶液与不饱和溶液可相互转化
+                        <ul>
+                            <li>饱和溶液增加溶剂、改变温度变为不饱和溶液</li>
+                            <li>不饱和溶液增加溶质、恒温蒸发溶剂、改变温度变为饱和溶液</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
+                    <li class="note-item">气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                    <li class="note-item">溶解度（S）指一定温度下，100g溶剂中达到饱和时/最多所能溶解的溶质质量，单位为g</li>
+                    <li class="note-item"><span class="chem-formula">20℃</span>时氯化钠溶解度36g，有三层含义
+                        <ul>
+                            <li>20℃时，100g水中最多溶解36g氯化钠</li>
+                            <li>20℃时，100g水中溶解36g氯化钠，溶液恰好达到饱和状态</li>
+                            <li>20℃时，每136g氯化钠饱和溶液中含有36g氯化钠、100g水</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">饱和溶液里，m质 + m剂 = m液</li>
+                    <li class="note-item">溶液质量等于溶质质量加上溶剂质量</li>
+                    <li class="note-item">大多数固体物质溶解度随温度升高而增大</li>
+                    <li class="note-item">氯化钠溶解度受温度影响很小，氢氧化钙溶解度随温度升高而减小，属于反常</li>
+                    <li class="note-item">气体的溶解度随压强增大而变大</li>
+                    <li class="note-item">溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
+                    <li class="note-item">晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
+                    <li class="note-item">五水合硫酸铜<span class="chem-formula">CuSO₄·5H₂O</span>俗称蓝矾、胆矾，属于结晶水合物</li>
+                    <li class="note-item">蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长</li>
+                    <li class="note-item">降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出</li>
                 </ul>
             </div>
         </div>
@@ -1302,7 +1362,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2026 九年级化学笔记 - 九上99条化学知识大全</p>
+            <p>© 2026 上海市北郊学校九（3）班 九上化学笔记（9/1-?）</p>
             <p>记录人：胡锦乐</p>
             <div class="contact-info">
                 <span>联系方式：</span>
@@ -1351,8 +1411,7 @@
                 <span>希沃白板</span>
             </div>
         </div>
-    <button class="download-btn" onclick="downloadChemWord()">点击下载九上99条.doc</button>
-
+    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.doc</button>
     <script>
         function downloadChemWord() {
             // 化学99条大全的完整内容（Word可识别的HTML格式，带样式）
@@ -1411,6 +1470,9 @@
                             .chem-formula {
                                 font-family: 'Times New Roman', serif;
                             }
+                            .note-section {
+                                margin-left: 20px;
+                            }
                             .topic-divider {
                                 border-top: 1px dashed rgba(95, 82, 255, 0.5);
                                 margin: 15px 0;
@@ -1418,20 +1480,57 @@
                         </style>
                     </head>
                     <body>
-                        <h1>九上99条-九上核心知识点</h1>
-                        <ol>
-                            <li>课还没上呢，敬请期待...</li>
-                        </ol>
+                        <h1>化学99条大全-本学期核心知识点</h1>
+                            <ol>
+                            <li>不能在化学课上挑衅、激怒化学老师</li>
+                            <li>上课禁止写作业（刘育君除外）</li>
+                            <li>考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
+                            <li>分散系包含溶液、浊液等，都属于混合物</li>
+                            <li>溶液是均一、稳定、外观澄清透明的混合物，例如食盐水（不一定是无色）</li>
+                            <li>浊液又分为乳浊液与悬浊液
+                                <ul>
+                                <li>乳浊液是两种互不互溶的液体混合形成的分散系，例如油水混合物</li>
+                                <li>悬浊液是固体和不互溶的液体混合形成的分散系，例如泥水</li>
+                                </ul>
+                            </li>
+                            <li>被溶解的物质叫做溶质，溶解其他物质的物质叫做溶剂</li>
+                            <li>一定温度下，一定量溶剂中不能继续溶解某溶质的溶液为该溶质的饱和溶液</li>
+                            <li>饱和溶液与不饱和溶液可相互转化
+                                <ul>
+                                    <li>饱和溶液增加溶剂、改变温度变为不饱和溶液</li>
+                                    <li>不饱和溶液增加溶质、恒温蒸发溶剂、改变温度变为饱和溶液</li>
+                                </ul>
+                            </li>
+                            <li>固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
+                            <li>气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                            <li>溶解度（S）指一定温度下，100g溶剂中达到饱和时/最多所能溶解的溶质质量，单位为g</li>
+                            <li>20℃时氯化钠溶解度36g，有三层含义
+                                <ul>
+                                    <li><strong>20℃时，100g水中最多溶解36g氯化钠</strong></li>
+                                    <li><strong>20℃时，100g水中溶解36g氯化钠，溶液恰好达到饱和状态</strong></li>
+                                    <li><strong>20℃时，每136g氯化钠饱和溶液中含有36g氯化钠、100g水</strong></li>
+                                </ul>
+                            </li>
+                            <li>饱和溶液里，m质 + m剂 = m液</li>
+                            <li>溶液质量等于溶质质量加上溶剂质量</li>
+                            <li>大多数固体物质溶解度随温度升高而增大</li>
+                            <li>氯化钠溶解度受温度影响很小，氢氧化钙溶解度随温度升高而减小，属于反常</li>
+                            <li>气体的溶解度随压强增大而变大</li>
+                            <li>溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
+                            <li>晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
+                            <li>五水合硫酸铜CuSO₄·5H₂O俗称蓝矾、胆矾，属于结晶水合物</li>
+                            <li>蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长</li>
+                            <li>降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出</li>
+                            </ol>
                     </body>
                 </html>
             `;
-
             // 编码内容，防止特殊字符出错
             const encodedContent = encodeURIComponent(wordContent);
             // 创建下载链接
             const link = document.createElement('a');
             link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
-            link.download = "九上99条化学知识大全.doc";
+            link.download = "化学99条大全-本学期核心知识点.doc";
             // 触发下载
             document.body.appendChild(link);
             link.click();
@@ -1439,18 +1538,31 @@
         }
     </script>
     </footer>
-    </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-    
     <script>
-        // 批量渲染所有化学公式
-        document.querySelectorAll('.formula').forEach(el => {
-            katex.render(el.textContent, el, {
-                displayMode: false,
-                throwOnError: false
+        document.addEventListener('DOMContentLoaded', function() {
+            var formulas = document.querySelectorAll('.formula');
+            formulas.forEach(function(el) {
+                katex.render(el.textContent, el, {
+                    throwOnError: false
+                });
             });
+            // 第五条和第六条随机轮流显示（序号都是5）
+            var randomItems = document.querySelectorAll('.note-item[data-random-group="5"]');
+            if (randomItems.length > 0) {
+                var randomIndex = Math.floor(Math.random() * randomItems.length);
+                randomItems.forEach(function(item, index) {
+                    if (index !== randomIndex) {
+                        item.classList.add('random-hidden');
+                    }
+                });
+            }
+            // 随机显示后重新计算序号
+            initNoteIndex();
         });
     </script>
 </body>
