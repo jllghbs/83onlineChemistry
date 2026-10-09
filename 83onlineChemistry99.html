@@ -988,6 +988,9 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
+    <script>window.MathJax = { startup: { typeset: false }, svg: { fontCache: 'none' } };</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body class="theme-blue">
     <!-- 更新公告 -->
@@ -1001,9 +1004,6 @@
                     <li>优化搜索框交互体验，实现页面滚动时搜索框始终固定在顶部，方便随时进行内容检索</li>
                 </ol>
             </div>
-            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
-                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
-            </div>
             <div class="announcement-signature">83online运营团队</div>
             <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
         </div>
@@ -1015,34 +1015,6 @@
                 document.getElementById('announcement').style.display = 'none';
             }, 400);
         }
-        
-        function updateCountdown() {
-            const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
-            const timeDiff = examDate - today;
-            
-            if (timeDiff <= 0) {
-                document.getElementById('countdown-container').style.display = 'none';
-                return;
-            }
-            
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            
-            const countdownElement = document.getElementById('countdown');
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
-            } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
-            }
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
 
         function openSettings() {
             document.getElementById('settings-overlay').classList.add('show');
@@ -1533,7 +1505,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八上化学笔记（9/1-1/19）</p>
+            <p>© 2026 上海市北郊学校八（3）班 八上化学笔记（9/1-1/19）</p>
             <p>记录人：胡锦乐</p>
             <div class="contact-info">
                 <span>联系方式：</span>
@@ -1548,7 +1520,7 @@
                     <div class="contact-icon qr-container" title="邮箱">
                         <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
                         <div class="qr-code">
-                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p class="contact-text">official83online@163.com</p>
                             <p>邮箱</p>
                         </div>
                     </div>
@@ -1582,10 +1554,93 @@
                 <span>希沃白板</span>
             </div>
         </div>
-    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.doc</button>
+    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.docx</button>
 
     <script>
-        function downloadChemWord() {
+        const WORD_FORMULAS = {
+            F1: { tex: '产率=\\dfrac{m_{\\text{精盐}}}{m_{\\text{粗盐}}}\\times 100\\%', h: 24 },
+            F2: { tex: 'H_2CO_3 \\stackrel{\\triangle}{=} CO_2\\uparrow + H_2O', h: 18 },
+            F3: { tex: '2KMnO_4 \\stackrel{\\triangle}{=} K_2MnO_4 + MnO_2 + O_2\\uparrow', h: 18 },
+            F4: { tex: '2H_2O_2 \\stackrel{MnO_2}{=} 2H_2O + O_2\\uparrow', h: 18 },
+            F5: { tex: '2KClO_3 \\underset{\\triangle}{\\stackrel{MnO_2}{=}} 2KCl + 3O_2\\uparrow', h: 18 },
+            F6: { tex: '2P + 5O_2 \\stackrel{\\text{点燃}}{=} 2P_2O_5', h: 18 },
+            F7: { tex: 'C + O_2 \\stackrel{\\text{点燃}}{=} CO_2', h: 18 },
+            F8: { tex: '3Fe + 2O_2 \\stackrel{\\text{点燃}}{=} Fe_3O_4', h: 18 },
+            F9: { tex: 'CO_2 + H_2O = H_2CO_3', h: 18 },
+            F10: { tex: 'Ca(OH)_2 + CO_2 = CaCO_3\\downarrow + H_2O', h: 18 },
+            F11: { tex: 'CaCO_3 + 2HCl = CaCl_2 + CO_2\\uparrow + H_2O', h: 18 }
+        };
+        function waitMathJax() {
+            return new Promise(function (resolve) {
+                let n = 0;
+                (function check() {
+                    if (window.MathJax && typeof window.MathJax.tex2svg === 'function') {
+                        const p = window.MathJax.startup && window.MathJax.startup.promise;
+                        if (p) return p.then(function () { resolve(true); }, function () { resolve(false); });
+                        return resolve(true);
+                    }
+                    if (++n > 100) return resolve(false);
+                    setTimeout(check, 100);
+                })();
+            });
+        }
+        function texToPng(tex, heightCss) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    const container = window.MathJax.tex2svg(tex, { display: false });
+                    const svg = container.querySelector('svg');
+                    if (!svg) return reject(new Error('svg not found'));
+                    if (svg.querySelector('.mjx-error, merror, [data-mjx-error]') || /Undefined control sequence|\\[a-zA-Z]+/.test(svg.textContent)) return reject(new Error('mathjax syntax error: ' + tex));
+                    const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+                    const vw = vb[2] || 100, vh = vb[3] || 20;
+                    const wCss = Math.round(heightCss * vw / vh);
+                    const clone = svg.cloneNode(true);
+                    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                    clone.setAttribute('width', wCss);
+                    clone.setAttribute('height', heightCss);
+                    const xml = new XMLSerializer().serializeToString(clone);
+                    const img = new Image();
+                    img.onload = function () {
+                        const dpr = 3, canvas = document.createElement('canvas');
+                        canvas.width = wCss * dpr; canvas.height = heightCss * dpr;
+                        const ctx = canvas.getContext('2d');
+                        ctx.scale(dpr, dpr);
+                        ctx.drawImage(img, 0, 0, wCss, heightCss);
+                        resolve({ url: canvas.toDataURL('image/png'), w: wCss, h: heightCss });
+                    };
+                    img.onerror = reject;
+                    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+                } catch (e) { reject(e); }
+            });
+        }
+        async function renderWordFormulas(html) {
+            const re = /\{\{([A-Za-z0-9]+):([^}]*)\}\}/g;
+            const marks = [];
+            let m;
+            while ((m = re.exec(html))) marks.push(m);
+            if (!marks.length) return html;
+            const ready = await waitMathJax();
+            const cache = {};
+            for (const mark of marks) {
+                const full = mark[0], id = mark[1], fallback = mark[2];
+                if (html.indexOf(full) === -1) continue;
+                let rep = fallback;
+                if (ready && WORD_FORMULAS[id]) {
+                    try {
+                        if (!cache[id]) cache[id] = await texToPng(WORD_FORMULAS[id].tex, WORD_FORMULAS[id].h);
+                        const r = cache[id];
+                        rep = '<img src="' + r.url + '" width="' + r.w + '" height="' + r.h + '" style="vertical-align:middle;border:0">';
+                    } catch (e) { console.error('公式渲染失败：' + id, e); }
+                }
+                html = html.split(full).join(rep);
+            }
+            return html;
+        }
+        function timeStamp() {
+            const d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
+            return p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+        }
+        async function downloadChemWord() {
             // 化学99条大全的完整内容（Word可识别的HTML格式，带样式）
             const wordContent = `
                 <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
@@ -1609,27 +1664,19 @@
                                 margin-top: 20px;
                                 margin-bottom: 10px;
                             }
-                            ol { 
-                                list-style-type: none;
-                                counter-reset: item;
-                                padding-left: 0;
+                            ol {
+                                list-style-type: decimal;
+                                padding-left: 28px;
                             }
-                            li { 
-                                font-size: 11pt; 
-                                line-height: 1.8; 
+                            li {
+                                font-size: 11pt;
+                                line-height: 1.8;
                                 margin-bottom: 8px;
                                 color: #333;
-                                counter-increment: item;
-                                position: relative;
-                                padding-left: 35px;
                             }
-                            li::before {
-                                content: counter(item) ".";
-                                position: absolute;
-                                left: 0;
+                            ol > li::marker {
                                 color: #5f52ff;
                                 font-weight: bold;
-                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
                             }
                             ul { 
                                 list-style-type: disc; 
@@ -1674,7 +1721,7 @@
                             <li>蒸发时玻璃棒作用：搅拌，使液体受热均匀，防止液体飞溅</li>
                             <li>蒸发时所用的仪器为铁架台、蒸发皿、酒精灯、玻璃棒、坩埚钳、电子点火器、陶土网（将受热后的蒸发皿放置在陶土网上冷却，以免损坏桌面或因骤冷导致蒸发皿破裂）</li>
                             <li>蒸发停止时机：蒸发皿中有大量固体析出时，利用余热蒸干</li>
-                            <li>粗盐产率公式：产率=（m精盐÷m粗盐）×100%</li>
+                            <li>粗盐产率公式：{{F1:产率=（m精盐÷m粗盐）×100%}}</li>
                             <li>粗盐产率分析：<ul><li>偏大原因：①蒸发后精盐未蒸干；②过滤时滤纸破损；③液面高于滤纸边缘</li><li>偏小原因：①溶解时水太少导致精盐未完全溶解；②蒸发时液体溅出；③过滤时有液体残留；④称量时蒸发皿中有残留固体</li></ul></li>
                             <li>蒸馏水用量对粗盐提纯的影响：过多增加过滤、蒸发操作时间；过少不能将粗盐中可溶物完全溶解</li>
                             <li>未说明药品用量时的取用规则：固体粉末铺满试管底部、块状取1块，液体取<span class="chem-formula">1~2mL</span></li>
@@ -1693,30 +1740,30 @@
                             <li>空气的主要成分（体积分数）：氮气约<span class="chem-formula">78%</span>、氧气约<span class="chem-formula">21%</span>、稀有气体约<span class="chem-formula">0.94%</span>、二氧化碳约<span class="chem-formula">0.03%</span>、其他气体/杂质约<span class="chem-formula">0.03%</span></li>
                             <li>氮气的性质与用途：无色无味气体、难溶于水，不与红磷反应/不燃烧/不助燃；用途为食品保鲜、作保护气</li>
                             <li>稀有气体：化学性质很稳定，常用作保护气；通电时能发出不同颜色的光，可制作霓虹灯等电光源</li>
-                            <li>红磷燃烧测空气中氧含量（方程式）：<span class="chem-formula">2P + 5O₂ ═══（条件：△）2P₂O₅</span></li>
+                            <li>红磷燃烧测空气中氧含量（方程式）：<span class="chem-formula">{{F6:2P + 5O₂ ═══（条件：点燃）2P₂O₅}}</span></li>
                             <li>红磷燃烧测空气中氧含量（现象）：产生大量白烟，放热，冷却后水倒吸入集气瓶，体积约占集气瓶1/5</li>
                             <li>红磷测氧含量结果偏差原因：<ul><li>偏小：红磷量不足、装置气密性差、未冷却至室温就打开止水夹</li><li>偏大：未夹紧止水夹、点燃红磷后未及时塞紧瓶塞</li></ul></li>
                             <li>氧气的性质：物理性质（无色无味气体、密度略大于空气、难溶于水）；化学性质（助燃性，能与多种物质发生氧化反应）</li>
                             <li>与氧气发生的反应是氧化反应</li>
                             <li>氧化物的定义：由两种元素组成，且一种是氧元素的化合物</li>
                             <li>碳的燃烧（现象）：空气中红热；氧气中发出白光、放热</li>
-                            <li>碳的燃烧（方程式）：<span class="chem-formula">C + O₂ ═══（条件：△）CO₂</span>（充分燃烧）</li>
+                            <li>碳的燃烧（方程式）：<span class="chem-formula">{{F7:C + O₂ ═══（条件：点燃）CO₂}}</span>（充分燃烧）</li>
                             <li>铁的燃烧（现象）：空气中不燃烧，仅发生缓慢氧化；氧气中火星四射、放热，生成黑色固体</li>
-                            <li>铁的燃烧（方程式）：<span class="chem-formula">3Fe + 2O₂ ═══（条件：△）Fe₃O₄</span></li>
+                            <li>铁的燃烧（方程式）：<span class="chem-formula">{{F8:3Fe + 2O₂ ═══（条件：点燃）Fe₃O₄}}</span></li>
                             <li>铁在氧气中燃烧的实验注意事项：<ul><li>系火柴：引燃铁丝</li><li>瓶底放水/细沙：防止高温熔融物溅落，导致集气瓶受热不均炸裂</li></ul></li>
                             <li>二氧化碳的物理性质：无色无味气体、密度比空气大、能溶于水</li>
-                            <li>二氧化碳与水的反应（方程式）：<span class="chem-formula">CO₂ + H₂O = H₂CO₃</span></li>
+                            <li>二氧化碳与水的反应（方程式）：<span class="chem-formula">{{F9:CO₂ + H₂O ═══ H₂CO₃}}</span></li>
                             <li>二氧化碳与水的反应（现象）：使紫色石蕊溶液变红</li>
-                            <li>碳酸受热分解（方程式）：<span class="chem-formula">H₂CO₃ ═══（条件：△）CO₂↑ + H₂O</span></li>
+                            <li>碳酸受热分解（方程式）：<span class="chem-formula">{{F2:H₂CO₃ ═══（条件：△）CO₂↑ + H₂O}}</span></li>
                             <li>碳酸受热分解（现象）：石蕊溶液由红色恢复为紫色</li>
-                            <li>二氧化碳与澄清石灰水的反应（方程式）：<span class="chem-formula">Ca(OH)₂ + CO₂ = CaCO₃↓ + H₂O</span></li>
+                            <li>二氧化碳与澄清石灰水的反应（方程式）：<span class="chem-formula">{{F10:Ca(OH)₂ + CO₂ ═══ CaCO₃↓ + H₂O}}</span></li>
                             <li>二氧化碳与澄清石灰水的反应（现象）：澄清石灰水变浑浊（用于检验CO₂）</li>
                             <li>工业制氧：采用分离液态空气法，利用各气体沸点不同（物理变化）</li>
                             <li>启普发生器：适用于固体与液体反应制取气体，优点是随开随用、随关随停，不能加热</li>
-                            <li>实验室制氧气（加热高锰酸钾，方程式）：<span class="chem-formula">2KMnO₄ ═══（条件：△）K₂MnO₄ + MnO₂ + O₂↑</span></li>
-                            <li>实验室制氧气（过氧化氢催化，方程式）：<span class="chem-formula">2H₂O₂ ═══（条件：MnO₂）2H₂O + O₂↑</span></li>
-                            <li>实验室制氧气（加热氯酸钾，方程式）：<span class="chem-formula">2KClO₃ ═══（条件：MnO₂、△）2KCl + 3O₂↑</span></li>
-                            <li>实验室制二氧化碳（方程式）：<span class="chem-formula">CaCO₃ + 2HCl = CaCl₂ + CO₂↑ + H₂O</span></li>
+                            <li>实验室制氧气（加热高锰酸钾，方程式）：<span class="chem-formula">{{F3:2KMnO₄ ═══（条件：△）K₂MnO₄ + MnO₂ + O₂↑}}</span></li>
+                            <li>实验室制氧气（过氧化氢催化，方程式）：<span class="chem-formula">{{F4:2H₂O₂ ═══（条件：MnO₂）2H₂O + O₂↑}}</span></li>
+                            <li>实验室制氧气（加热氯酸钾，方程式）：<span class="chem-formula">{{F5:2KClO₃ ═══（条件：MnO₂、△）2KCl + 3O₂↑}}</span></li>
+                            <li>实验室制二氧化碳（方程式）：<span class="chem-formula">{{F11:CaCO₃ + 2HCl ═══ CaCl₂ + CO₂↑ + H₂O}}</span></li>
                             <li>实验室制二氧化碳不用硫酸的原因：生成微溶于水的CaSO₄，覆盖在碳酸钙表面，阻止反应继续进行</li>
                             <li>多功能瓶有长短两根导管，长导管深入瓶底，短导管仅露出橡胶塞。可用于收集氧气、二氧化碳等</li>
                             <li>多功能瓶长进短出收集氧气，带火星木条放短导管口复燃则满，因氧气密度大集满后从短管逸出</li>
@@ -1755,13 +1802,33 @@
                 </html>
             `;
 
-            // 编码内容，防止特殊字符出错
-            const encodedContent = encodeURIComponent(wordContent);
-            // 创建下载链接
+            const wordHtml = await renderWordFormulas(wordContent);
+            const fileName = "化学99条大全-八年级上学期-" + timeStamp() + ".docx";
+            if (window.htmlDocx && typeof window.htmlDocx.asBlob === 'function') {
+                try {
+                    const blob = window.htmlDocx.asBlob(wordHtml, { orientation: 'portrait', margins: { top: 1440, right: 1440, bottom: 1440, left: 1440 } });
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(blob, fileName);
+                    } else {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+                    }
+                    return;
+                } catch (e) {
+                    console.error('docx 生成失败，回退到 .doc：', e);
+                }
+            }
+            // 回退：HTML 伪装的 .doc（库加载失败时）
+            const encodedContent = encodeURIComponent(wordHtml);
             const link = document.createElement('a');
             link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
-            link.download = "化学99条大全-本学期核心知识点.doc";
-            // 触发下载
+            link.download = "化学99条大全-八年级上学期-" + timeStamp() + ".doc";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

@@ -809,9 +809,6 @@
                 </ol>
             </div>
             <div class="announcement-signature">83online运营团队</div>
-            <div id="countdown-container" style="text-align: center; margin: 15px 0;">
-                <div id="countdown" style="background: rgba(95, 82, 255, 0.1); padding: 10px; border-radius: 8px; border: 2px solid #5f52ff;"></div>
-            </div>
             <button class="announcement-close" onclick="closeAnnouncement()">关闭</button>
         </div>
     </div>
@@ -827,30 +824,6 @@
             equationItems.forEach(function(item, index) {
                 item.setAttribute('data-index', index + 1);
             });
-        }
-        function updateCountdown() {
-            const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
-            const timeDiff = examDate - today;
-            
-            if (timeDiff <= 0) {
-                document.getElementById('countdown-container').style.display = 'none';
-                return;
-            }
-            
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            
-            const countdownElement = document.getElementById('countdown');
-            const isMobile = window.innerWidth <= 768;
-            
-            if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
-            } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
-            }
         }
         function openSettings() {
             document.getElementById('settings-overlay').classList.add('show');
@@ -946,8 +919,6 @@
         }
         window.addEventListener('DOMContentLoaded', function() {
             initEquationIndex();
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
         });
     </script>
     <!-- 头部 -->
@@ -1304,7 +1275,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2025 上海市北郊学校八（3）班 八年级化学方程式大全</p>
+            <p>© 2026 上海市北郊学校八（3）班 八年级化学方程式大全</p>
             <p>记录人：胡锦乐</p>
             <div class="contact-info">
                 <span>联系方式：</span>
@@ -1319,7 +1290,7 @@
                     <div class="contact-icon qr-container" title="邮箱">
                         <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
                         <div class="qr-code">
-                            <p class="contact-text">jllghbs1223@2925.com</p>
+                            <p class="contact-text">official83online@163.com</p>
                             <p>邮箱</p>
                         </div>
                     </div>

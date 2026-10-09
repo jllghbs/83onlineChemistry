@@ -430,6 +430,31 @@ footer {
         margin: 0;
         padding: 0;
     }
+    /* 笔记表格样式 */
+    .note-table {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0.8rem auto;
+        border-collapse: collapse;
+        background-color: #3366cc;
+        color: #fff;
+    }
+    .note-table th, .note-table td {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .note-table th {
+        font-size: calc(1.3 * var(--base-font-size));
+        font-weight: bold;
+    }
+    .note-table td {
+        font-size: calc(1.1 * var(--base-font-size));
+    }
+    .note-table th .formula, .note-table td .formula {
+        font-size: 1em;
+    }
     /* KateX公式样式 */
     .formula {
         font-family: 'Times New Roman', serif;
@@ -917,11 +942,11 @@ footer {
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/07/23 <span class="announcement-version">Ver3.0.0</span></div>
+            <div class="announcement-time">2026/09/29 <span class="announcement-version">Ver3.0.11</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>添加了思维导图功能，点击专题标题旁的按钮查看知识结构</li>
+                    <li>新增课题2：认识酸、碱、盐的性质与应用</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1284,7 +1309,7 @@ footer {
         }
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0);
+            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1301,9 +1326,9 @@ footer {
             const isMobile = window.innerWidth <= 768;
             
             if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离月考</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
             } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离月考</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
             }
         }
         updateCountdown();
@@ -1418,15 +1443,140 @@ footer {
                 <h3 class="topic-title">课题1 初识酸和碱</h3>
                 <div class="textbook-title">指示剂颜色变化有无规律可循</div>
                 <ul>
+                    <li><strong>酸碱指示剂</strong>：能跟酸或碱的溶液起作用而显示不同颜色，从而通过颜色变化判断溶液酸碱性的物质</li>
+                    <li><div class="book-reference">紫色石蕊试液遇酸性溶液变成红色，遇碱性溶液变成蓝色，遇中性溶液不变色。（书P34）</div></li>
+                    <li><div class="book-reference">无色酚酞试液遇碱性溶液变成红色，遇酸性溶液和中性溶液不变色。（书P34）</div></li>
+                    <li><strong>记忆口诀</strong>：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红</li>
                 </ul>
                 <div class="textbook-title">我们会遇到哪些常见的酸和碱</div>
                 <ul>
+                    <li><strong>一、酸碱的形成</strong>
+                        <ul>
+                            <li><strong>酸</strong>：由 <span class="formula">H^+</span> 和酸根离子组成</li>
+                            <li><strong>碱</strong>：由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和 <span class="formula">OH^-</span> 组成</li>
+                        </ul>
+                    </li>
+                    <li><strong>二、酸</strong>
+                        <ol>
+                            <li><strong>分类</strong>：
+                                <ul>
+                                    <li>按酸碱性强弱：强酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）；弱酸（<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）</li>
+                                    <li>按可电离出的 <span class="formula">H^+</span> 个数（元数）：一元酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）；二元酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）；多元酸（<span class="chem-formula">H<sub>3</sub>PO<sub>4</sub></span>）</li>
+                                    <li>按是否含氧：含氧酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HNO<sub>3</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）；无氧酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HF</span>、<span class="chem-formula">H<sub>2</sub>S</span>）</li>
+                                </ul>
+                            </li>
+                            <li><strong>常见的酸</strong>：
+                                <ul>
+                                    <li><strong>浓盐酸</strong>：有挥发性，打开瓶盖瓶口出现白雾（<span class="chem-formula">HCl</span> 气体溶于空气中的水蒸气形成盐酸小液滴）</li>
+                                    <li><strong>浓硫酸</strong>：有吸水性（可作干燥剂）、脱水性（能将有机物中的 <span class="chem-formula">H</span>、<span class="chem-formula">O</span> 按 2:1 的比例脱去，使有机物碳化）</li>
+                                </ul>
+                                <table class="note-table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>性质</th>
+                                            <th><span class="formula">m_{\text{质}}</span></th>
+                                            <th><span class="formula">m_{\text{剂}}</span></th>
+                                            <th><span class="formula">m_{\text{液}}</span></th>
+                                            <th><span class="formula">C\%</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>浓盐酸</td>
+                                            <td>挥发</td>
+                                            <td>↓</td>
+                                            <td>—</td>
+                                            <td>↓</td>
+                                            <td>↓</td>
+                                        </tr>
+                                        <tr>
+                                            <td>浓硫酸</td>
+                                            <td>吸水性、脱水性</td>
+                                            <td>—</td>
+                                            <td>↑</td>
+                                            <td>↑</td>
+                                            <td>↓</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                            <li><div class="book-reference">实验表明，稀硫酸和稀盐酸都能与铁、镁等金属反应，也都能与氧化铁（铁锈的主要成分）、氧化铜等金属氧化物及碳酸钙反应。（书P44）</div></li>
+                        </ol>
+                    </li>
+                    <li><strong>三、碱</strong>
+                        <ol>
+                            <li><strong>分类</strong>：
+                                <ul>
+                                    <li>按溶解性：可溶性碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>）；难溶性碱（除易溶性碱）</li>
+                                    <li>按强弱：强碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>）；弱碱（除强碱外）</li>
+                                </ul>
+                            </li>
+                            <li><strong>常见的碱</strong>：
+                                <ul>
+                                    <li><strong>氢氧化钠</strong> <span class="chem-formula">NaOH</span>：俗称火碱、烧碱、苛性钠；易潮解<br><span class="chem-formula">2NaOH + CO<sub>2</sub> = <span style="position:relative;display:inline-block;margin-bottom:1.2em">Na<sub>2</sub>CO<sub>3</sub><span style="position:absolute;left:50%;transform:translateX(-50%);top:100%;white-space:nowrap">纯碱</span></span> + H<sub>2</sub>O</span></li>
+                                    <li><strong>氢氧化钙</strong> <span class="chem-formula">Ca(OH)<sub>2</sub></span>：俗称熟石灰、消石灰<br><span class="formula">Ca(OH)_2 + CO_2 = CaCO_3\downarrow + H_2O</span></li>
+                                    <li><strong>一水合氨</strong> <span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>：易挥发</li>
+                                </ul>
+                            </li>
+                            <li><strong>有颜色的碱</strong>：
+                                <ul>
+                                    <li>氢氧化铜 <span class="chem-formula">Cu(OH)<sub>2</sub></span>：蓝色沉淀</li>
+                                    <li>氢氧化铁 <span class="chem-formula">Fe(OH)<sub>3</sub></span>：红褐色沉淀</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
                 </ul>
 
 
                 <h3 class="topic-title">课题2 认识酸、碱、盐的性质与应用</h3>
                 <div class="textbook-title">酸、碱有哪些化学性质</div>
                 <ul>
+                    <li><strong>一、酸的性质</strong>
+                                <table class="note-table">
+                                    <thead>
+                                        <tr>
+                                            <th>反应物</th>
+                                            <th>与稀硫酸反应反应现象</th>
+                                            <th>化学方程式</th>
+                                            <th>盐酸能否反应</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>镁带</td>
+                                            <td>产生气泡</td>
+                                            <td><span class="formula">Mg + H_2SO_4 = MgSO_4 + H_2\uparrow</span></td>
+                                            <td>能</td>
+                                        </tr>
+                                        <tr>
+                                            <td>氧化铜粉末</td>
+                                            <td>黑色固体溶解，生成蓝色溶液</td>
+                                            <td><span class="formula">CuO + H_2SO_4 = CuSO_4 + H_2O</span></td>
+                                            <td>能</td>
+                                        </tr>
+                                        <tr>
+                                            <td>生锈的铁钉</td>
+                                            <td>生成黄色溶液</td>
+                                            <td><span class="formula">Fe_2O_3 + 3H_2SO_4 = Fe_2(SO_4)_3 + 3H_2O</span></td>
+                                            <td>能</td>
+                                        </tr>
+                                        <tr>
+                                            <td>碳酸钙粉末</td>
+                                            <td>产生气泡</td>
+                                            <td><span class="formula">CaCO_3 + H_2SO_4 = CaSO_4 + H_2O + CO_2\uparrow</span></td>
+                                            <td>能</td>
+                                        </tr>
+                                        <tr>
+                                            <td>氯化钡溶液</td>
+                                            <td>产生白色沉淀</td>
+                                            <td><span class="formula">BaCl_2 + H_2SO_4 = BaSO_4\downarrow + 2HCl</span></td>
+                                            <td>不能</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                    </li>
                 </ul>
                 <div class="textbook-title">生活中会遇到哪些常见的盐</div>
                 <ul>

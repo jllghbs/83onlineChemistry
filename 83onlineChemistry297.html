@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -988,17 +988,21 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
+    <script>window.MathJax = { startup: { typeset: false }, svg: { fontCache: 'none' } };</script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body class="theme-blue">
     <!-- 更新公告 -->
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/09/13 <span class="announcement-version">Ver1.0.11</span></div>
+            <div class="announcement-time">2026/09/29 <span class="announcement-version">Ver1.1.12</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>更新了专题七 溶液的部分内容</li>
+                    <li>更新了专题8 酸、碱、盐 课题2 酸、碱、盐的性质与应用</li>
+                    <li>优化了下载方式</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1018,7 +1022,7 @@
         
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1035,9 +1039,9 @@
             const isMobile = window.innerWidth <= 768;
             
             if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离月考</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
             } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离月考</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
             }
         }
         
@@ -1318,7 +1322,9 @@
                     <!-- 专题七 溶液 -->
                     <span id="topic7" class="topic-anchor"></span>
                     <li class="note-item">分散系包含溶液、浊液等，都属于混合物</li>
-                    <li class="note-item">溶液是均一、稳定、外观澄清透明的混合物，例如食盐水（不一定是无色）</li>
+                    <li class="note-item">溶液是均一、稳定、外观澄清透明的混合物，例如食盐水</li>
+                    <li class="note-item">溶液是混合物，不是纯净物</li>
+                    <li class="note-item">溶液不一定无色，如硫酸铜溶液是蓝色的</li>
                     <li class="note-item">浊液又分为乳浊液与悬浊液
                         <ul>
                             <li>乳浊液是两种互不互溶的液体混合形成的分散系，例如油水混合物</li>
@@ -1326,6 +1332,10 @@
                         </ul>
                     </li>
                     <li class="note-item">被溶解的物质叫做溶质，溶解其他物质的物质叫做溶剂</li>
+                    <li class="note-item">两种液体互相溶解时，通常以量少者为溶质，量多者为溶剂；当溶液中有水存在时，不论水量多少，水都是溶剂</li>
+                    <li class="note-item">酒精、汽油等也是常用的溶剂</li>
+                    <li class="note-item">医用碘酒中溶质是碘单质，溶剂是酒精</li>
+                    <li class="note-item"><span class="chem-formula">KNO₃</span>溶于水吸热、溶液温度降低；<span class="chem-formula">NaOH</span>溶于水放热、溶液温度升高</li>
                     <li class="note-item">一定温度下，一定量溶剂中不能继续溶解某溶质的溶液为该溶质的饱和溶液</li>
                     <li class="note-item">饱和溶液与不饱和溶液可相互转化
                         <ul>
@@ -1335,6 +1345,10 @@
                     </li>
                     <li class="note-item">固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
                     <li class="note-item">气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                    <li class="note-item">溶解性与溶剂多少、是否搅拌、溶质颗粒大小无关；搅拌、把固体粉碎只能加快溶解速率，不能使溶质溶得更多</li>
+                    <li class="note-item">氯化钠、蔗糖很容易溶解在水中，能在水中溶解的物质具有亲水性；食用油不易溶于水、能溶于汽油等有机溶剂，能在有机溶剂中溶解的物质具有亲油性</li>
+                    <li class="note-item">肥皂、洗洁精、洗发液中主要发挥去污作用的表面活性剂既有亲油性又有亲水性</li>
+                    <li class="note-item">洗涤剂去油污是利用乳化作用：使油污分散在水中，随水冲走</li>
                     <li class="note-item">溶解度（S）指一定温度下，100g溶剂中达到饱和时/最多所能溶解的溶质质量，单位为g</li>
                     <li class="note-item"><span class="chem-formula">20℃</span>时氯化钠溶解度36g，有三层含义
                         <ul>
@@ -1344,15 +1358,82 @@
                         </ul>
                     </li>
                     <li class="note-item">饱和溶液里，m质 + m剂 = m液</li>
-                    <li class="note-item">溶液质量等于溶质质量加上溶剂质量</li>
-                    <li class="note-item">大多数固体物质溶解度随温度升高而增大</li>
-                    <li class="note-item">氯化钠溶解度受温度影响很小，氢氧化钙溶解度随温度升高而减小，属于反常</li>
+                    <li class="note-item">饱和溶液中溶解度的计算公式
+                        <ul>
+                            <li><span class="formula">\dfrac{S}{100}=\dfrac{m_{\text{质}}}{m_{\text{剂}}}</span></li>
+                            <li><span class="formula">\dfrac{S}{S+100}=\dfrac{m_{\text{质}}}{m_{\text{液}}}</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item">大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠</li>
+                    <li class="note-item">少数固体物质的溶解度受温度变化影响很小，如氯化钠</li>
+                    <li class="note-item">极少数固体物质的溶解度随温度升高而减小，如氢氧化钙（反常）</li>
                     <li class="note-item">气体的溶解度随压强增大而变大</li>
                     <li class="note-item">溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
                     <li class="note-item">晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
                     <li class="note-item">五水合硫酸铜<span class="chem-formula">CuSO₄·5H₂O</span>俗称蓝矾、胆矾，属于结晶水合物</li>
-                    <li class="note-item">蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长</li>
-                    <li class="note-item">降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出</li>
+                    <li class="note-item">蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长，如 <span class="chem-formula">NaCl</span></li>
+                    <li class="note-item">降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出，如 <span class="chem-formula">KNO₃</span></li>
+                    <li class="note-item">溶液的浓度可以用溶质的质量分数（C%，也可用 ω 表示）表示（表示浓度的方法不止一种）</li>
+                    <li class="note-item">C% = <span class="formula">\dfrac{m_{\text{质}}}{m_{\text{液}}}\times 100\%</span>（部分占整体的比例）</li>
+                    <li class="note-item">含义：0.9% 的 <span class="chem-formula">NaCl</span> 溶液表示<strong>每</strong>100g 溶液中含有 0.9g <span class="chem-formula">NaCl</span></li>
+                    <li class="note-item">溶液各部分的组成和性质完全相同，每一部分的溶质质量分数、密度、颜色都一样</li>
+                    <li class="note-item">一瓶溶液倒出一部分，倒出部分与剩余部分的溶质质量分数、密度、溶解度都不变，只是溶质、溶剂、溶液的总质量变少</li>
+                    <li class="note-item">温度不变时某物质的溶解度不变；饱和溶液恒温蒸发析出晶体后仍为饱和溶液，溶质质量分数不变</li>
+                    <li class="note-item">配制一定溶质质量分数的溶液步骤：计算、称量、溶解、装瓶贴标签</li>
+                    <li class="note-item">配制 100g 10% 的 <span class="chem-formula">NaCl</span> 溶液：需 <span class="chem-formula">NaCl</span> 10g、水 90mL</li>
+                    <li class="note-item">装瓶后贴标签，注明溶质质量分数和溶液名称</li>
+                    <li class="note-item">用浓溶液配制稀溶液的步骤：计算、量取、混匀、装瓶贴标签</li>
+                    <li class="note-item">溶液稀释前后溶质质量不变：<span class="formula">m_{\text{质浓}}=m_{\text{质稀}}</span></li>
+                    <li class="note-item"><span class="formula">C\%_{\text{浓}}\times m_{\text{液浓}}=C\%_{\text{稀}}\times m_{\text{液稀}}</span></li>
+                    <li class="note-item">例：把 20% 的溶液配成 5% 的溶液 100g，<span class="formula">20\%\times m_{\text{液浓}}=5\%\times 100\text{g}</span>，解得 <span class="formula">m_{\text{液浓}}=25\text{g}</span></li>
+                    <li class="note-item">稀释时加水质量 = 稀溶液质量 − 浓溶液质量</li>
+                    <li class="note-item">配制与稀释的注意事项
+                        <ul>
+                            <li>称量：固体用托盘天平称取，液体用量筒量取</li>
+                            <li>溶解和稀释都在烧杯中进行，量筒只能量取液体，不能在量筒中溶解或稀释</li>
+                            <li>量筒读数时视线要与液体凹液面的最低处保持水平；仰视读数偏小，俯视读数偏大</li>
+                            <li>装瓶时不小心洒出部分溶液，不影响C%</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">误差分析
+                        <ul>
+                            <li>偏小原因：溶质不纯、称量时溶质撒落、量取水时仰视读数、溶解前烧杯内壁有水</li>
+                            <li>偏大原因：量取水时俯视读数</li>
+                        </ul>
+                    </li>
+                    <!-- 专题八 酸、碱、盐 -->
+                    <span id="topic8" class="topic-anchor"></span>
+                    <li class="note-item">酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色，从而通过颜色变化判断溶液酸碱性的物质</li>
+                    <li class="note-item">紫色石蕊试液遇酸性溶液变红，遇碱性溶液变蓝，遇中性溶液不变色</li>
+                    <li class="note-item">无色酚酞试液遇碱性溶液变红，遇酸性和中性溶液不变色</li>
+                    <li class="note-item">记忆口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红</li>
+                    <li class="note-item">酸由 <span class="formula">H^+</span> 和酸根离子组成</li>
+                    <li class="note-item">碱由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和 <span class="formula">OH^-</span> 组成</li>
+                    <li class="note-item">酸按强弱分：强酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）、弱酸（<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）</li>
+                    <li class="note-item">酸按可电离出的 <span class="formula">H^+</span> 个数（元数）分：一元酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）、二元酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）、多元酸（<span class="chem-formula">H<sub>3</sub>PO<sub>4</sub></span>）</li>
+                    <li class="note-item">酸按是否含氧分：含氧酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HNO<sub>3</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）、无氧酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HF</span>、<span class="chem-formula">H<sub>2</sub>S</span>）</li>
+                    <li class="note-item">浓盐酸有挥发性，打开瓶盖瓶口出现白雾（<span class="chem-formula">HCl</span> 气体溶于空气中的水蒸气形成盐酸小液滴）</li>
+                    <li class="note-item">浓硫酸有吸水性（可作干燥剂）、脱水性（能将有机物中的 <span class="chem-formula">H</span>、<span class="chem-formula">O</span> 按 2:1 的比例脱去，使有机物碳化）</li>
+                    <li class="note-item">浓盐酸挥发使溶质、溶液质量减小，溶质质量分数减小；浓硫酸吸水使溶剂、溶液质量增大，溶质质量分数减小</li>
+                    <li class="note-item">碱按溶解性分：可溶性碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>）；难溶性碱（除可溶性碱外）</li>
+                    <li class="note-item">碱按强弱分：强碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>）；弱碱（除强碱外）</li>
+                    <li class="note-item">氢氧化钠 <span class="chem-formula">NaOH</span>：俗称火碱、烧碱、苛性钠，易潮解</li>
+                    <li class="note-item">氢氧化钠与二氧化碳反应<br><span class="formula">2NaOH + CO_2 = Na_2CO_3 + H_2O</span></li>
+                    <li class="note-item">氢氧化钙 <span class="chem-formula">Ca(OH)<sub>2</sub></span>：俗称熟石灰、消石灰，微溶于水</li>
+                    <li class="note-item">氢氧化钙与二氧化碳反应<br><span class="formula">Ca(OH)_2 + CO_2 = CaCO_3\downarrow + H_2O</span></li>
+                    <li class="note-item">澄清石灰水（氢氧化钙水溶液）可用于检验 <span class="chem-formula">CO<sub>2</sub></span>（变浑浊）</li>
+                    <li class="note-item">一水合氨 <span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>：易挥发</li>
+                    <li class="note-item">有颜色的碱
+                        <ul>
+                            <li>氢氧化铜 <span class="chem-formula">Cu(OH)<sub>2</sub></span>：蓝色沉淀</li>
+                            <li>氢氧化铁 <span class="chem-formula">Fe(OH)<sub>3</sub></span>：红褐色沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">镁与稀硫酸反应，镁带表面产生气泡（盐酸也能反应）<br><span class="formula">Mg + H_2SO_4 = MgSO_4 + H_2\uparrow</span></li>
+                    <li class="note-item">氧化铜与稀硫酸反应：黑色固体溶解，生成蓝色溶液（盐酸也能反应）<br><span class="formula">CuO + H_2SO_4 = CuSO_4 + H_2O</span></li>
+                    <li class="note-item">氧化铁与稀硫酸反应，生成黄色溶液（盐酸也能反应）<br><span class="formula">Fe_2O_3 + 3H_2SO_4 = Fe_2(SO_4)_3 + 3H_2O</span></li>
+                    <li class="note-item">碳酸钙与稀硫酸反应，产生气泡（盐酸也能反应）<br><span class="formula">CaCO_3 + H_2SO_4 = CaSO_4 + H_2O + CO_2\uparrow</span></li>
+                    <li class="note-item">氯化钡与稀硫酸反应，产生白色沉淀（盐酸不能反应）<br><span class="formula">BaCl_2 + H_2SO_4 = BaSO_4\downarrow + 2HCl</span></li>
                 </ul>
             </div>
         </div>
@@ -1411,9 +1492,94 @@
                 <span>希沃白板</span>
             </div>
         </div>
-    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.doc</button>
+    <button class="download-btn" onclick="downloadChemWord()">点击下载化学99条大全.docx</button>
     <script>
-        function downloadChemWord() {
+        // Word 模板中 {{Fn:兜底文本}} 对应的 LaTeX 与图片高度(pt)
+        const WORD_FORMULAS = {
+            F1: { tex: '\\dfrac{S}{100}=\\dfrac{m_{\\text{质}}}{m_{\\text{剂}}}', h: 30 },
+            F2: { tex: '\\dfrac{S}{S+100}=\\dfrac{m_{\\text{质}}}{m_{\\text{液}}}', h: 30 },
+            F3: { tex: 'C\\%=\\dfrac{m_{\\text{质}}}{m_{\\text{液}}}\\times 100\\%', h: 30 },
+            F4: { tex: 'm_{\\text{质浓}}=m_{\\text{质稀}}', h: 18 },
+            F5: { tex: 'C\\%_{\\text{浓}}\\times m_{\\text{液浓}}=C\\%_{\\text{稀}}\\times m_{\\text{液稀}}', h: 18 },
+            F6: { tex: '20\\%\\times m_{\\text{液浓}}=5\\%\\times 100\\text{g}', h: 18 },
+            F7: { tex: 'm_{\\text{液浓}}=25\\text{g}', h: 18 },
+            F8: { tex: '2NaOH + CO_2 = Na_2CO_3 + H_2O', h: 18 },
+            F9: { tex: 'Ca(OH)_2 + CO_2 = CaCO_3\\downarrow + H_2O', h: 18 },
+            F10: { tex: 'Mg + H_2SO_4 = MgSO_4 + H_2\\uparrow', h: 18 },
+            F12: { tex: 'CuO + H_2SO_4 = CuSO_4 + H_2O', h: 18 },
+            F14: { tex: 'Fe_2O_3 + 3H_2SO_4 = Fe_2(SO_4)_3 + 3H_2O', h: 18 },
+            F16: { tex: 'CaCO_3 + H_2SO_4 = CaSO_4 + H_2O + CO_2\\uparrow', h: 18 },
+            F18: { tex: 'BaCl_2 + H_2SO_4 = BaSO_4\\downarrow + 2HCl', h: 18 }
+        };
+        function waitMathJax() {
+            return new Promise(function (resolve) {
+                let n = 0;
+                (function check() {
+                    if (window.MathJax && typeof window.MathJax.tex2svg === 'function') {
+                        const p = window.MathJax.startup && window.MathJax.startup.promise;
+                        if (p) return p.then(function () { resolve(true); }, function () { resolve(false); });
+                        return resolve(true);
+                    }
+                    if (++n > 100) return resolve(false);
+                    setTimeout(check, 100);
+                })();
+            });
+        }
+        // LaTeX → MathJax 矢量 SVG → canvas → PNG dataURL（heightCss:Word中图片高CSS像素）
+        function texToPng(tex, heightCss) {
+            return new Promise(function (resolve, reject) {
+                try {
+                    const container = window.MathJax.tex2svg(tex, { display: false });
+                    const svg = container.querySelector('svg');
+                    if (!svg) return reject(new Error('svg not found'));
+                    if (svg.querySelector('.mjx-error, merror, [data-mjx-error]') || /Undefined control sequence|\\[a-zA-Z]+/.test(svg.textContent)) return reject(new Error('mathjax syntax error: ' + tex));
+                    const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
+                    const vw = vb[2] || 100, vh = vb[3] || 20;
+                    const wCss = Math.round(heightCss * vw / vh);
+                    const clone = svg.cloneNode(true);
+                    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                    clone.setAttribute('width', wCss);
+                    clone.setAttribute('height', heightCss);
+                    const xml = new XMLSerializer().serializeToString(clone);
+                    const img = new Image();
+                    img.onload = function () {
+                        const dpr = 3, canvas = document.createElement('canvas');
+                        canvas.width = wCss * dpr; canvas.height = heightCss * dpr;
+                        const ctx = canvas.getContext('2d');
+                        ctx.scale(dpr, dpr);
+                        ctx.drawImage(img, 0, 0, wCss, heightCss);
+                        resolve({ url: canvas.toDataURL('image/png'), w: wCss, h: heightCss });
+                    };
+                    img.onerror = reject;
+                    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+                } catch (e) { reject(e); }
+            });
+        }
+        async function renderWordFormulas(html) {
+            const re = /\{\{(F\d+):([^}]*)\}\}/g;
+            const marks = [];
+            let m;
+            while ((m = re.exec(html))) marks.push(m);
+            if (!marks.length) return html;
+            const ready = await waitMathJax();
+            for (const mark of marks) {
+                const full = mark[0], id = mark[1], fallback = mark[2];
+                let rep = fallback;
+                if (ready && WORD_FORMULAS[id]) {
+                    try {
+                        const r = await texToPng(WORD_FORMULAS[id].tex, WORD_FORMULAS[id].h);
+                        rep = '<img src="' + r.url + '" width="' + r.w + '" height="' + r.h + '" style="vertical-align:middle;border:0">';
+                    } catch (e) { console.error('公式渲染失败：' + id, e); }
+                }
+                html = html.split(full).join(rep);
+            }
+            return html;
+        }
+        function timeStamp() {
+            const d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
+            return p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds());
+        }
+        async function downloadChemWord() {
             // 化学99条大全的完整内容（Word可识别的HTML格式，带样式）
             const wordContent = `
                 <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
@@ -1437,27 +1603,19 @@
                                 margin-top: 20px;
                                 margin-bottom: 10px;
                             }
-                            ol { 
-                                list-style-type: none;
-                                counter-reset: item;
-                                padding-left: 0;
+                            ol {
+                                list-style-type: decimal;
+                                padding-left: 28px;
                             }
-                            li { 
-                                font-size: 11pt; 
-                                line-height: 1.8; 
+                            li {
+                                font-size: 11pt;
+                                line-height: 1.8;
                                 margin-bottom: 8px;
                                 color: #333;
-                                counter-increment: item;
-                                position: relative;
-                                padding-left: 35px;
                             }
-                            li::before {
-                                content: counter(item) ".";
-                                position: absolute;
-                                left: 0;
+                            ol > li::marker {
                                 color: #5f52ff;
                                 font-weight: bold;
-                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
                             }
                             ul { 
                                 list-style-type: disc; 
@@ -1486,7 +1644,9 @@
                             <li>上课禁止写作业（刘育君除外）</li>
                             <li>考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
                             <li>分散系包含溶液、浊液等，都属于混合物</li>
-                            <li>溶液是均一、稳定、外观澄清透明的混合物，例如食盐水（不一定是无色）</li>
+                            <li>溶液是均一、稳定、外观澄清透明的混合物，例如食盐水</li>
+                            <li>溶液是混合物，不是纯净物</li>
+                            <li>溶液不一定无色，如硫酸铜溶液是蓝色的</li>
                             <li>浊液又分为乳浊液与悬浊液
                                 <ul>
                                 <li>乳浊液是两种互不互溶的液体混合形成的分散系，例如油水混合物</li>
@@ -1494,6 +1654,10 @@
                                 </ul>
                             </li>
                             <li>被溶解的物质叫做溶质，溶解其他物质的物质叫做溶剂</li>
+                            <li>两种液体互相溶解时，通常以量少者为溶质，量多者为溶剂；当溶液中有水存在时，不论水量多少，水都是溶剂</li>
+                            <li>酒精、汽油等也是常用的溶剂</li>
+                            <li>医用碘酒中溶质是碘单质，溶剂是酒精</li>
+                            <li>KNO₃溶于水吸热、溶液温度降低；NaOH溶于水放热、溶液温度升高</li>
                             <li>一定温度下，一定量溶剂中不能继续溶解某溶质的溶液为该溶质的饱和溶液</li>
                             <li>饱和溶液与不饱和溶液可相互转化
                                 <ul>
@@ -1503,6 +1667,10 @@
                             </li>
                             <li>固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
                             <li>气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                            <li>溶解性（溶解能力）与溶剂多少、是否搅拌、溶质颗粒大小无关；搅拌、把固体粉碎只能加快溶解速率，不能使溶质溶得更多</li>
+                            <li>氯化钠、蔗糖很容易溶解在水中，能在水中溶解的物质具有亲水性；食用油不易溶于水、能溶于汽油等有机溶剂，能在有机溶剂中溶解的物质具有亲油性</li>
+                            <li>肥皂、洗洁精、洗发液中主要发挥去污作用的表面活性剂既有亲油性又有亲水性</li>
+                            <li>洗涤剂去油污是利用乳化作用：使油污分散在水中，随水冲走</li>
                             <li>溶解度（S）指一定温度下，100g溶剂中达到饱和时/最多所能溶解的溶质质量，单位为g</li>
                             <li>20℃时氯化钠溶解度36g，有三层含义
                                 <ul>
@@ -1512,26 +1680,113 @@
                                 </ul>
                             </li>
                             <li>饱和溶液里，m质 + m剂 = m液</li>
-                            <li>溶液质量等于溶质质量加上溶剂质量</li>
-                            <li>大多数固体物质溶解度随温度升高而增大</li>
-                            <li>氯化钠溶解度受温度影响很小，氢氧化钙溶解度随温度升高而减小，属于反常</li>
+                            <li>饱和溶液中溶解度的计算公式
+                                <ul>
+                                    <li>{{F1:S/100 = m质/m剂}}</li>
+                                    <li>{{F2:S/(S+100) = m质/m液}}</li>
+                                </ul>
+                            </li>
+                            <li>大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠</li>
+                            <li>少数固体物质的溶解度受温度变化影响很小，如氯化钠</li>
+                            <li>极少数固体物质的溶解度随温度升高而减小，如氢氧化钙（反常）</li>
                             <li>气体的溶解度随压强增大而变大</li>
                             <li>溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
                             <li>晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
                             <li>五水合硫酸铜CuSO₄·5H₂O俗称蓝矾、胆矾，属于结晶水合物</li>
-                            <li>蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长</li>
-                            <li>降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出</li>
+                            <li>蒸发结晶：适用于几乎所有物质，优点是得到全部溶质，缺点是耗时长，如NaCl</li>
+                            <li>降温结晶（蒸发溶剂浓缩→降温）：适用于t↑S↑（溶解度随温度升高而增大）的物质，优点是方便，缺点是无法全部析出，如KNO₃</li>
+                            <li>溶液的浓度可以用溶质的质量分数（C%，也可用ω表示）表示（表示浓度的方法不止一种）</li>
+                            <li>{{F3:C% = m质/m液 × 100%}}（部分占整体的比例）</li>
+                            <li>含义：0.9%的NaCl溶液表示<strong>每</strong>100g溶液中含有0.9g NaCl</li>
+                            <li>溶液具有均一性，各部分的组成和性质完全相同，每一部分的溶质质量分数、密度、颜色都一样</li>
+                            <li>一瓶溶液倒出一部分，倒出部分与剩余部分的溶质质量分数、密度、溶解度都不变，只是溶质、溶剂、溶液的总质量变少</li>
+                            <li>温度不变时某物质的溶解度不变；饱和溶液恒温蒸发析出晶体后仍为饱和溶液，溶质质量分数不变</li>
+                            <li>配制一定溶质质量分数的溶液步骤：计算、称量、溶解、装瓶贴标签</li>
+                            <li>配制100g 10%的NaCl溶液：需NaCl 10g、水90mL</li>
+                            <li>装瓶后贴标签，注明溶质质量分数和溶液名称</li>
+                            <li>用浓溶液配制稀溶液的步骤：计算、量取、混匀、装瓶贴标签</li>
+                            <li>溶液稀释前后溶质质量不变：{{F4:m质浓=m质稀}}</li>
+                            <li>{{F5:C%浓×m液浓=C%稀×m液稀}}</li>
+                            <li>例：把20%的溶液配成5%的溶液100g，{{F6:20%×m液浓=5%×100g}}，解得{{F7:m液浓=25g}}</li>
+                            <li>稀释时加水质量=稀溶液质量−浓溶液质量</li>
+                            <li>配制与稀释的注意事项
+                                <ul>
+                                    <li>称量：固体用托盘天平称取，液体用量筒量取</li>
+                                    <li>溶解和稀释都在烧杯中进行，量筒只能量取液体，不能在量筒中溶解或稀释</li>
+                                    <li>量筒读数时视线要与液体凹液面的最低处保持水平；仰视读数偏小，俯视读数偏大</li>
+                                    <li>装瓶时不小心洒出部分溶液，不影响C%</li>
+                                </ul>
+                            </li>
+                            <li>配制结果的误差分析
+                                <ul>
+                                    <li>C%偏小的原因：溶质不纯、称量时溶质撒落、量取水时仰视读数、溶解前烧杯内壁有水</li>
+                                    <li>C%偏大的原因：量取水时俯视读数</li>
+                                </ul>
+                            </li>
+                            <li>酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色，从而通过颜色变化判断溶液酸碱性的物质</li>
+                            <li>紫色石蕊试液遇酸性溶液变红，遇碱性溶液变蓝，遇中性溶液不变色</li>
+                            <li>无色酚酞试液遇碱性溶液变红，遇酸性和中性溶液不变色</li>
+                            <li>记忆口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红</li>
+                            <li>酸由 H⁺ 和酸根离子组成</li>
+                            <li>碱由金属离子（或 NH₄⁺）和 OH⁻ 组成</li>
+                            <li>酸按强弱分：强酸（H₂SO₄、HCl、HNO₃）、弱酸（H₂CO₃）</li>
+                            <li>酸按可电离出的 H⁺ 个数（元数）分：一元酸（HCl、HNO₃）、二元酸（H₂SO₄、H₂CO₃）、多元酸（H₃PO₄）</li>
+                            <li>酸按是否含氧分：含氧酸（H₂SO₄、HNO₃、H₂CO₃）、无氧酸（HCl、HF、H₂S）</li>
+                            <li>浓盐酸有挥发性，打开瓶盖瓶口出现白雾（HCl 气体溶于空气中的水蒸气形成盐酸小液滴）</li>
+                            <li>浓硫酸有吸水性（可作干燥剂）、脱水性（能将有机物中的 H、O 按 2:1 的比例脱去，使有机物碳化）</li>
+                            <li>浓盐酸挥发使溶质、溶液质量减小，溶质质量分数减小；浓硫酸吸水使溶剂、溶液质量增大，溶质质量分数减小</li>
+                            <li>碱按溶解性分：可溶性碱（NaOH、KOH、Ba(OH)₂、Ca(OH)₂、NH₃·H₂O）；难溶性碱（除可溶性碱外）</li>
+                            <li>碱按强弱分：强碱（NaOH、KOH、Ca(OH)₂、Ba(OH)₂）；弱碱（除强碱外）</li>
+                            <li>氢氧化钠 NaOH：俗称火碱、烧碱、苛性钠，易潮解</li>
+                            <li>氢氧化钠与二氧化碳反应：{{F8:2NaOH + CO₂ = Na₂CO₃ + H₂O}}</li>
+                            <li>氢氧化钙 Ca(OH)₂：俗称熟石灰、消石灰，微溶于水</li>
+                            <li>氢氧化钙与二氧化碳反应：{{F9:Ca(OH)₂ + CO₂ = CaCO₃↓ + H₂O}}</li>
+                            <li>澄清石灰水（氢氧化钙水溶液）可用于检验 CO₂（变浑浊）</li>
+                            <li>一水合氨 NH₃·H₂O：易挥发</li>
+                            <li>有颜色的碱
+                                <ul>
+                                    <li>氢氧化铜 Cu(OH)₂：蓝色沉淀</li>
+                                    <li>氢氧化铁 Fe(OH)₃：红褐色沉淀</li>
+                                </ul>
+                            </li>
+                            <li>镁与稀硫酸反应，镁带表面产生气泡（盐酸也能反应）：{{F10:Mg + H₂SO₄ = MgSO₄ + H₂↑}}</li>
+                            <li>氧化铜与稀硫酸反应：黑色固体溶解，生成蓝色溶液（盐酸也能反应）：{{F12:CuO + H₂SO₄ = CuSO₄ + H₂O}}</li>
+                            <li>氧化铁与稀硫酸反应，生成黄色溶液（盐酸也能反应）：{{F14:Fe₂O₃ + 3H₂SO₄ = Fe₂(SO₄)₃ + 3H₂O}}</li>
+                            <li>碳酸钙与稀硫酸反应，产生气泡（盐酸也能反应）：{{F16:CaCO₃ + H₂SO₄ = CaSO₄ + H₂O + CO₂↑}}</li>
+                            <li>氯化钡与稀硫酸反应，产生白色沉淀（盐酸不能反应）：{{F18:BaCl₂ + H₂SO₄ = BaSO₄↓ + 2HCl}}</li>
                             </ol>
                     </body>
                 </html>
             `;
-            // 编码内容，防止特殊字符出错
-            const encodedContent = encodeURIComponent(wordContent);
-            // 创建下载链接
+            // 公式（LaTeX）渲染成图片后再打包
+            const wordHtml = await renderWordFormulas(wordContent);
+            const fileName = "化学99条大全-九年级上学期-" + timeStamp() + ".docx";
+            // 优先：生成真正的 .docx（OOXML）
+            if (window.htmlDocx && typeof window.htmlDocx.asBlob === 'function') {
+                try {
+                    const blob = window.htmlDocx.asBlob(wordHtml, { orientation: 'portrait', margins: { top: 1440, right: 1440, bottom: 1440, left: 1440 } });
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(blob, fileName);
+                    } else {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+                    }
+                    return;
+                } catch (e) {
+                    console.error('docx 生成失败，回退到 .doc：', e);
+                }
+            }
+            // 回退：HTML 伪装的 .doc（库加载失败时）
+            const encodedContent = encodeURIComponent(wordHtml);
             const link = document.createElement('a');
             link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
-            link.download = "化学99条大全-本学期核心知识点.doc";
-            // 触发下载
+            link.download = "化学99条大全-九年级上学期-" + timeStamp() + ".doc";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -1539,8 +1794,6 @@
     </script>
     </footer>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
     <script>

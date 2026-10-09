@@ -1284,7 +1284,7 @@ footer {
         }
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0);
+            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1301,9 +1301,9 @@ footer {
             const isMobile = window.innerWidth <= 768;
             
             if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离月考</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
             } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离月考</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
             }
         }
         updateCountdown();

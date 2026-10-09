@@ -801,7 +801,7 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/7/114 <span class="announcement-version">Ver1.0.3</span></div>
+            <div class="announcement-time">2026/9/29 <span class="announcement-version">Ver1.0.9</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
@@ -830,7 +830,7 @@
         }
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -847,9 +847,9 @@
             const isMobile = window.innerWidth <= 768;
             
             if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离月考</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
             } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离月考</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
             }
         }
         function openSettings() {
@@ -1020,7 +1020,6 @@
         <div class="unit-nav">
             <h2>专题导航</h2>
             <div class="btn-container">
-                <div class="btn-item"><a href="#topic7">专题七</a></div>
                 <div class="btn-item"><a href="#topic8">专题八</a></div>
                 <div class="btn-item"><a href="#topic9">专题九</a></div>
                 <div class="btn-item"><a href="#topic10">专题十</a></div>
@@ -1048,42 +1047,67 @@
             </div>
             <div class="note-content">
                 
-                <h3 class="topic-title" id="topic7">专题七 溶液</h3>
-                
-                <div class="textbook-title">课题1 初探溶液</div>
-                <ul class="equation-list">
-                    <li class="equation-item">还没学呢> 
-                        <span class="tag">氧化反应</span>
-                        <ul>
-                            <li><strong>说明：</strong>没有说明</li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <div class="textbook-title">课题2 探究物质的溶解性</div>
-                <ul class="equation-list">
-                </ul>
-                
-                <div class="textbook-title">课题3 学会定量表示溶液的组成</div>
-                <ul class="equation-list">
-                </ul>
-                
                 <h3 class="topic-title" id="topic8">专题八 酸、碱、盐</h3>
                 
                 <div class="textbook-title">课题1 初识酸和碱</div>
                 <ul class="equation-list">
-                    <li class="equation-item">还没学呢> 
-                        <span class="tag">氧化反应</span>
+                    <li class="equation-item"><span class="formula">2\text{NaOH} + \text{CO}_2 \xlongequal{\quad} \text{Na}_2\text{CO}_3 + \text{H}_2\text{O}</span>
+                        <span class="tag">常温</span>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Ca(OH)}_2 + \text{CO}_2 \xlongequal{\quad} \text{CaCO}_3\downarrow + \text{H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
                         <ul>
-                            <li><strong>说明：</strong>没有说明</li>
+                            <li><strong>现象：</strong>澄清石灰水变浑浊</li>
+                            <li><strong>应用：</strong>检验二氧化碳的方法</li>
                         </ul>
                     </li>
                 </ul>
-                
+
                 <div class="textbook-title">课题2 认识酸、碱、盐的性质与应用</div>
                 <ul class="equation-list">
+                    <li class="equation-item"><span class="formula">\text{Mg} + \text{H}_2\text{SO}_4 \xlongequal{\quad} \text{MgSO}_4 + \text{H}_2\uparrow</span>
+                        <span class="tag">置换反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>镁带表面产生气泡</li>
+                            <li><strong>注意：</strong>稀盐酸也能与镁反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CuO} + \text{H}_2\text{SO}_4 \xlongequal{\quad} \text{CuSO}_4 + \text{H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>黑色固体溶解，生成蓝色溶液</li>
+                            <li><strong>注意：</strong>稀盐酸也能与氧化铜反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Fe}_2\text{O}_3 + 3\text{H}_2\text{SO}_4 \xlongequal{\quad} \text{Fe}_2(\text{SO}_4)_3 + 3\text{H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>生成黄色溶液</li>
+                            <li><strong>注意：</strong>稀盐酸也能与氧化铁反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CaCO}_3 + \text{H}_2\text{SO}_4 \xlongequal{\quad} \text{CaSO}_4 + \text{H}_2\text{O} + \text{CO}_2\uparrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生气泡</li>
+                            <li><strong>注意：</strong>稀盐酸也能与碳酸钙反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{BaCl}_2 + \text{H}_2\text{SO}_4 \xlongequal{\quad} \text{BaSO}_4\downarrow + 2\text{HCl}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生白色沉淀</li>
+                            <li><strong>注意：</strong>稀盐酸不能发生此反应</li>
+                        </ul>
+                    </li>
                 </ul>
-                
+
                 <div class="textbook-title">课题3 调节土壤酸碱性与施用营养元素</div>
                 <ul class="equation-list">
                 </ul>

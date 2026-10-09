@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>九下99条化学知识大全</title>
+    <title>番外篇 化学99条大全</title>
     <!-- 引入KaTeX CSS与JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -988,13 +988,14 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
 </head>
 <body class="theme-blue">
     <!-- 更新公告 -->
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/07/12 <span class="announcement-version">Ver1.0.3</span></div>
+            <div class="announcement-time">2026/07/12 <span class="announcement-version">Ver1.0.1</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
@@ -1018,7 +1019,7 @@
         
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 5, 23, 10, 0, 0); // 6月23日10:00
+            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1035,9 +1036,9 @@
             const isMobile = window.innerWidth <= 768;
             
             if (isMobile) {
-                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离期末考试</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 14px; color: #5f52ff;">距离月考</div><div style="font-size: 22px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时</div>`;
             } else {
-                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离期末考试</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
+                countdownElement.innerHTML = `<div style="font-size: 16px; color: #5f52ff;">距离月考</div><div style="font-size: 26px; font-weight: bold; color: #5f52ff;">${days}天 ${hours}小时 ${minutes}分 ${seconds}秒</div>`;
             }
         }
         
@@ -1193,7 +1194,7 @@
     <header>
         <div class="header-container">
             <h1>上海市北郊学校 九（3）班 九下99条</h1>
-            <p class="time-range">学习周期：？</p>
+            <p class="time-range">学习周期：2025年9月1日 - 2026年1月19日</p>
         </div>
         <button class="settings-btn" onclick="openSettings()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
@@ -1262,12 +1263,12 @@
     <!-- 导航栏（优化宽度，手机端一行显示） -->
     <div class="nav-container">
         <div class="unit-nav">
-            <h2>九年级化学笔记导航</h2>
+            <h2>九下化学笔记单元导航</h2>
             <ul class="unit-list">
-                <li><a href="83onlineChemistry7.html">专题7</a></li>
-                <li><a href="83onlineChemistry8.html">专题8</a></li>
-                <li><a href="83onlineChemistry9.html">专题9</a></li>
-                <li><a href="83onlineChemistry10.html">专题10</a></li>
+                <li><a href="#topic7">专题7</a></li>
+                <li><a href="#topic8">专题8</a></li>
+                <li><a href="#topic9">专题9</a></li>
+                <li><a href="#topic10">专题10</a></li>
             </ul>
         </div>
     </div>
@@ -1287,9 +1288,9 @@
     <!-- 主内容 -->
     <div class="container">
         <div class="note-section">
-            <div class="unit-title">番外篇 九下99条</div>
+            <div class="unit-title">番外篇 化学99条大全</div>
             <div class="note-content">
-                <h3 class="topic-title">九下核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
+                <h3 class="topic-title">本学期核心知识点（千万不要考试的时候往考卷上默99条哦！！！）</h3>
                 
                 <ul class="note-list">
                     <li class="note-item">课还没上呢，敬请期待...</li>
@@ -1302,7 +1303,7 @@
     <!-- 页脚 -->
     <footer>
         <div class="footer-info">
-            <p>© 2026 九年级化学笔记 - 九下99条化学知识大全</p>
+            <p>© 2026 上海市北郊学校九（3）班 九下化学笔记</p>
             <p>记录人：胡锦乐</p>
             <div class="contact-info">
                 <span>联系方式：</span>
@@ -1317,7 +1318,7 @@
                     <div class="contact-icon qr-container" title="邮箱">
                         <img src="https://img.zxxk.com/aed/ai/upload/20260524/09af9b7a44a64b7baa4be208eedbbf90.png" alt="邮箱" class="contact-logo">
                         <div class="qr-code">
-                            <p class="contact-text">official83online@163.com</p>
+                            <p class="contact-text">jllghbs1223@2925.com</p>
                             <p>邮箱</p>
                         </div>
                     </div>
@@ -1351,7 +1352,7 @@
                 <span>希沃白板</span>
             </div>
         </div>
-    <button class="download-btn" onclick="downloadChemWord()">点击下载九下99条.doc</button>
+    <button class="download-btn" onclick="downloadChemWord()">点击下载九下99条.docx</button>
 
     <script>
         function downloadChemWord() {
@@ -1378,27 +1379,19 @@
                                 margin-top: 20px;
                                 margin-bottom: 10px;
                             }
-                            ol { 
-                                list-style-type: none;
-                                counter-reset: item;
-                                padding-left: 0;
+                            ol {
+                                list-style-type: decimal;
+                                padding-left: 28px;
                             }
-                            li { 
-                                font-size: 11pt; 
-                                line-height: 1.8; 
+                            li {
+                                font-size: 11pt;
+                                line-height: 1.8;
                                 margin-bottom: 8px;
                                 color: #333;
-                                counter-increment: item;
-                                position: relative;
-                                padding-left: 35px;
                             }
-                            li::before {
-                                content: counter(item) ".";
-                                position: absolute;
-                                left: 0;
+                            ol > li::marker {
                                 color: #5f52ff;
                                 font-weight: bold;
-                                font-family: 'SimHei', 'Microsoft YaHei Bold', bold;
                             }
                             ul { 
                                 list-style-type: disc; 
@@ -1426,13 +1419,32 @@
                 </html>
             `;
 
-            // 编码内容，防止特殊字符出错
+            const fileName = "九下99条化学知识大全-九年级下学期-" + (function(){var d=new Date(),p=function(n){return String(n).padStart(2,'0')};return p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());})() + ".docx";
+            if (window.htmlDocx && typeof window.htmlDocx.asBlob === 'function') {
+                try {
+                    const blob = window.htmlDocx.asBlob(wordContent, { orientation: 'portrait', margins: { top: 1440, right: 1440, bottom: 1440, left: 1440 } });
+                    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                        window.navigator.msSaveOrOpenBlob(blob, fileName);
+                    } else {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+                    }
+                    return;
+                } catch (e) {
+                    console.error('docx 生成失败，回退到 .doc：', e);
+                }
+            }
+            // 回退：HTML 伪装的 .doc（库加载失败时）
             const encodedContent = encodeURIComponent(wordContent);
-            // 创建下载链接
             const link = document.createElement('a');
             link.href = `data:application/msword;charset=utf-8,${encodedContent}`;
-            link.download = "九下99条化学知识大全.doc";
-            // 触发下载
+            link.download = "九下99条化学知识大全-九年级下学期-" + (function(){var d=new Date(),p=function(n){return String(n).padStart(2,'0')};return p(d.getHours())+p(d.getMinutes())+p(d.getSeconds());})() + ".doc";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
