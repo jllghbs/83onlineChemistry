@@ -935,6 +935,31 @@ footer {
         color: #fff;
         outline: 2px solid #1b5e20;
     }
+    /* 跳转闪烁链接（跟随主题色） */
+    .flash-link {
+        color: #5f52ff;
+        text-decoration: underline dotted;
+        cursor: pointer;
+    }
+    @keyframes flash-blue {
+        0%, 100% { background-color: transparent; }
+        25%, 75% { background-color: rgba(66, 133, 244, 0.35); }
+        50% { background-color: rgba(66, 133, 244, 0.7); }
+    }
+    @keyframes flash-green {
+        0%, 100% { background-color: transparent; }
+        25%, 75% { background-color: rgba(76, 175, 80, 0.3); }
+        50% { background-color: rgba(27, 94, 32, 0.6); }
+    }
+    .flash-target {
+        animation: flash-blue 0.8s ease-in-out 3;
+    }
+    body.theme-green .flash-target {
+        animation: flash-green 0.8s ease-in-out 3;
+    }
+    body.theme-green .flash-link {
+        color: #2e7d32;
+    }
 </style>
 </head>
 <body class="theme-blue">
@@ -942,11 +967,11 @@ footer {
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/09/29 <span class="announcement-version">Ver3.0.11</span></div>
+            <div class="announcement-time">2026/10/21 <span class="announcement-version">Ver3.0.19</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>新增课题2：认识酸、碱、盐的性质与应用</li>
+                    <li>盐的性质表格逐行并合并单元格</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1309,7 +1334,7 @@ footer {
         }
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
+            const examDate = new Date(today.getFullYear(), 9, 13, 15, 50, 0); // 10月13日15:50 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1454,6 +1479,7 @@ footer {
                         <ul>
                             <li><strong>酸</strong>：由 <span class="formula">H^+</span> 和酸根离子组成</li>
                             <li><strong>碱</strong>：由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和 <span class="formula">OH^-</span> 组成</li>
+                            <li><strong>盐</strong>：由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和酸根离子组成</li>
                         </ul>
                     </li>
                     <li><strong>二、酸</strong>
@@ -1508,7 +1534,7 @@ footer {
                         <ol>
                             <li><strong>分类</strong>：
                                 <ul>
-                                    <li>按溶解性：可溶性碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>）；难溶性碱（除易溶性碱）</li>
+                                    <li id="solubility-base">按溶解性：可溶性碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>）；难溶性碱（除易溶性碱）</li>
                                     <li>按强弱：强碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>）；弱碱（除强碱外）</li>
                                 </ul>
                             </li>
@@ -1576,10 +1602,127 @@ footer {
                                         </tr>
                                     </tbody>
                                 </table>
+                        <ul>
+                            <li><strong>酸的通性</strong>：
+                                <ol>
+                                    <li>与酸碱指示剂作用：使紫色石蕊试液变红，无色酚酞试液不变色</li>
+                                    <li>与活泼金属反应：酸 + 金属 → 盐 + 氢气</li>
+                                    <li>与碱性氧化物反应：酸 + 碱性氧化物 → 盐 + 水</li>
+                                    <li>与碱反应：酸 + 碱 → 盐 + 水（中和反应）</li>
+                                    <li>与某些盐反应：酸 + 盐 → 新盐 + 新酸</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>二、碱的性质</strong>
+                        <table class="note-table">
+                            <thead>
+                                <tr>
+                                    <th>反应物</th>
+                                    <th>与 NaOH 溶液反应</th>
+                                    <th>与 Ca(OH)<sub>2</sub> 溶液反应</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="chem-formula">CO<sub>2</sub></span></td>
+                                    <td><span class="formula">2NaOH + CO_2 = Na_2CO_3 + H_2O</span></td>
+                                    <td><span class="formula">Ca(OH)_2 + CO_2 = CaCO_3\downarrow + H_2O</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="chem-formula">FeCl<sub>3</sub></span>（黄色）</td>
+                                    <td><span class="formula">3NaOH + FeCl_3 = 3NaCl + Fe(OH)_3\downarrow</span></td>
+                                    <td><span class="formula">3Ca(OH)_2 + 2FeCl_3 = 3CaCl_2 + 2Fe(OH)_3\downarrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="chem-formula">CuSO<sub>4</sub></span></td>
+                                    <td><span class="formula">2NaOH + CuSO_4 = Cu(OH)_2\downarrow + Na_2SO_4</span></td>
+                                    <td><span class="formula">CuSO_4 + Ca(OH)_2 = CaSO_4 + Cu(OH)_2\downarrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="chem-formula">Na<sub>2</sub>CO<sub>3</sub></span></td>
+                                    <td>不反应</td>
+                                    <td><span class="formula">Na_2CO_3 + Ca(OH)_2 = CaCO_3\downarrow + 2NaOH</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <ul>
+                            <li><strong>碱的通性</strong>：
+                                <ol>
+                                    <li>与酸碱指示剂作用：使紫色石蕊试液变蓝，无色酚酞试液变红</li>
+                                    <li>与酸性氧化物反应：碱 + 酸性氧化物 → 盐 + 水</li>
+                                    <li>与酸反应：碱 + 酸 → 盐 + 水（中和反应）</li>
+                                    <li>与某些盐反应：碱 + 盐 → 新盐 + 新碱</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>三、酸性氧化物与碱性氧化物</strong>
+                        <ul>
+                            <li><strong>酸性氧化物</strong>：能与碱反应生成盐和水的氧化物，如 <span class="chem-formula">CO<sub>2</sub></span>、<span class="chem-formula">SO<sub>2</sub></span>、<span class="chem-formula">SO<sub>3</sub></span>，大多是非金属氧化物</li>
+                            <li><strong>碱性氧化物</strong>：能与酸反应生成盐和水的氧化物，如 <span class="chem-formula">CaO</span>、<span class="chem-formula">CuO</span>、<span class="chem-formula">Fe<sub>2</sub>O<sub>3</sub></span>，大多是金属氧化物</li>
+                        </ul>
+                    </li>
+                    <li><strong>四、复分解反应发生的条件</strong>：生成物中有沉淀（<span class="formula">\downarrow</span>）、气体（<span class="formula">\uparrow</span>）或水生成</li>
+                    <li><strong>五、常见的沉淀（不溶物）</strong>
+                        <ul>
+                            <li>不溶于水：<span class="chem-formula">CaCO<sub>3</sub></span>、<span class="chem-formula">BaCO<sub>3</sub></span>（能溶于酸）</li>
+                            <li>不溶于水、也不溶于酸：<span class="chem-formula">BaSO<sub>4</sub></span>、<span class="chem-formula">AgCl</span></li>
+                            <li>不溶于水的碱见 <a class="flash-link" href="#solubility-base" onclick="flashTo('solubility-base'); return false;">碱的分类 · 按溶解性</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <div class="textbook-title">生活中会遇到哪些常见的盐</div>
                 <ul>
+                    <li><strong>盐的组成</strong>：由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和酸根离子构成</li>
+                    <li><strong>盐的分类</strong>
+                        <ul>
+                            <li>按金属离子或酸根离子分：钾盐、钙盐、钠盐、NH<sub>4</sub>盐、CO<sub>3</sub>盐、SO<sub>4</sub>盐、NO<sub>3</sub>盐、盐酸盐……</li>
+                            <li>按组成分：正盐（<span class="chem-formula">NaCl</span>、<span class="chem-formula">CaSO<sub>4</sub></span>、<span class="chem-formula">AgCl</span>、<span class="chem-formula">NaNO<sub>3</sub></span>……）、酸式盐（<span class="chem-formula">NaHCO<sub>3</sub></span>、<span class="chem-formula">NaH<sub>2</sub>PO<sub>4</sub></span>……）、碱式盐（<span class="chem-formula">Cu<sub>2</sub>(OH)<sub>2</sub>CO<sub>3</sub></span>……）</li>
+                        </ul>
+                    </li>
+                    <li><strong>溶解性规律</strong>：<span class="chem-formula">NO<sub>3</sub><sup>-</sup></span>、<span class="chem-formula">K<sup>+</sup></span>、<span class="chem-formula">Na<sup>+</sup></span>、<span class="chem-formula">NH<sub>4</sub><sup>+</sup></span> 的盐都可溶</li>
+                    <li><strong>常见的盐及用途</strong>
+                        <table class="note-table">
+                            <thead>
+                                <tr>
+                                    <th>物质</th>
+                                    <th>俗名 / 来源</th>
+                                    <th>用途</th>
+                                    <th>性质（方程式）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="chem-formula">NaCl</span></td>
+                                    <td>食盐的主要成分</td>
+                                    <td>调味、腌制食品、配制生理盐水</td>
+                                    <td><span class="formula">NaCl + AgNO_3 = AgCl\downarrow + NaNO_3</span></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><span class="chem-formula">Na<sub>2</sub>CO<sub>3</sub></span></td>
+                                    <td rowspan="2">苏打、纯碱</td>
+                                    <td rowspan="2">制玻璃、造纸、生产洗涤剂</td>
+                                    <td><span class="formula">Na_2CO_3 + 2HCl = 2NaCl + H_2O + CO_2\uparrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="formula">Na_2CO_3 + BaCl_2 = 2NaCl + BaCO_3\downarrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="chem-formula">NaHCO<sub>3</sub></span></td>
+                                    <td>小苏打</td>
+                                    <td>发酵粉、治疗胃酸过多</td>
+                                    <td><span class="formula">NaHCO_3 + HCl = NaCl + H_2O + CO_2\uparrow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="chem-formula">CaCO<sub>3</sub></span></td>
+                                    <td>大理石、石灰石的主要成分；牙齿、蜗牛壳、贝壳、珍珠中也含碳酸钙</td>
+                                    <td>建筑材料、补钙剂</td>
+                                    <td><span class="formula">CaCO_3 + 2HCl = CaCl_2 + H_2O + CO_2\uparrow</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
                 </ul>
                 <div class="textbook-title">水对酸、碱、盐的性质产生怎样的影响</div>
                 <ul>
@@ -1617,6 +1760,15 @@ footer {
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"f05c6ba029764a72bbf8a7ac686120ea","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
     <script>
+        function flashTo(id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.remove('flash-target');
+            void el.offsetWidth;
+            el.classList.add('flash-target');
+            setTimeout(function () { el.classList.remove('flash-target'); }, 2600);
+        }
         document.addEventListener('DOMContentLoaded', function() {
             var formulas = document.querySelectorAll('.formula');
             formulas.forEach(function(el) {

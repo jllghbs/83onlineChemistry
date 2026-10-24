@@ -94,10 +94,11 @@
             background: linear-gradient(135deg, #1b5e20, #388e3c);
         }
         body.theme-green .download-btn {
-            background: rgba(46, 125, 50, 0.85);
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            box-shadow: 0 3px 10px rgba(46, 125, 50, 0.3);
         }
         body.theme-green .download-btn:hover {
-            background: rgba(27, 94, 32, 0.9);
+            background: linear-gradient(135deg, #1b5e20, #388e3c);
         }
         body.theme-green .point-number {
             background: linear-gradient(135deg, #2e7d32, #4caf50);
@@ -374,29 +375,24 @@
         }
         /*打印*/
         .download-btn {
-            padding: 14px 32px;
-            background: rgba(95, 82, 255, 0.85);
-            color: white;
+            display: block;
+            margin: 1.5rem auto;
+            padding: 0.75rem 1.9rem;
+            background: #5f52ff;
+            color: #fff;
             border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-family: inherit;
             cursor: pointer;
-            margin: 20px;
-            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(95, 82, 255, 0.3);
+            transition: background 0.25s ease;
         }
         .download-btn:hover {
-            transform: translateY(-3px);
-            background: rgba(95, 82, 255, 1);
-            box-shadow: 0 8px 25px rgba(95, 82, 255, 0.5);
+            background: #4a3ed8;
         }
         .download-btn:active {
-            transform: translateY(-1px);
-            background: rgba(95, 82, 255, 0.7);
-            box-shadow: 0 4px 15px rgba(95, 82, 255, 0.3);
+            background: #3f34c4;
         }
         /* 联系方式样式 */
         .contact-info {
@@ -987,6 +983,31 @@
                 font-size: 0.9rem;
             }
         }
+        /* 跳转闪烁链接（跟随主题色） */
+        .flash-link {
+            color: #5f52ff;
+            text-decoration: underline dotted;
+            cursor: pointer;
+        }
+        @keyframes flash-blue {
+            0%, 100% { background-color: transparent; }
+            25%, 75% { background-color: rgba(66, 133, 244, 0.35); }
+            50% { background-color: rgba(66, 133, 244, 0.7); }
+        }
+        @keyframes flash-green {
+            0%, 100% { background-color: transparent; }
+            25%, 75% { background-color: rgba(76, 175, 80, 0.3); }
+            50% { background-color: rgba(27, 94, 32, 0.6); }
+        }
+        .flash-target {
+            animation: flash-blue 0.8s ease-in-out 3;
+        }
+        body.theme-green .flash-target {
+            animation: flash-green 0.8s ease-in-out 3;
+        }
+        body.theme-green .flash-link {
+            color: #2e7d32;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
     <script>window.MathJax = { startup: { typeset: false }, svg: { fontCache: 'none' } };</script>
@@ -997,12 +1018,11 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/09/29 <span class="announcement-version">Ver1.1.12</span></div>
+            <div class="announcement-time">2026/10/21 <span class="announcement-version">Ver1.1.15</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>更新了专题8 酸、碱、盐 课题2 酸、碱、盐的性质与应用</li>
-                    <li>优化了下载方式</li>
+                    <li>专题8新增盐的分类、用途与性质</li>
                 </ol>
             </div>
             <div id="countdown-container" style="text-align: center; margin: 15px 0;">
@@ -1013,6 +1033,15 @@
         </div>
     </div>
     <script>
+        function flashTo(id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.remove('flash-target');
+            void el.offsetWidth;
+            el.classList.add('flash-target');
+            setTimeout(function () { el.classList.remove('flash-target'); }, 2600);
+        }
         function closeAnnouncement() {
             document.getElementById('announcement').classList.add('hide');
             setTimeout(() => {
@@ -1022,7 +1051,7 @@
         
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
+            const examDate = new Date(today.getFullYear(), 9, 13, 15, 50, 0); // 10月13日15:50 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1322,8 +1351,7 @@
                     <!-- 专题七 溶液 -->
                     <span id="topic7" class="topic-anchor"></span>
                     <li class="note-item">分散系包含溶液、浊液等，都属于混合物</li>
-                    <li class="note-item">溶液是均一、稳定、外观澄清透明的混合物，例如食盐水</li>
-                    <li class="note-item">溶液是混合物，不是纯净物</li>
+                    <li class="note-item">溶液是均一、稳定、外观澄清透明的混合物（不是纯净物），例如食盐水</li>
                     <li class="note-item">溶液不一定无色，如硫酸铜溶液是蓝色的</li>
                     <li class="note-item">浊液又分为乳浊液与悬浊液
                         <ul>
@@ -1343,8 +1371,7 @@
                             <li>不饱和溶液增加溶质、恒温蒸发溶剂、改变温度变为饱和溶液</li>
                         </ul>
                     </li>
-                    <li class="note-item">固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
-                    <li class="note-item">气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                    <li class="note-item">固体溶解性的影响因素有溶质种类、溶剂种类、温度；气体溶解性还受压强影响</li>
                     <li class="note-item">溶解性与溶剂多少、是否搅拌、溶质颗粒大小无关；搅拌、把固体粉碎只能加快溶解速率，不能使溶质溶得更多</li>
                     <li class="note-item">氯化钠、蔗糖很容易溶解在水中，能在水中溶解的物质具有亲水性；食用油不易溶于水、能溶于汽油等有机溶剂，能在有机溶剂中溶解的物质具有亲油性</li>
                     <li class="note-item">肥皂、洗洁精、洗发液中主要发挥去污作用的表面活性剂既有亲油性又有亲水性</li>
@@ -1364,9 +1391,7 @@
                             <li><span class="formula">\dfrac{S}{S+100}=\dfrac{m_{\text{质}}}{m_{\text{液}}}</span></li>
                         </ul>
                     </li>
-                    <li class="note-item">大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠</li>
-                    <li class="note-item">少数固体物质的溶解度受温度变化影响很小，如氯化钠</li>
-                    <li class="note-item">极少数固体物质的溶解度随温度升高而减小，如氢氧化钙（反常）</li>
+                    <li class="note-item">大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠；少数受温度变化影响很小，如氯化钠；极少数随温度升高而减小，如氢氧化钙（反常）</li>
                     <li class="note-item">气体的溶解度随压强增大而变大</li>
                     <li class="note-item">溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
                     <li class="note-item">晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
@@ -1403,25 +1428,27 @@
                     </li>
                     <!-- 专题八 酸、碱、盐 -->
                     <span id="topic8" class="topic-anchor"></span>
-                    <li class="note-item">酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色，从而通过颜色变化判断溶液酸碱性的物质</li>
-                    <li class="note-item">紫色石蕊试液遇酸性溶液变红，遇碱性溶液变蓝，遇中性溶液不变色</li>
-                    <li class="note-item">无色酚酞试液遇碱性溶液变红，遇酸性和中性溶液不变色</li>
-                    <li class="note-item">记忆口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红</li>
+                    <li class="note-item">酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色、从而判断溶液酸碱性的物质：紫色石蕊遇酸变红、遇碱变蓝、遇中性不变色；无色酚酞遇碱变红，遇酸性和中性不变色（口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红）</li>
                     <li class="note-item">酸由 <span class="formula">H^+</span> 和酸根离子组成</li>
                     <li class="note-item">碱由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和 <span class="formula">OH^-</span> 组成</li>
-                    <li class="note-item">酸按强弱分：强酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）、弱酸（<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）</li>
-                    <li class="note-item">酸按可电离出的 <span class="formula">H^+</span> 个数（元数）分：一元酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>）、二元酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）、多元酸（<span class="chem-formula">H<sub>3</sub>PO<sub>4</sub></span>）</li>
-                    <li class="note-item">酸按是否含氧分：含氧酸（<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HNO<sub>3</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>）、无氧酸（<span class="chem-formula">HCl</span>、<span class="chem-formula">HF</span>、<span class="chem-formula">H<sub>2</sub>S</span>）</li>
+                    <li class="note-item">酸的分类
+                        <ul>
+                            <li>按强弱：强酸：<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>；弱酸：<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span></li>
+                            <li>按电离出的 <span class="formula">H^+</span> 个数：一元酸：<span class="chem-formula">HCl</span>、<span class="chem-formula">HNO<sub>3</sub></span>；二元酸：<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>；多元酸：<span class="chem-formula">H<sub>3</sub>PO<sub>4</sub></span></li>
+                            <li>按是否含氧：含氧酸：<span class="chem-formula">H<sub>2</sub>SO<sub>4</sub></span>、<span class="chem-formula">HNO<sub>3</sub></span>、<span class="chem-formula">H<sub>2</sub>CO<sub>3</sub></span>；无氧酸：<span class="chem-formula">HCl</span>、<span class="chem-formula">HF</span>、<span class="chem-formula">H<sub>2</sub>S</span></li>
+                        </ul>
+                    </li>
                     <li class="note-item">浓盐酸有挥发性，打开瓶盖瓶口出现白雾（<span class="chem-formula">HCl</span> 气体溶于空气中的水蒸气形成盐酸小液滴）</li>
                     <li class="note-item">浓硫酸有吸水性（可作干燥剂）、脱水性（能将有机物中的 <span class="chem-formula">H</span>、<span class="chem-formula">O</span> 按 2:1 的比例脱去，使有机物碳化）</li>
                     <li class="note-item">浓盐酸挥发使溶质、溶液质量减小，溶质质量分数减小；浓硫酸吸水使溶剂、溶液质量增大，溶质质量分数减小</li>
-                    <li class="note-item">碱按溶解性分：可溶性碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>）；难溶性碱（除可溶性碱外）</li>
-                    <li class="note-item">碱按强弱分：强碱（<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>）；弱碱（除强碱外）</li>
-                    <li class="note-item">氢氧化钠 <span class="chem-formula">NaOH</span>：俗称火碱、烧碱、苛性钠，易潮解</li>
-                    <li class="note-item">氢氧化钠与二氧化碳反应<br><span class="formula">2NaOH + CO_2 = Na_2CO_3 + H_2O</span></li>
-                    <li class="note-item">氢氧化钙 <span class="chem-formula">Ca(OH)<sub>2</sub></span>：俗称熟石灰、消石灰，微溶于水</li>
-                    <li class="note-item">氢氧化钙与二氧化碳反应<br><span class="formula">Ca(OH)_2 + CO_2 = CaCO_3\downarrow + H_2O</span></li>
-                    <li class="note-item">澄清石灰水（氢氧化钙水溶液）可用于检验 <span class="chem-formula">CO<sub>2</sub></span>（变浑浊）</li>
+                    <li class="note-item" id="base-solubility">碱的分类
+                        <ul>
+                            <li>按溶解性：可溶性碱：<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>；难溶性碱：除可溶性碱外</li>
+                            <li>按强弱：强碱：<span class="chem-formula">NaOH</span>、<span class="chem-formula">KOH</span>、<span class="chem-formula">Ca(OH)<sub>2</sub></span>、<span class="chem-formula">Ba(OH)<sub>2</sub></span>；弱碱：除强碱外</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">氢氧化钠 <span class="chem-formula">NaOH</span>：俗称火碱、烧碱、苛性钠，易潮解<br><span class="formula">2NaOH + CO_2 = Na_2CO_3 + H_2O</span></li>
+                    <li class="note-item">氢氧化钙 <span class="chem-formula">Ca(OH)<sub>2</sub></span>：俗称熟石灰、消石灰，微溶于水<br><span class="formula">Ca(OH)_2 + CO_2 = CaCO_3\downarrow + H_2O</span><br>澄清石灰水（氢氧化钙水溶液）变浑浊，可用于检验 <span class="chem-formula">CO<sub>2</sub></span></li>
                     <li class="note-item">一水合氨 <span class="chem-formula">NH<sub>3</sub>·H<sub>2</sub>O</span>：易挥发</li>
                     <li class="note-item">有颜色的碱
                         <ul>
@@ -1434,6 +1461,56 @@
                     <li class="note-item">氧化铁与稀硫酸反应，生成黄色溶液（盐酸也能反应）<br><span class="formula">Fe_2O_3 + 3H_2SO_4 = Fe_2(SO_4)_3 + 3H_2O</span></li>
                     <li class="note-item">碳酸钙与稀硫酸反应，产生气泡（盐酸也能反应）<br><span class="formula">CaCO_3 + H_2SO_4 = CaSO_4 + H_2O + CO_2\uparrow</span></li>
                     <li class="note-item">氯化钡与稀硫酸反应，产生白色沉淀（盐酸不能反应）<br><span class="formula">BaCl_2 + H_2SO_4 = BaSO_4\downarrow + 2HCl</span></li>
+                    <li class="note-item">盐由金属离子（或 <span class="chem-formula">NH<sub>4</sub><sup>+</sup></span>）和酸根离子组成</li>
+                    <li class="note-item">酸的通性
+                        <ul>
+                            <li>与酸碱指示剂反应：紫色石蕊变红，无色酚酞不变色</li>
+                            <li>与活泼金属反应：生成盐和氢气</li>
+                            <li>与碱性氧化物反应：生成盐和水</li>
+                            <li>与碱反应：生成盐和水</li>
+                            <li>与某些盐反应：生成新盐和新酸</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">碱的通性
+                        <ul>
+                            <li>与酸碱指示剂反应：紫色石蕊变蓝，无色酚酞变红</li>
+                            <li>与酸性氧化物反应：生成盐和水</li>
+                            <li>与酸反应：生成盐和水</li>
+                            <li>与某些盐反应：生成新盐和新碱</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">酸性氧化物（<span class="chem-formula">CO<sub>2</sub></span>、<span class="chem-formula">SO<sub>2</sub></span>、<span class="chem-formula">SO<sub>3</sub></span>，大多是非金属氧化物）是能与碱反应生成盐和水的氧化物 & 碱性氧化物（<span class="chem-formula">CaO</span>、<span class="chem-formula">CuO</span>、<span class="chem-formula">Fe<sub>2</sub>O<sub>3</sub></span>，大多是金属氧化物）是能与酸反应生成盐和水的氧化物</li>
+                    <li class="note-item">复分解反应发生的条件：生成物中有沉淀、气体或水</li>
+                    <li class="note-item">常见的沉淀
+                        <ul>
+                            <li>不溶于水：<span class="chem-formula">CaCO<sub>3</sub></span>、<span class="chem-formula">BaCO<sub>3</sub></span>（能溶于酸）</li>
+                            <li>不溶于水、也不溶于酸：<span class="chem-formula">BaSO<sub>4</sub></span>、<span class="chem-formula">AgCl</span></li>
+                            <li>不溶于水的碱：<span class="flash-link" onclick="flashTo('base-solubility')">见碱按溶解性分类</span></li>
+                        </ul>
+                    </li>
+                    <li class="note-item"><span class="chem-formula">NO<sub>3</sub><sup>-</sup></span>、<span class="chem-formula">K<sup>+</sup></span>、<span class="chem-formula">Na<sup>+</sup></span>、<span class="chem-formula">NH<sub>4</sub><sup>+</sup></span> 的盐都可溶</li>
+                    <li class="note-item">氢氧化钠与氯化铁反应，产生红褐色沉淀<br><span class="formula">3NaOH + FeCl_3 = 3NaCl + Fe(OH)_3\downarrow</span></li>
+                    <li class="note-item">氢氧化钠与硫酸铜反应，产生蓝色沉淀<br><span class="formula">2NaOH + CuSO_4 = Cu(OH)_2\downarrow + Na_2SO_4</span></li>
+                    <li class="note-item">氢氧化钙与氯化铁反应，产生红褐色沉淀<br><span class="formula">3Ca(OH)_2 + 2FeCl_3 = 3CaCl_2 + 2Fe(OH)_3\downarrow</span></li>
+                    <li class="note-item">氢氧化钙与硫酸铜反应，产生蓝色沉淀<br><span class="formula">CuSO_4 + Ca(OH)_2 = CaSO_4 + Cu(OH)_2\downarrow</span></li>
+                    <li class="note-item">氢氧化钙与碳酸钠反应，产生白色沉淀<br><span class="formula">Na_2CO_3 + Ca(OH)_2 = CaCO_3\downarrow + 2NaOH</span></li>
+                    <li class="note-item">盐的分类
+                        <ul>
+                            <li>按金属离子或酸根离子分：钾盐、钙盐、钠盐、NH<sub>4</sub>盐、CO<sub>3</sub>盐、SO<sub>4</sub>盐、NO<sub>3</sub>盐、盐酸盐……</li>
+                            <li>按组成分：正盐（<span class="chem-formula">NaCl</span>、<span class="chem-formula">CaSO<sub>4</sub></span>、<span class="chem-formula">AgCl</span>、<span class="chem-formula">NaNO<sub>3</sub></span>……）、酸式盐（<span class="chem-formula">NaHCO<sub>3</sub></span>、<span class="chem-formula">NaH<sub>2</sub>PO<sub>4</sub></span>……）、碱式盐（<span class="chem-formula">Cu<sub>2</sub>(OH)<sub>2</sub>CO<sub>3</sub></span>……）</li>
+                        </ul>
+                    </li>
+                    <li class="note-item">常见的盐及用途
+                        <ul>
+                            <li><span class="chem-formula">NaCl</span>：食盐的主要成分，用于调味、腌制食品、配制生理盐水<br><span class="formula">NaCl + AgNO_3 = AgCl\downarrow + NaNO_3</span>（产生白色沉淀）</li>
+                            <li><span class="chem-formula">Na<sub>2</sub>CO<sub>3</sub></span>：俗称苏打、纯碱，用于制玻璃、造纸、生产洗涤剂
+                                <br><span class="formula">Na_2CO_3 + 2HCl = 2NaCl + H_2O + CO_2\uparrow</span>（产生气泡）
+                                <br><span class="formula">Na_2CO_3 + BaCl_2 = 2NaCl + BaCO_3\downarrow</span>（产生白色沉淀）
+                            </li>
+                            <li><span class="chem-formula">NaHCO<sub>3</sub></span>：俗称小苏打，用作发酵粉、治疗胃酸过多<br><span class="formula">NaHCO_3 + HCl = NaCl + H_2O + CO_2\uparrow</span>（产生气泡）</li>
+                            <li><span class="chem-formula">CaCO<sub>3</sub></span>：大理石、石灰石的主要成分，牙齿、蜗牛壳、贝壳、珍珠中也含碳酸钙，用作建筑材料、补钙剂<br><span class="formula">CaCO_3 + 2HCl = CaCl_2 + H_2O + CO_2\uparrow</span>（产生气泡）</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -1509,7 +1586,17 @@
             F12: { tex: 'CuO + H_2SO_4 = CuSO_4 + H_2O', h: 18 },
             F14: { tex: 'Fe_2O_3 + 3H_2SO_4 = Fe_2(SO_4)_3 + 3H_2O', h: 18 },
             F16: { tex: 'CaCO_3 + H_2SO_4 = CaSO_4 + H_2O + CO_2\\uparrow', h: 18 },
-            F18: { tex: 'BaCl_2 + H_2SO_4 = BaSO_4\\downarrow + 2HCl', h: 18 }
+            F18: { tex: 'BaCl_2 + H_2SO_4 = BaSO_4\\downarrow + 2HCl', h: 18 },
+            F20: { tex: '3NaOH + FeCl_3 = 3NaCl + Fe(OH)_3\\downarrow', h: 18 },
+            F22: { tex: '2NaOH + CuSO_4 = Cu(OH)_2\\downarrow + Na_2SO_4', h: 18 },
+            F24: { tex: '3Ca(OH)_2 + 2FeCl_3 = 3CaCl_2 + 2Fe(OH)_3\\downarrow', h: 18 },
+            F26: { tex: 'CuSO_4 + Ca(OH)_2 = CaSO_4 + Cu(OH)_2\\downarrow', h: 18 },
+            F28: { tex: 'Na_2CO_3 + Ca(OH)_2 = CaCO_3\\downarrow + 2NaOH', h: 18 },
+            F30: { tex: 'NaCl + AgNO_3 = AgCl\\downarrow + NaNO_3', h: 18 },
+            F32: { tex: 'Na_2CO_3 + 2HCl = 2NaCl + H_2O + CO_2\\uparrow', h: 18 },
+            F34: { tex: 'Na_2CO_3 + BaCl_2 = 2NaCl + BaCO_3\\downarrow', h: 18 },
+            F36: { tex: 'NaHCO_3 + HCl = NaCl + H_2O + CO_2\\uparrow', h: 18 },
+            F38: { tex: 'CaCO_3 + 2HCl = CaCl_2 + H_2O + CO_2\\uparrow', h: 18 }
         };
         function waitMathJax() {
             return new Promise(function (resolve) {
@@ -1644,8 +1731,7 @@
                             <li>上课禁止写作业（刘育君除外）</li>
                             <li>考试结束后需立刻停笔，不能拿着卷子冲出教室</li>
                             <li>分散系包含溶液、浊液等，都属于混合物</li>
-                            <li>溶液是均一、稳定、外观澄清透明的混合物，例如食盐水</li>
-                            <li>溶液是混合物，不是纯净物</li>
+                            <li>溶液是均一、稳定、外观澄清透明的混合物（不是纯净物），例如食盐水</li>
                             <li>溶液不一定无色，如硫酸铜溶液是蓝色的</li>
                             <li>浊液又分为乳浊液与悬浊液
                                 <ul>
@@ -1665,8 +1751,7 @@
                                     <li>不饱和溶液增加溶质、恒温蒸发溶剂、改变温度变为饱和溶液</li>
                                 </ul>
                             </li>
-                            <li>固体物质溶解性的影响因素有溶质种类、溶剂种类、温度</li>
-                            <li>气体物质的溶解性除溶质、溶剂、温度外，还受压强影响</li>
+                            <li>固体溶解性的影响因素有溶质种类、溶剂种类、温度；气体溶解性还受压强影响</li>
                             <li>溶解性（溶解能力）与溶剂多少、是否搅拌、溶质颗粒大小无关；搅拌、把固体粉碎只能加快溶解速率，不能使溶质溶得更多</li>
                             <li>氯化钠、蔗糖很容易溶解在水中，能在水中溶解的物质具有亲水性；食用油不易溶于水、能溶于汽油等有机溶剂，能在有机溶剂中溶解的物质具有亲油性</li>
                             <li>肥皂、洗洁精、洗发液中主要发挥去污作用的表面活性剂既有亲油性又有亲水性</li>
@@ -1686,9 +1771,7 @@
                                     <li>{{F2:S/(S+100) = m质/m液}}</li>
                                 </ul>
                             </li>
-                            <li>大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠</li>
-                            <li>少数固体物质的溶解度受温度变化影响很小，如氯化钠</li>
-                            <li>极少数固体物质的溶解度随温度升高而减小，如氢氧化钙（反常）</li>
+                            <li>大多数固体物质的溶解度随温度升高而增大，如硝酸钾、硝酸钠；少数受温度变化影响很小，如氯化钠；极少数随温度升高而减小，如氢氧化钙（反常）</li>
                             <li>气体的溶解度随压强增大而变大</li>
                             <li>溶解度曲线上的点代表对应温度下的饱和溶液，曲线下方的点代表不饱和溶液</li>
                             <li>晶体是拥有规则几何外形的固体，部分晶体带有结晶水</li>
@@ -1723,25 +1806,27 @@
                                     <li>C%偏大的原因：量取水时俯视读数</li>
                                 </ul>
                             </li>
-                            <li>酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色，从而通过颜色变化判断溶液酸碱性的物质</li>
-                            <li>紫色石蕊试液遇酸性溶液变红，遇碱性溶液变蓝，遇中性溶液不变色</li>
-                            <li>无色酚酞试液遇碱性溶液变红，遇酸性和中性溶液不变色</li>
-                            <li>记忆口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红</li>
+                            <li>酸碱指示剂是能跟酸或碱的溶液起作用而显示不同颜色、从而判断溶液酸碱性的物质：紫色石蕊遇酸变红、遇碱变蓝、遇中性不变色；无色酚酞遇碱变红，遇酸性和中性不变色（口诀：石蕊——酸红碱蓝中性紫；酚酞——酸中不变碱变红）</li>
                             <li>酸由 H⁺ 和酸根离子组成</li>
                             <li>碱由金属离子（或 NH₄⁺）和 OH⁻ 组成</li>
-                            <li>酸按强弱分：强酸（H₂SO₄、HCl、HNO₃）、弱酸（H₂CO₃）</li>
-                            <li>酸按可电离出的 H⁺ 个数（元数）分：一元酸（HCl、HNO₃）、二元酸（H₂SO₄、H₂CO₃）、多元酸（H₃PO₄）</li>
-                            <li>酸按是否含氧分：含氧酸（H₂SO₄、HNO₃、H₂CO₃）、无氧酸（HCl、HF、H₂S）</li>
+                            <li>酸的分类
+                                <ul>
+                                    <li>按强弱：强酸：H₂SO₄、HCl、HNO₃；弱酸：H₂CO₃</li>
+                                    <li>按电离出的 H⁺ 个数：一元酸：HCl、HNO₃；二元酸：H₂SO₄、H₂CO₃；多元酸：H₃PO₄</li>
+                                    <li>按是否含氧：含氧酸：H₂SO₄、HNO₃、H₂CO₃；无氧酸：HCl、HF、H₂S</li>
+                                </ul>
+                            </li>
                             <li>浓盐酸有挥发性，打开瓶盖瓶口出现白雾（HCl 气体溶于空气中的水蒸气形成盐酸小液滴）</li>
                             <li>浓硫酸有吸水性（可作干燥剂）、脱水性（能将有机物中的 H、O 按 2:1 的比例脱去，使有机物碳化）</li>
                             <li>浓盐酸挥发使溶质、溶液质量减小，溶质质量分数减小；浓硫酸吸水使溶剂、溶液质量增大，溶质质量分数减小</li>
-                            <li>碱按溶解性分：可溶性碱（NaOH、KOH、Ba(OH)₂、Ca(OH)₂、NH₃·H₂O）；难溶性碱（除可溶性碱外）</li>
-                            <li>碱按强弱分：强碱（NaOH、KOH、Ca(OH)₂、Ba(OH)₂）；弱碱（除强碱外）</li>
-                            <li>氢氧化钠 NaOH：俗称火碱、烧碱、苛性钠，易潮解</li>
-                            <li>氢氧化钠与二氧化碳反应：{{F8:2NaOH + CO₂ = Na₂CO₃ + H₂O}}</li>
-                            <li>氢氧化钙 Ca(OH)₂：俗称熟石灰、消石灰，微溶于水</li>
-                            <li>氢氧化钙与二氧化碳反应：{{F9:Ca(OH)₂ + CO₂ = CaCO₃↓ + H₂O}}</li>
-                            <li>澄清石灰水（氢氧化钙水溶液）可用于检验 CO₂（变浑浊）</li>
+                            <li>碱的分类
+                                <ul>
+                                    <li>按溶解性：可溶性碱：NaOH、KOH、Ba(OH)₂、Ca(OH)₂、NH₃·H₂O；难溶性碱：除可溶性碱外</li>
+                                    <li>按强弱：强碱：NaOH、KOH、Ca(OH)₂、Ba(OH)₂；弱碱：除强碱外</li>
+                                </ul>
+                            </li>
+                            <li>氢氧化钠 NaOH：俗称火碱、烧碱、苛性钠，易潮解；{{F8:2NaOH + CO₂ = Na₂CO₃ + H₂O}}</li>
+                            <li>氢氧化钙 Ca(OH)₂：俗称熟石灰、消石灰，微溶于水；{{F9:Ca(OH)₂ + CO₂ = CaCO₃↓ + H₂O}}；澄清石灰水变浑浊，可用于检验 CO₂</li>
                             <li>一水合氨 NH₃·H₂O：易挥发</li>
                             <li>有颜色的碱
                                 <ul>
@@ -1754,6 +1839,53 @@
                             <li>氧化铁与稀硫酸反应，生成黄色溶液（盐酸也能反应）：{{F14:Fe₂O₃ + 3H₂SO₄ = Fe₂(SO₄)₃ + 3H₂O}}</li>
                             <li>碳酸钙与稀硫酸反应，产生气泡（盐酸也能反应）：{{F16:CaCO₃ + H₂SO₄ = CaSO₄ + H₂O + CO₂↑}}</li>
                             <li>氯化钡与稀硫酸反应，产生白色沉淀（盐酸不能反应）：{{F18:BaCl₂ + H₂SO₄ = BaSO₄↓ + 2HCl}}</li>
+                            <li>盐由金属离子（或 NH₄⁺）和酸根离子组成</li>
+                            <li>酸的通性
+                                <ul>
+                                    <li>与酸碱指示剂反应：紫色石蕊变红，无色酚酞不变色</li>
+                                    <li>与活泼金属反应：生成盐和氢气</li>
+                                    <li>与碱性氧化物反应：生成盐和水</li>
+                                    <li>与碱反应：生成盐和水</li>
+                                    <li>与某些盐反应：生成新盐和新酸</li>
+                                </ul>
+                            </li>
+                            <li>碱的通性
+                                <ul>
+                                    <li>与酸碱指示剂反应：紫色石蕊变蓝，无色酚酞变红</li>
+                                    <li>与酸性氧化物反应：生成盐和水</li>
+                                    <li>与酸反应：生成盐和水</li>
+                                    <li>与某些盐反应：生成新盐和新碱</li>
+                                </ul>
+                            </li>
+                            <li>酸性氧化物（CO₂、SO₂、SO₃，大多是非金属氧化物）是能与碱反应生成盐和水的氧化物 & 碱性氧化物（CaO、CuO、Fe₂O₃，大多是金属氧化物）是能与酸反应生成盐和水的氧化物</li>
+                            <li>复分解反应发生的条件：生成物中有沉淀、气体或水</li>
+                            <li>常见的沉淀
+                                <ul>
+                                    <li>不溶于水：CaCO₃、BaCO₃（能溶于酸）</li>
+                                    <li>不溶于水、也不溶于酸：BaSO₄、AgCl</li>
+                                    <li>不溶于水的碱：见第54条</li>
+                                </ul>
+                            </li>
+                            <li>NO₃⁻、K⁺、Na⁺、NH₄⁺ 的盐都可溶</li>
+                            <li>氢氧化钠与氯化铁反应，产生红褐色沉淀：{{F20:3NaOH + FeCl₃ = 3NaCl + Fe(OH)₃↓}}</li>
+                            <li>氢氧化钠与硫酸铜反应，产生蓝色沉淀：{{F22:2NaOH + CuSO₄ = Cu(OH)₂↓ + Na₂SO₄}}</li>
+                            <li>氢氧化钙与氯化铁反应，产生红褐色沉淀：{{F24:3Ca(OH)₂ + 2FeCl₃ = 3CaCl₂ + 2Fe(OH)₃↓}}</li>
+                            <li>氢氧化钙与硫酸铜反应，产生蓝色沉淀：{{F26:CuSO₄ + Ca(OH)₂ = CaSO₄ + Cu(OH)₂↓}}</li>
+                            <li>氢氧化钙与碳酸钠反应，产生白色沉淀：{{F28:Na₂CO₃ + Ca(OH)₂ = CaCO₃↓ + 2NaOH}}</li>
+                            <li>盐的分类
+                                <ul>
+                                    <li>按金属离子或酸根离子分：钾盐、钙盐、钠盐、NH₄盐、CO₃盐、SO₄盐、NO₃盐、盐酸盐……</li>
+                                    <li>按组成分：正盐（NaCl、CaSO₄、AgCl、NaNO₃……）、酸式盐（NaHCO₃、NaH₂PO₄……）、碱式盐（Cu₂(OH)₂CO₃……）</li>
+                                </ul>
+                            </li>
+                            <li>常见的盐及用途
+                                <ul>
+                                    <li>NaCl：食盐的主要成分，用于调味、腌制食品、配制生理盐水；{{F30:NaCl + AgNO₃ = AgCl↓ + NaNO₃}}（产生白色沉淀）</li>
+                                    <li>Na₂CO₃：俗称苏打、纯碱，用于制玻璃、造纸、生产洗涤剂；{{F32:Na₂CO₃ + 2HCl = 2NaCl + H₂O + CO₂↑}}（产生气泡）；{{F34:Na₂CO₃ + BaCl₂ = 2NaCl + BaCO₃↓}}（产生白色沉淀）</li>
+                                    <li>NaHCO₃：俗称小苏打，用作发酵粉、治疗胃酸过多；{{F36:NaHCO₃ + HCl = NaCl + H₂O + CO₂↑}}（产生气泡）</li>
+                                    <li>CaCO₃：大理石、石灰石的主要成分，牙齿、蜗牛壳、贝壳、珍珠中也含碳酸钙，用作建筑材料、补钙剂；{{F38:CaCO₃ + 2HCl = CaCl₂ + H₂O + CO₂↑}}（产生气泡）</li>
+                                </ul>
+                            </li>
                             </ol>
                     </body>
                 </html>

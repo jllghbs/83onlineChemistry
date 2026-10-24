@@ -801,11 +801,11 @@
     <div class="announcement-overlay" id="announcement">
         <div class="announcement-box">
             <span class="announcement-close-mobile" onclick="closeAnnouncement()">×</span>
-            <div class="announcement-time">2026/9/29 <span class="announcement-version">Ver1.0.9</span></div>
+            <div class="announcement-time">2026/10/21 <span class="announcement-version">Ver1.0.11</span></div>
             <div class="announcement-title">更新公告</div>
             <div class="announcement-content">
                 <ol>
-                    <li>九年级化学方程式大全上线了</li>
+                    <li>专题8新增盐的性质方程式</li>
                 </ol>
             </div>
             <div class="announcement-signature">83online运营团队</div>
@@ -830,7 +830,7 @@
         }
         function updateCountdown() {
             const today = new Date();
-            const examDate = new Date(today.getFullYear(), 9, 12, 16, 0, 0); // 10月12日16:00 月考
+            const examDate = new Date(today.getFullYear(), 9, 13, 15, 50, 0); // 10月13日15:50 月考
             const timeDiff = examDate - today;
             
             if (timeDiff <= 0) {
@@ -1104,6 +1104,95 @@
                         <ul>
                             <li><strong>现象：</strong>产生白色沉淀</li>
                             <li><strong>注意：</strong>稀盐酸不能发生此反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{3NaOH} + \text{FeCl}_3 \xlongequal{\quad} \text{3NaCl} + \text{Fe(OH)}_3\downarrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生红褐色沉淀</li>
+                            <li><strong>注意：</strong>氢氧化钙也能与氯化铁反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{2NaOH} + \text{CuSO}_4 \xlongequal{\quad} \text{Cu(OH)}_2\downarrow + \text{Na}_2\text{SO}_4</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生蓝色沉淀</li>
+                            <li><strong>注意：</strong>氢氧化钙也能与硫酸铜反应</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{3Ca(OH)}_2 + \text{2FeCl}_3 \xlongequal{\quad} \text{3CaCl}_2 + \text{2Fe(OH)}_3\downarrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生红褐色沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CuSO}_4 + \text{Ca(OH)}_2 \xlongequal{\quad} \text{CaSO}_4 + \text{Cu(OH)}_2\downarrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生蓝色沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Na}_2\text{CO}_3 + \text{Ca(OH)}_2 \xlongequal{\quad} \text{CaCO}_3\downarrow + \text{2NaOH}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生白色沉淀</li>
+                            <li><strong>应用：</strong>工业上制取氢氧化钠</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{NaOH} + \text{HCl} \xlongequal{\quad} \text{NaCl} + \text{H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>无明显现象（可借助指示剂判断）</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Ca(OH)}_2 + \text{2HCl} \xlongequal{\quad} \text{CaCl}_2 + \text{2H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{2NaOH} + \text{H}_2\text{SO}_4 \xlongequal{\quad} \text{Na}_2\text{SO}_4 + \text{2H}_2\text{O}</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{NaCl} + \text{AgNO}_3 \xlongequal{\quad} \text{AgCl}\downarrow + \text{NaNO}_3</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生白色沉淀</li>
+                            <li><strong>应用：</strong>检验盐酸盐（氯离子）</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Na}_2\text{CO}_3 + \text{2HCl} \xlongequal{\quad} \text{2NaCl} + \text{H}_2\text{O} + \text{CO}_2\uparrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生气泡</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{Na}_2\text{CO}_3 + \text{BaCl}_2 \xlongequal{\quad} \text{2NaCl} + \text{BaCO}_3\downarrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生白色沉淀</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{NaHCO}_3 + \text{HCl} \xlongequal{\quad} \text{NaCl} + \text{H}_2\text{O} + \text{CO}_2\uparrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生气泡</li>
+                        </ul>
+                    </li>
+                    <li class="equation-item"><span class="formula">\text{CaCO}_3 + \text{2HCl} \xlongequal{\quad} \text{CaCl}_2 + \text{H}_2\text{O} + \text{CO}_2\uparrow</span>
+                        <span class="tag">复分解反应</span>
+                        <span class="tag">常温</span>
+                        <ul>
+                            <li><strong>现象：</strong>产生气泡</li>
                         </ul>
                     </li>
                 </ul>
